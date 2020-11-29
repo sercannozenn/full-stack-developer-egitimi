@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'FrontController@index')->name('index');
+
+Route::prefix('admin')->middleware('auth')->group(function ()
+{
+    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/add-post', 'AdminController@showAddPost')->name('admin.addPost');
+    Route::post('/add-post', 'AdminController@addPost');
 });
+
