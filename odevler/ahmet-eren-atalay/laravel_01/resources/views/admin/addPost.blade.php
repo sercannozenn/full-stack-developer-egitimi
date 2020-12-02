@@ -17,11 +17,11 @@
 
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2" for="example-textarea-ckeditor">CKEditor</label>
-                    <div class="col-md-10">
+
+
                         <textarea id="example-textarea-ckeditor" name="content" class="ckeditor"></textarea>
 
-                    </div>
+
                 </div>
                 <div class="form-group">
                     <label for="status">
