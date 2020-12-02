@@ -2702,3 +2702,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 .small-logo {
     height: 100%;
 }
+.big-logo {
+    width: 100%;
+}

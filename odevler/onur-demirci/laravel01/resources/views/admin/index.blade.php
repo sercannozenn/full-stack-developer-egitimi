@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-    Ana Sayfa
+    Admin Sayfası
 @endsection
 
 @section('css')

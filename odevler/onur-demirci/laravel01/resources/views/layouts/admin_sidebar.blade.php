@@ -1,12 +1,3 @@
-<!-- Sidebar search -->
-<form id="sidebar-search">
-    <div class="input-group">
-        <input type="text" id="sidebar-search-term" name="sidebar-search-term" placeholder="Arama..." readonly>
-        <button><i class="fa fa-search"></i></button>
-    </div>
-</form>
-<!-- END Sidebar search -->
-
 <!-- Primary Navigation -->
 <nav id="primary-nav">
     <ul>
