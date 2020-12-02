@@ -32,22 +32,30 @@
         @include('front.navbar');
     </header>
     <div id="inner-container">
-    <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
-        @include('front.aside');
-    </aside>
+        <aside id="page-sidebar" class="collapse navbar-collapse navbar-main-collapse">
+            @include('front.aside');
+        </aside>
 
-    <div id="inner-container">
-        @yield('content');
+        <div id="inner-container">
+            @yield('content');
+        </div>
+
+        <div/>
+
+        <footer class="container-fluid bg-dark ml-5">
+            <p class="text-center text-white">
+                &copy; {{@date("Y")}} Tüm Hakları Saklıdır.
+            </p>
+        </footer>
+
+    </div>
     </div>
 
-<div/>
-</div>
 
-
-<script src="{{asset("assets/js/jquery.min.js")}}"></script>
-<script src="{{asset("assets/js/vendor/bootstrap.min.js")}}"></script>
-<script src="{{asset("assets/js/plugins.js")}}"></script>
-<script src="{{asset("assets/js/main.js")}}"></script>
+    <script src="{{asset("assets/js/jquery.min.js")}}"></script>
+    <script src="{{asset("assets/js/vendor/bootstrap.min.js")}}"></script>
+    <script src="{{asset("assets/js/plugins.js")}}"></script>
+    <script src="{{asset("assets/js/main.js")}}"></script>
 @yield('js')
 </body>
 </html>
