@@ -2699,3 +2699,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .loader-11 { background-image: url('../img/loading.gifs/loading11@2x.gif'); }
     .loader-12 { background-image: url('../img/loading.gifs/loading12@2x.gif'); }
 }
+.small-logo {
+    height: 100%;
+}
