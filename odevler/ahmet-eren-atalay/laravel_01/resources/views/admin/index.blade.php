@@ -49,6 +49,7 @@
 
         </tbody>
     </table>
+
     </div>
 @endsection
 @section('js')
