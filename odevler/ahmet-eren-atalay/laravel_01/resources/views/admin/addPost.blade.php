@@ -17,9 +17,11 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="content">Makale İçeriği</label>
-                    <textarea class="form-control" name="content" id="content" cols="30" rows="10"
-                              placeholder="Maale İçeriği Giriniz"></textarea>
+                    <label class="control-label col-md-2" for="example-textarea-ckeditor">CKEditor</label>
+                    <div class="col-md-10">
+                        <textarea id="example-textarea-ckeditor" name="content" class="ckeditor"></textarea>
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="status">
@@ -35,4 +37,5 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 @endsection

@@ -1,3 +1,5 @@
+
+
 @extends('layouts.front')
 @section('title')
 @endsection
@@ -33,13 +35,8 @@
                 </form>
                 @else
 
-            <ul class="nav-dash">
-                <li>
-                    <a href="javascript:void(0)" data-toggle="tooltip" title="Users" class="animation-fadeIn">
-                        <i class="fa fa-user"></i>
-                    </a>
-                </li>
-            </ul>
+                @include('admin.index');
+
                 @endguest
 
 

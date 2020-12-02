@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        return view('front.index');
+
+        $data=Posts::all();
+
+        return view('front.index',compact('data'));
     }
 }
