@@ -10,12 +10,15 @@
 
 @section('content')
     <h3>Yeni Makale Ekleme</h3>
-    <form action="" method="POST">
+    <form action="" method="POST"  enctype="multipart/form-data">
         @csrf
         <input class="form-control" type="text" name="article_title" placeholder="Makale Başlığı">
-        <br>
+        <hr>
+        <h4 for="a_image">Makale Resmi <small>Maksimum boyut 5MB</small></h4><input type="file" id="a_image" name="article_image" accept="image/*">
+        <hr>
         <h4>Yayınlanma Zamanı</h4>
-        <hr style="margin-top:0">
+        <br>
+{{--        <hr style="margin-top:0">--}}
         <input id="now" name="publish_now" type="checkbox"><label for="publish_now"> &nbsp; Şimdi Yayınla</label>
         <br>
         <br>
@@ -48,5 +51,6 @@
         var today = `${ye}-${mo}-${da}`;
         today+= "T"+d.toString().substring(16,21);
         document.getElementById("date").min = today;
+
     </script>
 @endsection

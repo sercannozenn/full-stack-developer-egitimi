@@ -2,22 +2,16 @@
 <nav id="primary-nav">
     <ul>
         <li>
-            <a href="index.html" class="active"><i class="fa fa-fire"></i>Admin</a>
+            <a class="{{Request::is('admin') ? 'active' : '' }}" href="{{ Request::is('admin') ? "javascript:void(0)" : route('admin_index') }}"><i class="fa fa-fire"></i>Dashboard Ana Sayfa</a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-th-list"></i>Forms</a>
-            <ul>
+            <a href="javascript:void(0)" class="{{Request::is('admin/*') ?  : '' }}"><i class="fa fa-file-text-o"></i>Makaleler</a>
+            <ul {{ request()->is('admin/add-article') || request()->is('admin/edit-article') ? 'style=display:block!important;' : '' }}>
                 <li>
-                    <a href="page_form_components.html"><i class="fa fa-file-text"></i>Components</a>
+                    <a class="{{ request()->is('admin/add-article') ? 'active' : '' }}" href="{{ Request::is('admin/add-article') ? "javascript:void(0)" : route('add_article') }}"><i class="fa fa-plus"></i>Makale Ekle</a>
                 </li>
                 <li>
-                    <a href="page_form_validation.html"><i class="fa fa-exclamation-triangle"></i>Validation</a>
-                </li>
-                <li>
-                    <a href="page_form_wizard.html"><i class="fa fa-magic"></i>Wizard</a>
-                </li>
-                <li>
-                    <a href="page_form_masked.html"><i class="fa fa-flask"></i>Masked Inputs</a>
+                    <a class="{{ request()->is('admin/edit-article') ? 'active' : '' }}" href="{{ Request::is('admin/edit-article') ? "javascript:void(0)" : route('edit_article') }}"><i class="fa fa-pencil"></i>Makale Düzenle</a>
                 </li>
             </ul>
         </li>

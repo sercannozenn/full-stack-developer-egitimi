@@ -18,4 +18,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin_index');
     Route::get('/add-article', 'AdminController@addArticlePage')->name('add_article');
     Route::post('/add-article', 'AdminController@addArticle');
+    Route::get('/edit-article', 'AdminController@editArticlePage')->name('edit_article');
 });
