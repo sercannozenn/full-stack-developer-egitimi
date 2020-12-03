@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware('auth')->group(function (){
     Route::get('/','FrontController@index')->name('admin.index');
     Route::get('/getallpost','PostsController@getAllPost')->name('admin.getAllPost');
-    Route::get('/addpost','PostsController@addPost')->name('admin.addPost');
+    Route::get('/addpost','PostsController@showAddPost')->name('admin.addPost');
+    Route::post('/addpost','PostsController@addPost');
 });
 
