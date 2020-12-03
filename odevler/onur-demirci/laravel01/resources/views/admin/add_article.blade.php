@@ -5,11 +5,11 @@
 @endsection
 
 @section('title')
-    Yeni Makale Ekleme
+    Yeni Makale Ekle
 @endsection
 
 @section('content')
-    <h3>Yeni Makale Ekleme</h3>
+    <h3>Yeni Makale Ekle</h3>
     <form action="" method="POST"  enctype="multipart/form-data">
         @csrf
         <input class="form-control" type="text" name="article_title" placeholder="Makale Başlığı">

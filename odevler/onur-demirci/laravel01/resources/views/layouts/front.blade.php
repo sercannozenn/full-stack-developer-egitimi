@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/themes.css')}}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    @if(Request::is('admin/*') == false and Request::is('admin')==false)
+        <link rel="stylesheet" href="{{asset('assets/css/frontend.css')}}">
+    @else
+    @endif
     @yield('css')
     <script src="{{asset('assets/js/vendor/modernizr-respond.min.js')}}"></script>
 </head>
@@ -28,7 +34,7 @@
     <!-- Add the class .navbar-fixed-top or .navbar-fixed-bottom for a fixed header on top or bottom respectively -->
     <!-- <header class="navbar navbar-inverse navbar-fixed-top"> -->
     <!-- <header class="navbar navbar-inverse navbar-fixed-bottom"> -->
-    <header class="navbar navbar-inverse">
+    <header class="navbar navbar-inverse navbar-fixed-top">
         <!-- Mobile Navigation, Shows up  on smaller screens -->
         <ul class="navbar-nav-custom pull-right hidden-md hidden-lg">
             <li class="divider-vertical"></li>
@@ -42,8 +48,7 @@
         <!-- END Mobile Navigation -->
 
         <!-- Logo -->
-        <a href="{{route('index')}}" class="navbar-brand"><img class="small-logo"
-                                                               src={{asset('assets/img/template/logo.png')}} alt="logo"></a>
+        <a href="{{route('index')}}" class="navbar-brand">OnurD.Blog</a>
 
         <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
         <div id="loading" class="pull-left"><i class="fa fa-certificate fa-spin"></i></div>
@@ -52,7 +57,7 @@
         <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->
         <ul id="widgets" class="navbar-nav-custom pull-right">
             <!-- Just a divider -->
-            <li class="divider-vertical"></li>
+{{--            <li class="divider-vertical"></li>--}}
             @guest()
                 <li>
                     <a href="{{route('login')}}"><i class="fa fa-lock"></i> Giriş Yap</a>

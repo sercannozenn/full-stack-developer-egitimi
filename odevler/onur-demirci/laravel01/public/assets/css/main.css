@@ -2424,7 +2424,13 @@ a:focus {
 
     header.navbar-fixed-top + #inner-container > #page-sidebar.collapse,
     header.navbar-fixed-bottom + #inner-container > #page-sidebar.collapse {
-        height: 340px !important;
+        max-height: 340px !important;
+        background-size: cover;
+        background-position: top;
+        -webkit-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+        box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+        background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     }
 
     header.navbar-fixed-top + #inner-container > #page-sidebar {
@@ -2704,4 +2710,15 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 .big-logo {
     width: 100%;
+}
+.navbar-brand {
+    color: #ffffff !important;
+    font-family: 'Major Mono Display', Sans-Serif;
+}
+.brand {
+    color: #000000;
+    font-family: 'Major Mono Display', Sans-Serif;
+    font-size: 70px;
+    word-wrap: anywhere;
+    line-height: 70px;
 }

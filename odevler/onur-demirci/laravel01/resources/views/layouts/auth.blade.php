@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/themes.css')}}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     @yield('css')
     <script src="{{asset('assets/js/vendor/modernizr-respond.min.js')}}"></script>
 </head>
@@ -23,7 +25,7 @@
 <div id="login-container">
     <div id="login-logo">
         <a href="{{route('index')}}" data-toggle="tooltip" title="Ana Sayfaya Dön">
-            <img id="logo_big" class="big-logo" src="{{asset('assets/img/template/uadmin_logo.png')}}" alt="logo">
+            <h1 class="brand">OnurD.Blog</h1>
         </a>
     </div>
     <!-- Login Form -->

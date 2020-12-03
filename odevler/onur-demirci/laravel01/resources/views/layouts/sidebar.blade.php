@@ -2,22 +2,22 @@
 <nav id="primary-nav">
     <ul>
         <li>
-            <a href="index.html" class="active"><i class="fa fa-home"></i>Ana Sayfa</a>
+            <a href="index.html" class="active"><i class="gi gi-star"></i>Ana Sayfa</a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-th-list"></i>Forms</a>
+            <a href="#" class="closed">Yazılar</a>
             <ul>
                 <li>
-                    <a href="page_form_components.html"><i class="fa fa-file-text"></i>Components</a>
+                    <a href="page_form_components.html">Seyahat</a>
                 </li>
                 <li>
-                    <a href="page_form_validation.html"><i class="fa fa-exclamation-triangle"></i>Validation</a>
+                    <a href="page_form_components.html">Hayat</a>
                 </li>
                 <li>
-                    <a href="page_form_wizard.html"><i class="fa fa-magic"></i>Wizard</a>
+                    <a href="page_form_components.html">Spor</a>
                 </li>
                 <li>
-                    <a href="page_form_masked.html"><i class="fa fa-flask"></i>Masked Inputs</a>
+                    <a href="page_form_components.html">Yemek</a>
                 </li>
             </ul>
         </li>

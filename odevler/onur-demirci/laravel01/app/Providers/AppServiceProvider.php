@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        config(['app.locale' => 'tr']);
+        \Carbon\Carbon::setLocale('tr');
     }
 
     /**

@@ -1,5 +1,5 @@
 #inner-container {
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: cover;
     background-position: top;
 }
@@ -37,24 +37,24 @@
 }
 
 .navbar.navbar-inverse {
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: cover;
 }
 
 #sidebar-search input[type=text] {
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: initial;
     background-position: top;
 }
 
 #sidebar-search button {
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: cover;
     background-position: top;
 }
 
 #sidebar-search .input-group {
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: cover;
     background-position: top;
     display: block;
@@ -74,8 +74,6 @@
 }
 
 #page-content {
-    -webkit-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
     box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
     background-color: #111111;
 }
@@ -89,8 +87,10 @@
     background-color: unset !important;
 }
 header.navbar-fixed-bottom + #inner-container > #page-sidebar.collapse {
+    height: -webkit-fit-content!important;
+    height: -moz-fit-content!important;
     height: fit-content!important;
-    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-image: url("http://localhost:8000/assets/img/frontend/sidebar_background_overlay.png");
     background-size: cover;
     background-position: top;
 }
