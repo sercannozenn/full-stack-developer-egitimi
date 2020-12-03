@@ -2,7 +2,7 @@
 <nav id="primary-nav">
     <ul>
         <li>
-            <a href="index.html" class="active"><i class="fa fa-fire"></i>Dashboard</a>
+            <a href="index.html" class="active"><i class="fa fa-fire"></i>Admin</a>
         </li>
         <li>
             <a href="#"><i class="fa fa-th-list"></i>Forms</a>

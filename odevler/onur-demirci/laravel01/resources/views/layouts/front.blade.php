@@ -55,22 +55,23 @@
             <li class="divider-vertical"></li>
             @guest()
                 <li>
-                    <a href="#"><i class="fa fa-lock"></i> Giriş Yap</a>
+                    <a href="{{route('login')}}"><i class="fa fa-lock"></i> Giriş Yap</a>
                 </li>
                 <li class="divider-vertical"></li>
                 <li>
-                    <a href="#"><i class="fa fa-user"></i> Kayıt Ol</a>
+                    <a href="{{route('register')}}"><i class="fa fa-user"></i> Kayıt Ol</a>
                 </li>
             @else()
             <!-- User Menu -->
                 <li class="dropdown pull-right dropdown-user">
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><img
-                                src="{{asset('assets/img/template/avatar.png')}}" alt="avatar"> <b
+                                src="{{asset('assets/img/template/avatar.png')}}" alt="avatar"> {{ auth()->user()->name }} <b
                                 class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="page_login.html"><i class="fa fa-lock"></i>Çıkış Yap</a>
+                            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="page_login.html"><i class="fa fa-lock"></i>Çıkış Yap</a>
                         </li>
+                        <form method="POST" id="logout-form" action="{{route('logout')}}">@csrf</form>
                     </ul>
                 </li>
                 <!-- END User Menu -->
@@ -94,7 +95,7 @@
                 </div>
             </form>
             <!-- END Sidebar search -->
-            @if(Request::is('admin/*'))
+            @if(Request()->route()->getPrefix()=="/admin")
                 @include('layouts.admin_sidebar')
             @else()
                 @include('layouts.sidebar')

@@ -22,7 +22,7 @@
 <!-- Login Container -->
 <div id="login-container">
     <div id="login-logo">
-        <a href="">
+        <a href="{{route('index')}}" data-toggle="tooltip" title="Ana Sayfaya Dön">
             <img id="logo_big" class="big-logo" src="{{asset('assets/img/template/uadmin_logo.png')}}" alt="logo">
         </a>
     </div>
@@ -34,19 +34,22 @@
         @yield('form-inputs')
         <div class="clearfix">
             <div class="btn-group btn-group-sm pull-right">
-            @if(url()->current()=="http://localhost:8000/login")
-                <button type="button" id="login-button-pass" class="btn btn-warning" data-toggle="tooltip" title="Şifrenizi mi unuttunuz?"><i class="fa fa-lock"></i></button>
-                <button type="submit" class="btn btn-success"><i class="fa fa-arrow-right"></i> Giriş Yap</button>
+                @if(url()->current()=="http://localhost:8000/login")
+                    <button type="button" id="login-button-pass" class="btn btn-warning" data-toggle="tooltip"
+                            title="Şifrenizi mi unuttunuz?"><i class="fa fa-lock"></i></button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-arrow-right"></i> Giriş Yap</button>
             </div>
 
-            <label id="topt-fixed-header-top" class="switch switch-success pull-left" data-toggle="tooltip" title="Beni Hatırla"><input type="checkbox"><span></span></label>
+            <label id="topt-fixed-header-top" class="switch switch-success pull-left" data-toggle="tooltip"
+                   title="Beni Hatırla"><input type="checkbox" name="remember"><span></span></label>
             @elseif(url()->current()=="http://localhost:8000/register")
                 <button type="submit" class="btn btn-success"><i class="fa fa-user"></i> Kayıt Ol</button>
-            </div>
-            @endif
         </div>
-    </form>
-    <!-- END Login Form -->
+    @endif
+</div>
+</form>
+
+<!-- END Login Form -->
 </div>
 
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"

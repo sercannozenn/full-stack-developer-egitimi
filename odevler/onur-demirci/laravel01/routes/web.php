@@ -14,3 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'IndexController@index')->name('index');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', 'AdminController@index')->name('admin_index');
+    Route::get('/add-article', 'AdminController@addArticlePage')->name('add_article');
+    Route::post('/add-article', 'AdminController@addArticle');
+});
