@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97456b56-efab-42d6-97aa-7e41f3b81858" name="Default Changelist" comment="" />
+    <list default="true" id="97456b56-efab-42d6-97aa-7e41f3b81858" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Posts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Posts.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -200,7 +204,7 @@
       <workItem from="1606936306070" duration="1609000" />
       <workItem from="1606993496770" duration="10497000" />
       <workItem from="1607004129514" duration="4999000" />
-      <workItem from="1607009518853" duration="242000" />
+      <workItem from="1607009518853" duration="2723000" />
     </task>
     <servers />
   </component>

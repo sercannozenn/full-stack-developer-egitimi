@@ -9,6 +9,8 @@ class Posts extends Model
 {
     use HasFactory;
 
-    protected $table="posts";
-
+    protected $table = "posts";
+    protected $primaryKey = "id";
+//    protected $fillable=["name","content"];
+    protected $guarded = [];
 }
