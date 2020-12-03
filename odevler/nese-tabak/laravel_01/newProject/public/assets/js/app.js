@@ -1,0 +1,1 @@
+require('../../../resources/js/bootstrap');
