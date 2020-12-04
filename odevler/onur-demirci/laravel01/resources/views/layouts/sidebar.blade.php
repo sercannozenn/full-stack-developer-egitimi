@@ -2,22 +2,22 @@
 <nav id="primary-nav">
     <ul>
         <li>
-            <a href="index.html" class="active"><i class="gi gi-star"></i>Ana Sayfa</a>
+            <a href="{{route('index')}}" class="active"><i class="gi gi-star"></i>Ana Sayfa</a>
         </li>
         <li>
             <a href="#" class="closed">Yazılar</a>
             <ul>
                 <li>
-                    <a href="page_form_components.html">Seyahat</a>
+                    <a href="#">Seyahat</a>
                 </li>
                 <li>
-                    <a href="page_form_components.html">Hayat</a>
+                    <a href="#">Hayat</a>
                 </li>
                 <li>
-                    <a href="page_form_components.html">Spor</a>
+                    <a href="#">Spor</a>
                 </li>
                 <li>
-                    <a href="page_form_components.html">Yemek</a>
+                    <a href="#">Yemek</a>
                 </li>
             </ul>
         </li>
