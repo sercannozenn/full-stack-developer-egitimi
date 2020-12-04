@@ -14,6 +14,7 @@ class IndexController extends Controller
             ->select('*', 'articles.id as articleID','articles.created_at as article_created','articles.updated_at as article_updated')
             ->groupBy('articles.id')
             ->orderBy('articles.id', 'DESC')
+            ->limit(12)
             ->get();
 
         return view('front.index',compact('articles'));
