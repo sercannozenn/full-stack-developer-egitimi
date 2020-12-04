@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'FrontController@index')->name('index');
+Route::get('/home', 'AdminController@index')->name('admin.index');
 

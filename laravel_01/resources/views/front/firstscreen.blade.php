@@ -22,10 +22,10 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <div class="col-md-12">
-                        <a href="#" class="btn btn-primary btn-block btn-lg">Giriş Yap</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg">Giriş Yap</a>
                     </div>
                     <div class="col-md-12 secondBtn">
-                        <a href="#" class="btn btn-primary btn-block btn-lg">Kaydol</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-block btn-lg">Kaydol</a>
                     </div>
                 </div>
                 <div class="col-md-4"></div>
