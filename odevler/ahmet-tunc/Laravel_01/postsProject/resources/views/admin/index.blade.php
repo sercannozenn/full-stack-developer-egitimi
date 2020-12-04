@@ -19,6 +19,9 @@
     <!-- Row 1 -->
     <div class="dash-tiles row">
         <!-- Column 1 of Row 1 -->
+
+
+
         <div class="col-sm-3">
             <!-- Total Users Tile -->
             <div class="dash-tile dash-tile-ocean clearfix animation-pullDown">
@@ -26,7 +29,7 @@
                     Post Sayısı
                 </div>
                 <div class="dash-tile-icon"><i class="fa fa-list-alt"></i></div>
-                <div class="dash-tile-text">265k</div>
+                <div class="dash-tile-text">{{count($postCount)}}</div>
             </div>
         </div>
         <!-- END Column 1 of Row 1 -->
@@ -36,10 +39,10 @@
             <!-- Total Sales Tile -->
             <div class="dash-tile dash-tile-flower clearfix animation-pullDown">
                 <div class="dash-tile-header">
-                    Kategori Sayısı
+                    Admin Sayısı
                 </div>
                 <div class="dash-tile-icon"><i class="fa fa-bookmark"></i></div>
-                <div class="dash-tile-text">300k</div>
+                <div class="dash-tile-text">{{count($userCount)}}</div>
             </div>
             <!-- END Total Sales Tile -->
 

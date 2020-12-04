@@ -7,7 +7,7 @@
         </div>
         @guest
             <script>
-                window.location.href="login";
+                window.location.href = "login";
             </script>
         @else
             <div class="col-12 text-center">
@@ -22,27 +22,18 @@
             <li>
                 <a href="{{route('admin.index')}}"><i class="fa fa-user"></i>Anasayfa</a>
             </li>
+
             <li>
-                <a href="#"><i class="fa fa-list-alt"></i>Post İşlemleri</a>
-                <ul>
-                    <li>
-                        <a href="{{route('admin.addPost')}}"><i class="fa fa-file-text"></i>Yeni Post Ekle</a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.getAllPost')}}"><i class="fa fa-list"></i>Post Listesi</a>
-                    </li>
-                </ul>
+                <a href="{{route('admin.addPost')}}"><i class="fa fa-file-text"></i>Yeni Post Ekle</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user"></i>Kategori İşlemleri</a>
+                <a href="{{route('admin.getAllPost')}}"><i class="fa fa-list"></i>Post Listesi</a>
             </li>
+
             <li>
-                <a href="#"><i class="fa fa-user"></i>Kullanıcı İşlemleri</a>
-            </li>
-            <li>
-                <a href="{{route('login')}}"  onclick="
+                <a href="{{route('login')}}" onclick="
                 event.preventDefault();
-                document.getElementById('logoutForm').submit();" ><i class="fa fa-sign-out"></i>Çıkış Yap</a>
+                document.getElementById('logoutForm').submit();"><i class="fa fa-sign-out"></i>Çıkış Yap</a>
 
                 <form action="{{route('logout')}}" id="logoutForm" method="POST">
                     @csrf

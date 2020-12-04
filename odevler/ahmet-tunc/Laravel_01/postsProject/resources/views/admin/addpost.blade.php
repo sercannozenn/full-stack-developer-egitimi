@@ -16,43 +16,69 @@
     </ul>
     <h3 class="page-header page-header-top"><i class="fa fa-list-alt animation-hatch"></i> Yeni Post Ekle</h3>
 
-    <form action="" method="POST" class="form-horizontal form-box">
+
+    <form action="" method="POST" class="form-horizontal form-box" enctype="multipart/form-data">
         @csrf
         <div class="form-box-content">
+            <?php
+            if (!isset($error)){
+            if (isset($control)){
+            if($control->exists)
+            { ?>
             <div class="form-group">
                 <div class="col-md-10">
-                    <input type="text" name="title" id="title" class="form-control" placeholder="Başlık">
+                    <div class="alert alert-success" style="margin-bottom: unset">
+                        <strong>Post kayıt işlemi başarıyla gerçekleştirilmiştir.</strong>
+                    </div>
                 </div>
             </div>
-{{--            <div class="form-group">--}}
-{{--                <div class="col-md-10">--}}
-{{--                    <select id="example-select-chosen" name="example-select-chosen" class="form-control">--}}
-{{--                        <option>Kategori</option>--}}
-{{--                        <option>html</option>--}}
-{{--                        <option>css</option>--}}
-{{--                        <option>javascript</option>--}}
-{{--                        <option>php</option>--}}
-{{--                        <option>mysql</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <?php }else{ ?>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="alert alert-danger" role="alert" style="margin-bottom: unset">
+                        <strong>Post kayıt işlemi gerçekleştirilememiştir.</strong>
+                    </div>
+                </div>
+            </div>
+            <?php }}}else{ ?>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div class="alert alert-danger" style="margin-bottom: unset">
+                        <strong>Lütfen doldurmanız gereken alanları kontrol ediniz.</strong>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+
+            <div class="form-group">
+                <div class="col-md-4">
+                    <input type="file" id="file" name="file" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="text" name="title" id="title" class="form-control" maxlength="99" placeholder="Başlık"
+                           required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <select id="select" name="select" class="form-control" required>
+                        <option>Kategori</option>
+                        <option>html</option>
+                        <option>css</option>
+                        <option>javascript</option>
+                        <option>php</option>
+                        <option>mysql</option>
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-md-10">
                     <textarea id="content" name="content"
-                              class="ckeditor"></textarea>
+                              class="ckeditor" required></textarea>
                 </div>
             </div>
-{{--            <div class="form-group">--}}
-{{--                <div class="col-md-2">--}}
-{{--                    <div class="input-group input-colorpicker color" data-color="#db4a39">--}}
-{{--                        <input type="text" id="example-input-colorpicker2" name="example-input-colorpicker2" class="form-control">--}}
-{{--                        <span class="input-group-addon"><i style="background-color: #db4a39"></i></span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-10">--}}
-{{--                    <span class="help-block">Post Arkaplan Rengi</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="form-group">
                 <div class="col-md-10">
                     <div class="checkbox">
@@ -75,5 +101,6 @@
 
 @section('js')
     <script src="{{asset('assets/js/ckeditor/ckeditor.js')}}"></script>
+
 @endsection
 

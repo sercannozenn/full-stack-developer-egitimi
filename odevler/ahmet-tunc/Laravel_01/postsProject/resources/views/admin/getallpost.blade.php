@@ -17,29 +17,39 @@
     <h3 class="page-header page-header-top"><i class="fa fa-list-alt animation-hatch"></i> Post Listesi</h3>
 
 
-    <table id="example-datatables" class="table table-striped table-bordered table-hover animation-fadeIn">
+    <table id="example-datatables" class="table table-striped table-bordered table-hover animation-slideDown">
         <thead>
         <tr>
             <th class="cell-small"></th>
-            <th class="cell-small text-center hidden-xs hidden-sm">No</th>
+            <th class="cell-small text-center hidden-xs hidden-sm">ID</th>
             <th><i class="fa fa-list-alt"></i> Başlık</th>
-            <th class="hidden-xs hidden-sm hidden-md"><i class="fa fa-pencil"></i> İçerik</th>
-            <th><i class="fa fa-bookmark"></i> Kategori</th>
+            <th class="hidden-xs hidden-sm hidden-md text-center"><i class="fa fa-clock-o"></i> Oluşturulma Tarihi</th>
+            <th><i class="fa fa-bookmark text-center"></i> Aktiflik</th>
         </tr>
         </thead>
         <tbody>
+
+        <?php foreach ($veriler as $row){?>
         <tr>
-            <td class="text-center">
+            <td class="text-center col-xs-2 col-sm-1">
                 <div class="btn-group">
-                    <a href="javascript:void(0)" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
-                    <a href="javascript:void(0)" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                    <a href="{{url('/admin/getallpost/update/'.$row->id)}}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>
+                    <a href="{{url('/admin/getallpost/delete/'.$row->id)}}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                 </div>
             </td>
-            <td class="text-center hidden-xs hidden-sm">1</td>
-            <td><a href="javascript:void(0)">username1</a></td>
-            <td class="hidden-xs hidden-sm hidden-md">user1@example.com</td>
-            <td><span class="label label-warning">Pending..</span></td>
+            <td class="text-center hidden-xs hidden-sm col-xs-1">{{$row->id}}</td>
+            <td class="col-xs-5">{{$row->title}}</td>
+            <td class="hidden-xs hidden-sm hidden-md col-xs-2 text-center">{{$row->created_at}}</td>
+            <?php
+            if($row->status == 0){ ?>
+                <td class="text-center col-xs-1 text-center" style="background-color: #FF4444"><span class="fa fa-times gi-white"></span></td>
+            <?php } else{ ?>
+            <td class="text-center col-xs-1 text-center" style="background-color: #44FF44"><span class="fa fa-check gi-white"></span></td>
+        <?php }?>
         </tr>
+
+        <?php } ?>
+
         </tbody>
     </table>
 @endsection

@@ -17,23 +17,6 @@
     <!-- Loading Indicator, Used for demostrating how loading of widgets could happen, check main.js - uiDemo() -->
     <div id="loading" class="pull-left"><i class="fa fa-certificate fa-spin"></i></div>
 
-    <!-- Header Widgets -->
-    <!-- You can create the widgets you want by replicating the following. Each one exists in a <li> element -->
-    <ul id="widgets" class="navbar-nav-custom pull-right">
-        <li class="dropdown pull-right dropdown-user">
-            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/img/template/avatar.png')}}" alt="avatar"> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <!-- Modal div is at the bottom of the page before including javascript code -->
-                    <a href="#modal-user-settings" role="button" data-toggle="modal"><i class="fa fa-user"></i> Kullanıcı Ayarları</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="page_login.html"><i class="fa fa-sign-out"></i> Çıkış</a>
-                </li>
-            </ul>
-        </li>
-        <!-- END User Menu -->
-    </ul>
+
     <!-- END Header Widgets -->
 </header>
