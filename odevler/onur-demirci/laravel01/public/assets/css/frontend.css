@@ -183,10 +183,70 @@ header.navbar-fixed-bottom + #inner-container > #page-sidebar.collapse {
     grid-column: 1/3;
     grid-row: 4;
 }
+.grid-item {
+    position: relative;
+    z-index: 0;
+    background-color: #000;
+    transition: .5s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.background-holder {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    transition: .5s ease;
+    z-index: 1;
+}
+.background-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.0);
+    z-index: 2;
+    transition: .5s ease;
+}
+article.home-page-article {
+    z-index: 3;
+    color:#fff;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-family: 'Red Hat Display', Sans-Serif;
+}
+.home-page-article .article-title h2 {
+    font-family: 'Red Hat Display', Sans-Serif !important;
+}
 
 
+.grid-item:hover > .background-overlay {
+    background-color: rgba(0,0,0,0.5);
+    transition: .5s ease;
+}
+.grid-item:hover > .background-holder {
+    transform: scale(1.3);
+    transition: .5s ease;
+}
+
+article.home-page-article .article-summary p {
+    font-size: 12px;
+    margin-block-end: unset;
+}
 
 
+article.home-page-article .article-summary span a {
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: 1s ease;
+    font-size: 10px;
+}
+article.home-page-article .article-summary span a:hover {
+    text-decoration: underline;
+    transition: 1s ease;
+}
 
 @media (max-width:991px) {
     header.navbar-fixed-top + #inner-container > #page-sidebar.collapse,
@@ -206,5 +266,8 @@ header.navbar-fixed-bottom + #inner-container > #page-sidebar.collapse {
     #column-2.grid-container {
         grid-template-rows: 187.5px 187.5px 187.5px 187.5px;
         grid-gap: 13px;
+    }
+    .home-page-article .article-title h2 {
+        font-size: 18px;
     }
 }

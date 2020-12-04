@@ -13,7 +13,8 @@ class IndexController extends Controller
 //            ->where('status', 1)
             ->select('*', 'articles.id as articleID','articles.created_at as article_created','articles.updated_at as article_updated')
             ->groupBy('articles.id')
-            ->orderBy('articles.id', 'DESC')
+            ->where('articles.publish_time', "<", now())
+            ->orderBy('articles.publish_time', 'DESC')
             ->limit(12)
             ->get();
 
