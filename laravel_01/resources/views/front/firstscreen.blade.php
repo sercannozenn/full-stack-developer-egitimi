@@ -4,26 +4,18 @@
 @endsection
 @section('css')
     <style>
-    .container{
-        margin-top: 30vh ;
-    }
-    .secondBtn{
-        margin-top: 3vh;
-    }
+        .container {
+            margin-top: 30vh;
+        }
+
+        .secondBtn {
+            margin-top: 3vh;
+        }
 
     </style>
 @endsection
 @section('content')
-    {{--    <div class="container text-center">--}}
-    {{--        <p>Lütfen İşleminizi seçiniz</p><br>--}}
-    {{--        <div>--}}
-    {{--            <a href="" class="btn btn-primary">KAYIT OL</a>--}}
-    {{--        </div>--}}
-    {{--        <div>--}}
-    {{--            <a href="" class="btn btn-primary">GİRİŞ YAP</a>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-
+    <div class="container">
         <div class="card text-center  ">
             <h5 class="card-header">Lütfen İşleminizi Seçiniz</h5>
             <div class="card-body ">
@@ -40,10 +32,8 @@
 
 
             </div>
-
         </div>
-
-
+    </div>
 @endsection
 @section('js')
 @endsection
