@@ -1,0 +1,96 @@
+#inner-container {
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: cover;
+    background-position: top;
+}
+
+#primary-nav ul li a.active {
+    background-image: unset !important;
+    background-color: #000000 !important;
+    border-top: .5px solid #FFFFFF !important;
+    /*border-left: .5px solid #FFFFFF !important;*/
+    border-bottom: .5px solid #FFFFFF !important;
+}
+
+#primary-nav ul li a.active, #primary-nav ul li a {
+    /*background-color: #000000;*/
+    color: #FFFFFF;
+    border: none;
+    font-family: 'Red Hat Display', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 900;
+    background: linear-gradient(90deg, #000000 0%, #0f1b13 100%);
+    background-size: 0;
+    background-repeat: no-repeat;
+    transition: .7s ease;
+}
+
+.open {
+    color: #FFFFFF !important;
+    background-color: #000000 !important;
+}
+
+#primary-nav ul li a:hover {
+    background-size: 100%;
+    color: #fff;
+}
+
+.navbar.navbar-inverse {
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: cover;
+}
+
+#sidebar-search input[type=text] {
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: initial;
+    background-position: top;
+}
+
+#sidebar-search button {
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: cover;
+    background-position: top;
+}
+
+#sidebar-search .input-group {
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: cover;
+    background-position: top;
+    display: block;
+}
+
+#primary-nav li span {
+    color: #000000;
+}
+
+#primary-nav li a.active i {
+    color: #FFFFFF !important;
+}
+
+#page-content + footer {
+    background-color: #000000;
+    color: #fff;
+}
+
+#page-content {
+    -webkit-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0px 0px 61px 12px rgba(0, 0, 0, 0.75);
+    background-color: #111111;
+}
+
+#page-content {
+    border-top: .4px solid #FFFFFF;
+}
+
+.closed {
+    color: #FFFFFF !important;
+    background-color: unset !important;
+}
+header.navbar-fixed-bottom + #inner-container > #page-sidebar.collapse {
+    height: fit-content!important;
+    background-image: url("{{asset('assets/img/frontend/sidebar_background_overlay.png')}}");
+    background-size: cover;
+    background-position: top;
+}
