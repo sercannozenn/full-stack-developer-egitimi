@@ -1,0 +1,34 @@
+.social-widget {
+    .search-form {
+        position: relative;
+        .search-input {
+            border: 0;
+            height: 45px;
+            width: 100%;
+            padding: 10px 20px;
+            color: $body-text;
+        }
+        .search-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 45px;
+            line-height: 45px;
+            background: $light;
+            color: $body-text;
+        }
+    }
+    .user-img {
+        border-radius: 5px;
+    }
+    .twitter-btn,
+    .fb-btn {
+        font-weight: bold;
+        font-size: 15px;
+        padding: 0 15px;
+        border-radius: 4px;
+        i {
+            font-size: 15px;
+        }
+    }
+}
