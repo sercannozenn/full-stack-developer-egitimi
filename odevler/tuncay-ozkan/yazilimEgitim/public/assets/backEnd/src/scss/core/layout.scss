@@ -1,0 +1,387 @@
+// App
+
+/*============================================================== 
+ For all pages 
+============================================================== */
+
+.container-fluid {
+    width: 100%;
+    min-height: calc(100vh - 122px);
+    padding: 30px 18px;
+}
+
+.page-wrapper {
+    min-height: calc(100vh - 64px); 
+    //margin-left: 250px;
+    &.page-header {
+        .gredient-info-bg {
+            background: $skin1;
+        }
+        .container-fluid {
+            padding-top: 0;
+            margin-top: -50px;
+        }
+    }
+}
+
+.main-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/*******************
+ Stickey inner-left-part
+*******************/
+
+$left-part-width:260px;
+.left-part {
+    height: 100%;
+    width: $left-part-width;
+    position: absolute;
+    border-right: 1px solid $border;
+    &.fixed-left-part {
+        position: fixed;
+        top: 0px;
+        padding-top: 10px;
+    }
+    .show-left-part {
+        position: absolute;
+        top: 45%;
+        right: -46px;
+    }
+}
+
+.right-part {
+    width: calc(100% - 260px);
+    min-height: calc(100vh - 64px);
+    overflow: auto;
+    margin-left: $left-part-width;
+}
+
+.reverse-mode {
+    .left-part {
+        right: 0;
+        border-left: 1px solid $border;
+    }
+    .show-left-part {
+        right: auto;
+        left: -41px;
+    }
+    .right-part {
+        margin-left: 0px;
+        margin-right: $left-part-width;
+    }
+}
+
+// Vertical layout
+#main-wrapper[data-layout="vertical"] {
+    .topbar nav .nav-wrapper .brand-logo {
+        //width: $sidebar-width-full;
+        transition: width .3s;
+    }
+    
+    /*sidebar type*/
+    &[data-sidebartype="full"] {
+        .page-wrapper {
+            margin-left: $sidebar-width-full;
+        }
+    }
+    &[data-sidebartype="iconbar"] {
+        .page-wrapper,
+        .topbar nav ul.left {
+            margin-left: $sidebar-width-iconbar;
+        }
+        .left-sidebar,
+        .sidenav:not(.right-sidenav),
+        .topbar nav .nav-wrapper .brand-logo {
+            width: $sidebar-width-iconbar;
+        }
+        #dropdownuser {
+            width: 160px !important;
+            left: 15px !important;
+        }
+        .sidenav:not(.right-sidenav) {
+            ul:not(.dropdown-content) li {
+                a {
+                    display: block;
+                    text-align: center;
+                    height: 80px;
+                    i {
+                        display: block;
+                        width: auto;
+                        float: none;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+    }
+    &[data-sidebartype="overlay"] {
+        .topbar nav .nav-wrapper .brand-logo {
+            width: $sidebar-width-full;
+        }
+        .left-sidebar {
+            left: -$sidebar-width-full;
+        }
+        &.show-sidebar {
+            .left-sidebar {
+                left: 0;
+            }
+        }
+    }
+    /*Sidebar position*/
+    &[data-sidebar-position="fixed"] {
+        .topbar nav .nav-wrapper .brand-logo {
+            position: fixed;
+            z-index: 10;
+        }
+        .left-sidebar {
+            position: fixed;
+        }
+    }
+    /*Header position*/
+    &[data-header-position="fixed"] {
+        .topbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        .page-wrapper {
+            padding-top: $topbar-height;
+        }
+    }
+    /*Boxed Layout*/
+    &[data-boxed-layout="boxed"] {
+        max-width: $boxed-width;
+        margin: 0 auto;
+        position: relative;
+        box-shadow: 1px 0 80px rgba(0, 0, 0, 0.2);
+    }
+    &[data-boxed-layout="boxed"][data-header-position="fixed"] {
+        .topbar {
+            max-width: $boxed-width;
+        }
+    }
+}
+
+// Vertical responsive layout
+@media(min-width:767px) {
+    #main-wrapper[data-layout="vertical"] {
+
+        /*Vertical*/
+        &[data-sidebartype="full"] {
+            .topbar nav .nav-wrapper .brand-logo {
+                width: $sidebar-width-full;
+            }
+        }
+        /*Sidebar position*/
+        &[data-sidebar-position="fixed"][data-sidebartype="full"],
+        &[data-sidebar-position="fixed"][data-sidebartype="overlay"] {
+            .topbar nav ul.left {
+                margin-left: $sidebar-width-full;
+            }
+        }
+        &[data-sidebar-position="fixed"][data-sidebartype="mini-sidebar"] {
+            .topbar nav ul.left {
+                margin-left: $sidebar-width-mini;
+            }
+        }
+        &[data-sidebar-position="fixed"][data-sidebartype="iconbar"] {
+            .topbar nav ul.left {
+                margin-left: $sidebar-width-iconbar;
+            }
+        }
+        /*Vertical with mini-sidebar*/
+        &[data-layout="vertical"][data-sidebartype="mini-sidebar"] {
+            .topbar nav .nav-wrapper .brand-logo {
+                width: $sidebar-width-mini;
+                .text {
+                    display: none;
+                }
+                &.full-logo {
+                    width: $sidebar-width-full;
+                    .text {
+                        display: block;
+                    }
+                }
+            }
+        }
+        /*Fixed sidebar with minisidebar*/
+        &[data-sidebartype="mini-sidebar"] {
+            .page-wrapper {
+                margin-left: $sidebar-width-mini;
+            }
+            .topbar nav {
+                ul.left {
+                    margin-left: $sidebar-width-mini;
+                }
+            }
+            .left-sidebar {
+                width: $sidebar-width-mini;
+                .sidenav {
+                    width: $sidebar-width-mini;
+                    .user-profile {
+                        padding: 29px 15px 15px;
+                        .user-name {
+                            .name {
+                                justify-content: center;
+                                font-size: 36px;
+                                i {
+                                    margin-right: 0;
+                                }
+                            }
+                            .hidden {
+                                display: none;
+                            }
+                        }
+                    }
+                    .hide-menu {
+                        display: none;
+                    }
+                    .collapsible {
+                        .has-arrow::after {
+                            display: none;
+                        }
+                    }
+                    .create-btn {
+                        padding: 0 6px;
+                    }
+                    &.right-sidenav {
+                        width: 300px;
+                    }
+                }
+                &:hover {
+                    .sidenav {
+                        width: $sidebar-width-full;
+                        .hide-menu,
+                        .collapsible .has-arrow::after {
+                            display: block;
+                        }
+                        .user-profile {
+                            padding-top: 50px;
+                            .user-name {
+                                .name {
+                                    justify-content: flex-start;
+                                    font-size: 16px;
+                                    i {
+                                        margin-right: 10px;
+                                    }
+                                }
+                                .hidden {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1023px) {
+    #main-wrapper {
+        &[data-sidebartype="mini-sidebar"] {
+            &.show-sidebar {
+                .topbar nav .nav-wrapper {
+                    .brand-logo.full-logo {
+                        width: $sidebar-width-mini;
+                        .text {
+                            display: none;
+                        }
+                    }
+                    ul.left {
+                        margin-left: $sidebar-width-mini;
+                    }
+                }
+                .left-sidebar {
+                    .sidenav {
+                        width: $sidebar-width-full;
+                        .hide-menu,
+                        .collapsible .has-arrow::after {
+                            display: block;
+                        }
+                        .user-profile {
+                            padding-left: 14px;
+                            .user-name {
+                                .hidden {
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &[data-sidebartype="overlay"] {
+            .topbar nav .nav-wrapper {
+                .brand-logo {
+                    width: $sidebar-width-mini;
+                    .text {
+                        display: none;
+                    }
+                }
+                ul.left {
+                    margin-left: $sidebar-width-mini;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:766px) {
+    #main-wrapper {
+        &[data-sidebartype="mini-sidebar"] {
+            .page-wrapper {
+                margin-left: 0;
+            }
+            .topbar nav .nav-wrapper {
+                .brand-logo {
+                    width: $sidebar-width-mini;
+                    .text {
+                        display: none;
+                    }
+                }
+                ul.left {
+                    margin-left: $sidebar-width-mini;
+                }
+            }
+            .left-sidebar {
+                left: -$sidebar-width-full;
+            }
+        }
+        &.show-sidebar {
+            .left-sidebar {
+                left: 0;
+            }
+        }
+    }
+    .left-part {
+        left: -$left-part-width;
+        z-index: 1;
+        position: fixed;
+        transition: 0.1s ease-in;
+        &.show-panel {
+            left: 0px;
+        }
+    }
+    .reverse-mode .left-part{
+        right: -$left-part-width;
+        left: auto; 
+        &.show-panel {
+            right: 0px;
+        }
+    }
+    .right-part {
+        width: 100%;
+        margin-left: 0px;
+    }
+}
+
+// Phone vertical(400px) 
+@media(max-width:400px) {
+    .mini-sidebar .topbar nav .nav-wrapper>ul>li>a:not(.sidebar-toggle) {
+        padding: 0 6px;
+    }
+}

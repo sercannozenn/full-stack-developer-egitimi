@@ -1,0 +1,137 @@
+// variables and colors
+
+@import "components/color-variables";
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800');
+
+$skin1: #2962FF;
+$skin2: #fe5419;
+$skin3: #00b0ff;
+$skin4: #6659f7;
+$skin5: #273146;
+$skin6: #fff;
+
+$topbar-height: 64px;
+$sidebar-width-full: 250px;
+$sidebar-width-mini: 70px;
+$sidebar-width-iconbar: 200px;
+
+/*Boxed layout width*/
+
+$boxed-width: 1200px;
+
+$font-family: 'Nunito Sans', sans-serif !default;
+$body-color: #eef5f9;
+$body-text: #9098ac;
+$white-op: rgba(255, 255, 255, 0.5);
+$dark-op: rgba(0, 0, 0, 0.5);
+$topbar: #fff;
+$sidebar-text: $white-op;
+$sidebar-icons: $white-op;
+$heading-text: #455a64;
+
+$shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.01), 0 3px 1px -2px rgba(0, 0, 0, 0.02), 0 1px 5px 0 rgba(0, 0, 0, 0.02);
+$shadow2: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.02), 0 1px 5px 0 rgba(0, 0, 0, 0.02);
+$radius: 3px;
+
+$white: #fff;
+$code: #e83e8c;
+$light: #e9edf2;
+$border: rgba(120, 130, 140, 0.13);
+$lft: left;
+$rgt: right;
+$heading-font-color: #5b616e;
+
+$font-light:300;
+$font-medium:700;
+$font-normal:400;
+$font-bold:800;
+
+/**
+ * Table Of Content
+ *
+ * 	1. Colors
+ *	2. Typography
+ *	3. Forms
+ *	4. Tabs
+ */
+
+// 1. Colors
+// ==========================================================================
+
+$primary-color: color("blue", "accent-4") !default;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: color("deep-purple", "darken-1") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$link-color: color("light-blue", "darken-1") !default;
+
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #4F5467 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+$info:    #288fee !default;
+$danger:  #f5365c  !default;
+$success: #2dce89 !default;
+$warning: #fb6340 !default;
+$inverse: #414755 !default;
+$primary: #5e72e4 !default;
+$muted:   $gray-600 !default;
+
+/*******************
+ Gradiant mixin
+*******************/
+@mixin horizontal-gradient($from, $to, $stop: 100%) {
+  /* fallback/image non-cover color */
+  background-color: $from;
+  /* Firefox 3.6+ */
+  background-image: -moz-linear-gradient(left, $from 0%, $to $stop);
+  /* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, $from), color-stop($stop, $to));
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient(left, $from 0%, $to $stop);
+  /* Opera 11.10+ */
+  background-image: -o-linear-gradient(left, $from 0%, $to $stop);
+  /* IE10+ */
+  background: -ms-linear-gradient(left, $from 0%, $to $stop);
+  /* Standard */
+  background: linear-gradient(to right, $from 0%, $to $stop);
+  /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=1 );
+}
+
+// 2. Typography
+// ==========================================================================
+
+$font-stack: $font-family !default;
+$off-black: rgba(0, 0, 0, 0.87) !default;
+
+// Header Styles
+
+$h1-fontsize: 40px !default;
+$h2-fontsize: 36px !default;
+$h3-fontsize: 30px !default;
+$h4-fontsize: 24px !default;
+$h5-fontsize: 20px !default;
+$h6-fontsize: 16px !default;
+
+// 3. Forms
+// ==========================================================================
+// Select
+
+$select-border: 1px solid $gray-500 !default;
+
+// 4. Tabs
+// ==========================================================================
+
+$tabs-underline-color: $primary-color !default;
+$tabs-text-color: $primary-color-light !default;
+$tabs-bg-color: #fff !default;
