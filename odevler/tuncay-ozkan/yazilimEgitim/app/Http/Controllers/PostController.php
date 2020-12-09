@@ -24,11 +24,11 @@ class PostController extends Controller
         $data = PostModel::findOrFail($id);
         $status = $data->status;
         if ($status == 1) {
-            $status = 2;
+            $data->status = 2;
             $data->save();
             return response()->json(['message' => 'Başarılı', 'status' => $data->status], 200);
         } else {
-            $status = 1;
+            $data->status = 1;
             $data->save();
             return response()->json(['message' => 'Başarısız', 'status' => $data->status], 200);
 
