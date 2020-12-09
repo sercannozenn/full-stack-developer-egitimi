@@ -1,0 +1,14 @@
+
+// Variables;
+
+@import "../variable";
+
+.ct-series-a .ct-bar {
+    stroke: $primary;
+}
+
+#chart-earnings {
+	&.c3 path {
+		opacity: 1 !important;
+	}
+}
