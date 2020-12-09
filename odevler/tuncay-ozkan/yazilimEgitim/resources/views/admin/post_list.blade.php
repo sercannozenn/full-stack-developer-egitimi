@@ -12,7 +12,7 @@
         <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <h5 class="card-title">Makale Listesi</h5>
+                    <h5 class="card-title">Makale Liste</h5>
                     <a class="btn-floating waves-effect waves-light teal" title="Yeni Makale Ekle">
                         <i class="material-icons">add</i>
                     </a>
