@@ -1,3 +1,6 @@
+@php
+    //dd($data)
+@endphp
 @extends('layouts.admin')
 @section('title')
     Makale Listesi
@@ -16,6 +19,7 @@
                     <table class="responsive-table">
                         <thead>
                         <tr>
+                            <th>İşlemler</th>
                             <th>Resim</th>
                             <th>ID</th>
                             <th>Başlık</th>
@@ -27,7 +31,41 @@
                             <th>Güncelleme Tarihi</th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        @foreach ($data as $key=>$value)
+
+                            <tr>
+                                <td>
+                                    <a href="javascript:void(0)" class="deleteCategory" data-id="{{ $value->id }}">
+                                        <i class="fas fa-trash  red-text"></i>
+                                    </a>
+                                    <a href="#editCategory" class="editCategory modal-trigger"
+                                       data-id="{{ $value->id }}">
+                                        <i class="fas fa-edit  yellow-text"></i>
+                                    </a>
+                                </td>
+                                <td><img src="{{asset($value->image)}}" width="100" height="100"></td>
+                                <td>{{$value->id}}</td>
+                                <td>{{$value->title}}</td>
+                                <td>{{$value->getPostUser->name}}</td>
+                                <td>
+                                    @if($value->status==1)
+                                        <a class="waves-effect waves-light btn green changeStatus"
+                                           data-id="{{ $value->id }}">Aktif</a>
+                                    @else
+                                        <a class="waves-effect waves-light btn red changeStatus"
+                                           data-id="{{ $value->id }}">Pasif</a>
+                                    @endif
+                                </td>
+                                <td>{{$value->slug}}</td>
+                                <td>{{$value->getCategory->name}}</td>
+                                <td>{{$value->publish_date	}}</td>
+                                <td>{{$value->updated_at}}</td>
+                            </tr>
+                        @endforeach
+
+
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -35,4 +73,44 @@
     </div>
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function () {
+
+            $('.changeStatus').click(function () {
+                const dataId=$(this).data('id');
+               $.ajax({
+                   url:'{{route('admin.post.changeStatus')}}',
+                   method:'POST',
+                   data:{id:dataId,
+                       '_token': '{{ csrf_token() }}'
+                   },
+                   async:false,
+                   success:function (response) {
+                       // if (response.status == 1)
+                       // {
+                       //     self[0].classList.remove('red');
+                       //     self[0].classList.add('green');
+                       //     self[0].innerText = "Aktif";
+                       // }
+                       // else
+                       // {
+                       //     self[0].classList.remove('green');
+                       //     self[0].classList.add('red');
+                       //     self[0].innerText = "Pasif";
+                       // }
+                       //
+                       // Swal.fire({
+                       //     icon: 'success',
+                       //     title: 'Uyarı',
+                       //     text: dataID + " id'li kategorinin durumu şu anda " + self[0].innerText
+                       //         + " olarak güncellendi.",
+                       //     confirmButtonText: 'Tamam'
+                       //
+                       // })
+                   },
+               })
+            })
+        })
+
+    </script>
 @endsection

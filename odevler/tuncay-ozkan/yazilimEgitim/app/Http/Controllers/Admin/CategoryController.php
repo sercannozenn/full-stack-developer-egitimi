@@ -101,7 +101,7 @@ class CategoryController extends Controller
             $category = PostCategory::find($categoryID);
 
             $status = $category->status;
-
+dd($category);
             $category->status = $status ? 0 : 1;
             $category->save();
 
