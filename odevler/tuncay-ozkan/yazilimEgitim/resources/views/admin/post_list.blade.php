@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-content">
                     <h5 class="card-title">Makale Liste</h5>
-                    <a class="btn-floating waves-effect waves-light teal" title="Yeni Makale Ekle">
+                    <a href="/admin/post/add" class="btn-floating waves-effect waves-light teal" title="Yeni Makale Ekle">
                         <i class="material-icons">add</i>
                     </a>
                     <table class="responsive-table">
@@ -75,10 +75,10 @@
 @section('js')
     <script>
         $(document).ready(function () {
-
             $('.changeStatus').click(function () {
+                // const btnStatus = document.getElementsByClassName('changeStatus');
                 const dataId = $(this).data('id');
-
+                var self = $(this)[0];
                 $.ajax({
                     url: '{{route('admin.post.changeStatus')}}',
                     method: 'POST',
@@ -89,23 +89,19 @@
                     async: false,
                     success: function (response) {
 
-                        const status = response.status;
-                        const btnStatus=document.getElementsByClassName('changeStatus');
-                        console.log(status);
-                        if (status === 1) {
 
-
-                            btnStatus[0].classList.remove('green');
-                            btnStatus[0].classList.add('red');
-                            btnStatus[0].classList.innerText = "Pasif"
-
+                        if (response.status == 1) {
+                            self.classList.remove('red');
+                            self.classList.add('green');
+                            self.innerText = "Aktif"
+                        } else {
+                            self.classList.remove('green');
+                            self.classList.add('red');
+                            self.innerText = "Pasif"
                         }
-                        else
-                        {
-                            btnStatus[0].classList.removeClass('red');
-                            btnStatus[0].classList.addClass('green');
-                            btnStatus[0].classList.innerText = "Aktif"
-                        }
+
+                        // for ($i=0;$i<btnStatus.length;$i++){
+                        // console.log(btnStatus);}
                     },
                 })
             })

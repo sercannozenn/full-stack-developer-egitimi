@@ -47,10 +47,10 @@
                                 <td>
                                     @if ($item->status)
                                         <a class="waves-effect waves-light btn green changeStatus"
-                                           data-id="{{ $item->id }}">Aktif</a>
+                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Aktif</a>
                                     @else
                                         <a class="waves-effect waves-light btn red changeStatus"
-                                           data-id="{{ $item->id }}">Pasif</a>
+                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Pasif</a>
                                     @endif
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
@@ -226,6 +226,7 @@
             $('.changeStatus').click(function ()
             {
                 let dataID = $(this).data('id');
+                let dataName = $(this).data('name');
                 let self = $(this);
                 $.ajax({
                     url: '{{route('admin.category.changeStatus')}}',
@@ -253,7 +254,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Uyarı',
-                            text: dataID + " id'li kategorinin durumu şu anda " + self[0].innerText
+                            text: dataName + " adlı kategorinin durumu " + self[0].innerText
                                 + " olarak güncellendi.",
                             confirmButtonText: 'Tamam'
 
