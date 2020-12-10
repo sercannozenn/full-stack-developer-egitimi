@@ -7,9 +7,13 @@
     Makale Ekleme
 @endsection
 @section('css')
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
     <link rel="stylesheet" type="text/css"
           href="{{asset('/assets/backEnd/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/backEnd/libs/ckeditor/samples/css/samples.css')}}">
+    <link href="{{asset('/assets/backEnd/extra-libs/prism/prism.css')}}" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 @endsection
 @section('content')
     <div class="row">
@@ -36,12 +40,18 @@
 
                                 </div>
                                 <div class="input-field col s3 m3">
-                                    <select multiple>
-                                        <option value="" disabled >Etiket Seçimi Yapın  </option>
-                                        @foreach($category as  $key=>$value)
-                                            <option value="{{$value->category_id}}">{{$value->name}}</option>
-                                        @endforeach
-                                    </select>
+{{--                                    <select multiple>--}}
+{{--                                        <option value="" disabled >Etiket Seçimi Yapın  </option>--}}
+{{--                                        @foreach($category as  $key=>$value)--}}
+{{--                                            <option value="{{$value->category_id}}">{{$value->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+                                    <h5 class="card-title ">Form Initial Chips
+                                        <i class="material-icons right tooltipped"data-position="left" data-delay="50" data-tooltip="Get Code">more_vert</i>
+                                    </h5>
+                                        <h6 class="card-subtitle">Set initial tags.</h6>
+                                        <div class="chips chips-initial"></div>
+
                             </div>
                             <div class="col s3">
                                 <div class="card">
@@ -67,8 +77,8 @@
                     <div class="card">
                         <div class="card-content">
                             <h4 class="card-title">İçerik</h4>
-                            <div id="editor" style="visibility: hidden; display: none;">
-                                <h6>Makale Yaz</h6>
+                            <div >
+                                <textarea name="posts"></textarea>
                             </div>
 
                         </div>
@@ -112,43 +122,20 @@
 
     </script>
 
-    <script src="{{asset('/assets/backEnd/dist/js/app-style-switcher.js')}}"></script>
-    <script src="{{asset('/assets/backEnd/libs/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{asset('/assets/backEnd/libs/ckeditor/samples/js/sample.js')}}"></script>
+    <script src="{{asset('/assets/backEnd/extra-libs/prism/prism.js')}}"></script>
+    <script src="{{asset('/assets/backEnd/libs/jquery-match-height/dist/jquery.matchHeight-min.js')}}"></script>
+
     <script>
-        //default
-        initSample();
-
-        //inline editor
-        // We need to turn off the automatic editor creation first.
-        CKEDITOR.disableAutoInline = true;
-
-        CKEDITOR.inline('editor2', {
-            extraPlugins: 'sourcedialog',
-            removePlugins: 'sourcearea'
-        });
-
-        var editor1 = CKEDITOR.replace('editor1', {
-            extraAllowedContent: 'div',
-            height: 460
-        });
-        editor1.on('instanceReady', function () {
-            // Output self-closing tags the HTML4 way, like <br>.
-            this.dataProcessor.writer.selfClosingEnd = '>';
-
-            // Use line breaks for block elements, tables, and lists.
-            var dtd = CKEDITOR.dtd;
-            for (var e in CKEDITOR.tools.extend({}, dtd.$nonBodyContent, dtd.$block, dtd.$listItem, dtd.$tableContent)) {
-                this.dataProcessor.writer.setRules(e, {
-                    indent: true,
-                    breakBeforeOpen: true,
-                    breakAfterOpen: true,
-                    breakBeforeClose: true,
-                    breakAfterClose: true
+        CKEDITOR.replace( 'posts' );
+    </script>
+    <script>
+        $(function(){
+            // Match the height of each card in a row
+            setTimeout(function(){
+                $('.row.match-height').each(function() {
+                    $(this).find('.card').not('.card .card').matchHeight(); // Not .card .card prevents collapsible cards from taking height
                 });
-            }
-            // Start in source mode.
-            this.setMode('source');
+            },500);
         });
     </script>
 @endsection

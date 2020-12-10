@@ -10,6 +10,9 @@
             <div class="card">
                 <div class="card-content">
                     <h5 class="card-title">Etiket Listesi</h5>
+                <a href="{{route('admin.tag.add')}}" class="btn-floating waves-effect waves-light teal" title="Yeni Tag Ekle">
+                        <i class="material-icons">add</i>
+                    </a>
                     <p>Add <code>class="responsive-table"</code> to the table tag to make the table horizontally scrollable on smaller screen widths.</p>
                     <table class="responsive-table">
                         <thead>
