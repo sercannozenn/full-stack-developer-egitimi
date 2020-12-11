@@ -22,6 +22,11 @@ class PostController extends Controller
         return view('admin.post_add',compact('category'));
     }
 
+    public function store(Request $request)
+    {
+
+    }
+
     public function changeStatus(Request $request)
     {
         $id = $request->id;

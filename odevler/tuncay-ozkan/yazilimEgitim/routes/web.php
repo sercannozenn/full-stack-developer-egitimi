@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function () {
         Route::get('/add', 'PostController@add')->name('admin.post.add');
+        Route::post('/add', 'PostController@store')->name('admin.post.store');
         Route::get('/list', 'PostController@index')->name('admin.post.list');
         Route::post('/changeStatus', 'PostController@changeStatus')->name('admin.post.changeStatus');
         Route::resource('/category', 'Admin\CategoryController');
