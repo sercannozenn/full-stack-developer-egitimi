@@ -1,0 +1,197 @@
+// Variables;
+@import "../variable";
+
+.bg-white{
+	background: $white;
+}
+
+.topbar{
+    background-image: url(../../../landingpage/assets/images/banner-bg.jpg);
+    background-repeat: no-repeat;
+	.header-banner {
+    	padding-top: 120px;
+    	padding-bottom: 120px;
+	}
+    nav .nav-wrapper .brand-logo {
+        background-color: transparent!important;
+    }
+}
+.img-shadow {
+    -webkit-box-shadow: 16px 20px 30px rgba(103, 119, 157, 0.3);
+    box-shadow: 16px 20px 30px rgba(103, 119, 157, 0.3);
+}
+
+.live-box {
+    position: relative;
+    img{
+    	margin-bottom:-6px;
+    }
+    .overlay {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        height: 100%;
+        display: none;
+        .live-btn {
+            position: relative;
+            top: 45%;
+        }
+    }
+    &:hover {
+        .overlay {
+            display: block;
+        }
+    }
+}
+
+.spacer {
+    padding: 80px 0;
+}
+
+.message-center{
+	margin: 0 auto;
+}
+
+.testimonial { 
+    position: relative;
+    .underline,
+    .aboveline {
+        display: inline-block;
+        width: 80px;
+        height: 2px;
+        background-color: $gray-300;
+        position: absolute;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
+    .aboveline {
+        top: 0;
+    }
+    .underline {
+        bottom: 0;
+    }
+    .owl-carousel .owl-item img {
+        width: auto;
+        margin: 0 auto;
+    }
+    .quote {
+        line-height: 35px;
+    }
+}
+
+.shadow{
+	box-shadow: 8px 0px 20px rgba(0, 0, 0, 0.08)!important;
+}
+
+/*============================================================== 
+ For Desktop & above all (2500px) 
+============================================================== */
+
+@media (min-width: 2500px) and (max-width: 4499px) {
+    .topbar {
+        background-position: right -70px top 0px;
+    }
+    .footer{
+        background-position:  top -80px left -30px!important; 
+    }
+}
+
+/*============================================================== 
+ For Desktop & above all (1600px) 
+============================================================== */
+
+@media (min-width: 1600px) and (max-width: 2499px) {
+    .topbar {
+        background-position: right -500px top 0px;
+    }
+}
+
+
+/*============================================================== 
+ For Laptop & above all (1400px) 
+============================================================== */
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+    .topbar {
+        background-position: right -640px top 0px;
+    }
+}
+
+
+/*-- ============================================================== 
+ Desktop & above all (1399px) 
+============================================================== */
+
+@media (max-width: 1399px) {
+    .topbar {
+        background-position: right -630px top -10px;
+    }
+}
+
+/*--============================================================== 
+ Phone and below ipad(767px) 
+============================================================== */
+
+@media (max-width: 767px) {
+    .topbar {
+        background-position: right -930px top -10px;
+    }
+    .footer{
+        background-position:  top -10px left -930px!important;
+    }
+    .sml-logo{
+    	width: auto !important;
+    } 
+    .sml-icon{
+    	margin : 0 18px !important;
+    	float: right !important;
+    }
+    .sml-nav{
+    	background-color: $topbar !important;
+    	padding: 0 !important;
+    }
+    .sml-font{
+    	li{
+    		a{
+    			color: $body-text !important;
+    		}
+    	}
+    }
+}
+
+/*--============================================================== 
+ Ipad & above all(1023px) 
+============================================================== */
+
+@media (max-width: 1023px) {
+    .feature1,
+    .header-banner {
+        text-align: center;
+    }
+    .footer {
+        text-align: center;
+        padding-bottom: 100px;
+    }
+    .sml-logo{
+    	width: auto !important;
+    } 
+    .sml-icon{
+    	margin : 0 18px !important;
+    	float: right !important;
+    }
+    .sml-nav{
+    	background-color: $topbar !important;
+    	padding: 0 !important;
+    }
+    .sml-font{
+    	li{
+    		a{
+    			color: $body-text !important;
+    		}
+    	}
+    }
+}

@@ -1,0 +1,71 @@
+// App
+
+/*============================================================== 
+ For all pages 
+ ============================================================== */
+
+* {
+    outline: none;
+}
+
+html {
+    color: $body-text;
+}
+
+body {
+    background: $body-color;
+    font-family: $font-family;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $heading-font-color
+}
+
+dl,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+p,
+pre,
+ul {
+    margin-top: 0;
+}
+
+.pre-scroll {
+    position: relative;
+}
+
+a.link {
+    color: $body-text;
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.error {
+    @extend .red-text;
+}
+
+.preloader {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 999999999;
+    background: $white;
+}
+
+nav i,
+nav i.material-icons {
+    height: $topbar-height;
+    line-height: $topbar-height;
+}
