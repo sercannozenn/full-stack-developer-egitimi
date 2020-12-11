@@ -16,6 +16,7 @@
                     <table class="responsive-table">
                         <thead>
                         <tr>
+                            <th>İşlem</th>
                             <th>Resim</th>
                             <th>ID</th>
                             <th>Başlık</th>
@@ -25,9 +26,43 @@
                             <th>Kategori</th>
                             <th>Paylaşım Tarihi</th>
                             <th>Güncelleme Tarihi</th>
+                            <th>Yayınlanma Tarihi</th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        @foreach($post_list as $item)
+                            <tr id="row{{$item->id}}">
+                                <td>
+                                    <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}" data-name="{{$item->name}}">
+                                        <i class="fas fa-trash  red-text"></i>
+                                    </a>
+                                    <a href="#editTag" class="editTag modal-trigger"
+                                       data-id="{{ $item->id }}">
+                                        <i class="fas fa-edit  yellow-text"></i>
+                                    </a>
+                                </td>
+                                <td></td>
+                                <td>{{ $item->id }}</td>
+                                <td>{{$item->title}}</td>
+                                <td>{{ $item->getUser->name }}</td>
+
+                                <td>
+                                    @if ($item->status)
+                                        <a class="waves-effect waves-light btn green changeTagStatus"
+                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Aktif</a>
+                                    @else
+                                        <a class="waves-effect waves-light btn red changeTagStatus"
+                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Pasif</a>
+                                    @endif
+                                </td>
+                                <td>{{ $item->slug }}</td>
+                                <td>{{ $item->getCategory->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->publish_time)->format('d-m-Y H:i:s') }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

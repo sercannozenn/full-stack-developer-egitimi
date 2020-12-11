@@ -25,12 +25,9 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function (){
-        Route::get('/add',function (){
-           return view('admin.post_add');
-        })->name('admin.post.add');
-        Route::get('/list',function (){
-            return view('admin.post_list');
-        })->name('admin.post.list');
+        Route::resource('/posts','Admin\PostsController');
+        Route::get('/add','Admin\PostsController@addPost')->name('admin.post.add');
+        Route::post('/add/save','Admin\PostsController@store')->name('admin.post.save');
 
         Route::resource('/etiket', 'Admin\NewTagController');
         Route::post('/etiket/changeStatus','Admin\NewTagController@changeStatus')->name('admin.tag.changeStatus');

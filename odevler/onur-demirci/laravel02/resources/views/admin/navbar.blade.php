@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.post.list')}}"><i class="material-icons dp48">view_list</i>
+                    <a href="{{route('posts.index')}}"><i class="material-icons dp48">view_list</i>
                         <span class="hide-menu"> Makale Listesi </span>
                     </a>
                 </li>

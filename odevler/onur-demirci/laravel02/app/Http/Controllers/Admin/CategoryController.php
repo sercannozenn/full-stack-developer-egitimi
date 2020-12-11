@@ -48,7 +48,6 @@ class CategoryController extends Controller
         ];
 
         PostCategory::create($data);
-
         alert()->success('Başarılı', 'Kategori eklendi')
             ->showConfirmButton('Tamam', '#3085d6');
 
