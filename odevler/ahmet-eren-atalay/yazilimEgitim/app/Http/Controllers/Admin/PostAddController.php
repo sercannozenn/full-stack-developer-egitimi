@@ -13,11 +13,20 @@ use Illuminate\Support\Str;
 
 class PostAddController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $id = $request->id;
         $PostCategory = PostCategory::all();
         $Tags = TagsList::all();
-        return view('admin.post_add',compact('PostCategory','Tags'));
+        $post = null;
+        if ($id) {
+            $post = PostsList::find($id);
+
+            return view('admin.post_add', compact('PostCategory', 'Tags', 'post'));
+        }
+
+
+        return view('admin.post_add', compact('PostCategory', 'Tags', 'post'));
     }
 
     public function postadd(Request $request)
@@ -25,12 +34,9 @@ class PostAddController extends Controller
         $title = $request->title;
         $content = $request->content;
         $slug = Str::slug($title);
-       $user = Auth::user();
+        $user = Auth::user();
         $tags = $request->tags_id;
         $category = $request->category_id;
-        $categoryName = $request->category;
-
-
 
         $data = [
             'title' => $title,
@@ -39,18 +45,25 @@ class PostAddController extends Controller
             'user_id' => $user->id,
             'tags_id' => $tags,
             'category_id' => $category,
-
-
         ];
+        $id = $request->id;
+        if ($id) {
+            PostsList::where('id', $id)->update($data);
+            alert()->success('Başarılı', 'Kategori güncellendi')
+                ->showConfirmButton('Tamam', '#3085d6');
+            return redirect()->route('admin.post.list');
+        }
 
-     PostsList::create($data);
+
+
+
+        PostsList::create($data);
 
 
         alert()->success('Başarılı', 'Kategori eklendi')
             ->showConfirmButton('Tamam', '#3085d6');
 
         return redirect()->route('admin.post.list');
-
 
 
     }

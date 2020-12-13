@@ -36,8 +36,7 @@
                                     <a href="javascript:void(0)" class="deleteCategory" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
-                                    <a href="#editPostList" class="editPostList modal-trigger"
-                                       data-id="{{ $item->id }}">
+                                    <a href="{{ route('admin.post.edit', ['id' => $item->id]) }}" class="editPostList">
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
                                 </td>
@@ -65,74 +64,6 @@
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="editPostList" class="modal modalEdit">
-        <div class="modal-content">
-            <div class="row" >
-                <div class="col s12 l12">
-                    <div class="card">
-                        <div class="card-content">
-                            <h5 class="card-title activator">Makale Düzenleme</h5>
-                            <form id="postEditForm" action="" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">account_circle</i>
-                                        <input name="title" id="titleEdit" type="text">
-                                        <label for="titleEdit">Makale Adı</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-
-                                    <div class="col s12">
-                                        <div class="form-group">
-
-                        <textarea  name="content" id="ckeditor" cols="50" rows="15" class="ckeditor">
-
-
-                        </textarea>
-
-
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <div class="switch">
-                                            <label for="statusEdit">
-                                                Pasif
-                                                <input name="status" id="statusEdit" type="checkbox">
-                                                <span class="lever"></span>
-                                                Aktif
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <button id="btnEdit" class="btn green waves-effect btn-block" type="button">
-                                            Değişiklikleri Kaydet
-                                        </button>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <button class="btn red waves-effect btn-block modal-close" type="button">
-                                            Vazgeç
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -228,70 +159,6 @@
 
                     }
                 })
-            });
-
-
-            $('.editPostList').click(function () {
-                let dataID = $(this).data('id');
-                let titleEdit = $('#titleEdit');
-                let contentEdit = $('#ckeditor');
-                let status = $('#statusEdit');
-
-
-                let route = '{{route('admin.post.edit',['list'=>'listEdit']) }}';
-                let routeUpdate = '{{route('admin.post.update',['list'=>'listEdit']) }}';
-
-                route = route.replace('listEdit', dataID);
-                routeUpdate = routeUpdate.replace('listEdit', dataID);
-
-                $('#postEditForm').attr('action', routeUpdate);
-
-                $.ajax({
-                    url: route,
-                    method: 'GET',
-                    data: {
-                        id: dataID,
-                    },
-                    async: false,
-                    success: function (response) {
-
-                        $('label[for="titleEdit"]').addClass('active');
-
-                        let list = response.list;
-
-
-                        titleEdit.val(list.title);
-
-
-                        if (list.status) {
-                            status.attr('checked', true);
-                        } else {
-                            status.attr('checked', false);
-                        }
-                    },
-                    error: function () {
-
-                    }
-                })
-
-
-            });
-
-
-            $('#btnEdit').click(function () {
-                var titleEdit = $('#titleEdit').val();
-
-                if (titleEdit.trim() == '') {
-                    Swal.fire({
-                        title: 'Uyarı',
-                        text: `İlgili Alanlar Boş Bırakılamaz`,
-                        icon: 'error',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Tamam',
-                    })
-                } else {
-                    $('#postEditForm').submit();
-                }
             });
 
         });
