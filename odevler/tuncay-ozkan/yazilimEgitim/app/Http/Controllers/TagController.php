@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\TagModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class TagController extends Controller
 {
     public function index()
     {
-        return view('admin.tag_list');
+        $data= TagModel::all();
+
+        return view('admin.tag_list',compact('data'));
     }
 
     public function create()
@@ -19,17 +23,23 @@ class TagController extends Controller
 
     public function store(Request $request)
     {
+        $validate=$request->validate([
+            'data'=>'required|min:3'
 
+
+        ]);
         $data = $request->data;
+        $userID=Auth::user()->id;
+        $post = trim( $data,"close");
 
-
-        $post = explode('close', $data);
-        $json = json_encode($post);
         $PostData = new TagModel();
         $PostData->status=1;
-        $PostData->name = $json;
+       $PostData->name =$post;
+        $PostData->user_id = $userID;
+
         $PostData->save();
-        return response()->json(['message' => 'Başarılı', 'status' => $PostData->status], 200);
+
+        return response()->json(['message' => 'Başarılı', 'status' => $PostData->status], 200)->isRedirect('admin/etiket/add');
 
 
     }

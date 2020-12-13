@@ -54,4 +54,6 @@ class AdminController extends Controller
         alert()->success('Uyarı', 'Bilgileriniz güncellendi')->showConfirmButton('Tamam', '#3085d6');
         return redirect()->route('admin.viewProfile');
     }
+
+
 }

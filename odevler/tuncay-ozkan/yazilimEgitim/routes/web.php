@@ -27,10 +27,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/add', 'PostController@add')->name('admin.post.add');
         Route::post('/add', 'PostController@store')->name('admin.post.store');
         Route::get('/list', 'PostController@index')->name('admin.post.list');
+        Route::get('/search', 'PostController@search')->name('admin.post.search');
         Route::post('/changeStatus', 'PostController@changeStatus')->name('admin.post.changeStatus');
         Route::resource('/category', 'Admin\CategoryController');
         Route::post('/category/changeStatus', 'Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');
         Route::post('/category/delete', 'Admin\CategoryController@delete')->name('admin.category.delete');
+        Route::get('/test',function (){
+           return view('admin.test');
+        });
 
     });
     Route::get('/etiket', 'TagController@index')->name('admin.tag.list');

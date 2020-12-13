@@ -25,7 +25,22 @@
                             <th>Güncelleme Tarihi</th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                           @foreach ($data as $key=>$value )
+                           <tr>
+                            <td>{{$value->id}}</td>
+                            <td><code> {!!$value->name!!}</code></td>
+                            <td>
+                                <a class="btn btn-danger">Aktif</a>
+                             
+                            </td>
+                            <td>{{Auth::user()->name}}</td>
+                            <td>{{$value->created_at}}</td>
+                            <td>{{$value->updated_at}}</td>
+
+                        </tr>
+                           @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

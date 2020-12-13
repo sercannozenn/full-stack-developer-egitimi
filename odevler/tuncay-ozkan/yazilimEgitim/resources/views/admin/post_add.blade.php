@@ -7,13 +7,17 @@
     Makale Ekleme
 @endsection
 @section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css">
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="{{asset('/assets/backEnd/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('/assets/backEnd/libs/ckeditor/samples/css/samples.css')}}">
-    <link href="{{asset('/assets/backEnd/extra-libs/prism/prism.css')}}" rel="stylesheet">
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <style>
+        input.select-dropdown.dropdown-trigger {
+            display: none;
+        }
+    </style>
+
+
 @endsection
 @section('content')
     <div class="row">
@@ -84,13 +88,12 @@
 
                         </div>
                         <div class="row">
-                            <div class="col s12 l4">
-                                <div class="card x-small">
+                            <div class="col s6 14 ">
+                                <div class="card ">
                                     <div class="card-content">
                                         <h5 class="card-title activator">Etiket
                                         </h5>
-                                        <h6 class="card-subtitle">Etiket Eklemek İçin Enter Tuşuna Basın </h6>
-                                        <div class="chips" name="tags_id" id="tagPostSearch"></div>
+                                        <select id="searc-tag" class="searc-tag"></select>
                                     </div>
 
                                 </div>
@@ -106,13 +109,12 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
 @endsection
 @section('js')
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
 
       const myForm=document.getElementById("PostForm");
@@ -126,16 +128,77 @@
           request.onload=function () {
               console.log(request.responseText);
 
-          }
+          };
           request.send(new FormData(myForm));
 
       });
 
     </script>
 
+<script>
+    {{--$(document).ready(function () {--}}
+    {{--    $("#tagPostSearch").keyup(function () {--}}
+    {{--        const post=$('#tagPostSearch').val();--}}
+    {{--        console.log(post);--}}
+    {{--        $.ajax(--}}
+    {{--            {--}}
+    {{--                url: '{{route('admin.post.search')}}',--}}
+    {{--                method: 'GET',--}}
+    {{--                data: {--}}
 
-    <script src="{{asset('/assets/backEnd/extra-libs/prism/prism.js')}}"></script>
-    <script src="{{asset('/assets/backEnd/libs/jquery-match-height/dist/jquery.matchHeight-min.js')}}"></script>
+    {{--                    data: post--}}
+    {{--                },--}}
+    {{--                async: false,--}}
+    {{--                success: function (response) {--}}
+    {{--                    console.log(response);--}}
+    {{--                    // Swal.fire({--}}
+    {{--                    //     icon: 'success',--}}
+    {{--                    //     title: 'Uyarı',--}}
+    {{--                    //     text: "Kayıt İşlemi  Başarılı",--}}
+    {{--                    //     confirmButtonText: 'Tamam'--}}
+    {{--                    //--}}
+    {{--                    // })--}}
+    {{--                },--}}
+    {{--                // error:function () {--}}
+    {{--                //     Swal.fire({--}}
+    {{--                //         icon: 'danger',--}}
+    {{--                //         title: 'Uyarı',--}}
+    {{--                //         text: "Kayıt İşlemi  Başarısız",--}}
+    {{--                //         confirmButtonText: 'Tamam'--}}
+    {{--                //--}}
+    {{--                //     })--}}
+    {{--                // }--}}
+    {{--            },--}}
+    {{--        )--}}
+    {{--    });--}}
+
+    {{--})--}}
+</script>
+
+ <script>
+     $('#searc-tag').select2({
+         ajax: {
+            // url: '{{route('admin.post.search')}}',
+            url: '{{route('admin.post.search')}}',
+             dataType: 'json',
+             delay: 250,
+             data: function (params) {
+                 return {
+                     q: params.term, // search term
+                     page: params.page,
+                 };
+             },
+         },
+         async:false,
+         succes:function(response){
+             console.log(response);
+         },
+
+         placeholder: 'Etiket Yazın',
+         minimumInputLength: 1 +'Karakter Girin',
+     });
+ </script>
+
 
     <script>
         CKEDITOR.replace('posts');

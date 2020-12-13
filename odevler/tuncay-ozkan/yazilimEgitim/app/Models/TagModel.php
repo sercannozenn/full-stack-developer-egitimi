@@ -11,4 +11,8 @@ class TagModel extends Model
     protected $guarded = [];
     protected $primaryKey = 'id';
     protected $table = 'tags';
+
+    public static function where(string $string, string $string1, string $string2)
+    {
+    }
 }
