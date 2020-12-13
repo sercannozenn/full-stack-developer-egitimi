@@ -1,0 +1,434 @@
+/*******************
+Other comon scss for all pages
+*******************/
+
+.chatbox {
+    li {
+        .drop-title {
+            font-weight: $font-medium;
+            padding: 11px 20px 15px;
+            border-bottom: 1px solid $border;
+        }
+        a {
+            color: $body-text;
+        }
+    }
+    .message-center {
+        position: relative;
+        a {
+            border-bottom: 1px solid $border;
+            display: flex;
+            text-decoration: none;
+            padding: 9px 15px;
+            .user-img {
+                width: 50px;
+                position: relative;
+                display: inline-block;
+                margin: 0 0px 15px 0;
+                img {
+                    width: 100%;
+                    vertical-align: middle;
+                }
+                .profile-status {
+                    border: 2px solid $white;
+                    border-radius: 50%;
+                    display: inline-block;
+                    height: 10px;
+                    left: 30px;
+                    position: absolute;
+                    top: 1px;
+                    width: 10px;
+                }
+                .online {
+                    @extend .green;
+                }
+                .busy {
+                    @extend .red;
+                }
+                .away {
+                    @extend .amber;
+                }
+                .offline {
+                    @extend .yellow;
+                }
+            }
+            .mail-contnet {
+                width: 100%;
+                vertical-align: middle;
+                margin-left: 10px;
+                h5 {
+                    margin: 5px 0px 0;
+                    font-size: 16px;
+                    color: $heading-text;
+                }
+                .mail-desc,
+                .time {
+                    font-size: 12px;
+                    display: block;
+                    margin: 1px 0;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    color: $body-text;
+                    white-space: nowrap;
+                    width: 80%;
+                }
+            }
+            .btn-floating {
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+.calendar-events {
+    padding: 8px 10px;
+    border: 1px solid $white;
+    cursor: move;
+    &:hover {
+        border: 1px dashed $border;
+    }
+    i {
+        margin-right: 8px;
+    }
+}
+
+.profile-tab,
+.customtab {
+    li {
+        a.nav-link {
+            border: 0px;
+            padding: 15px 20px;
+            color: $body-color;
+            &.active {
+                border-bottom: 2px solid $primary-color;
+                color: $primary-color;
+            }
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+html body {
+    .jqstooltip,
+    .flotTip {
+        width: auto!important;
+        height: auto!important;
+        background: $gray-900;
+        color: $white;
+        padding: 5px 10px;
+    }
+}
+
+body .jqstooltip {
+    border-color: transparent;
+    border-radius: 60px;
+}
+
+/*******************
+Notification page Jquery toaster
+******************/
+
+.jq-icon-info {
+    @extend .blue;
+    color: $white;
+}
+
+.jq-icon-success {
+    @extend .cyan;
+    color: $white;
+}
+
+.jq-icon-error {
+    @extend .red;
+    color: $white;
+}
+
+.jq-icon-warning {
+    @extend .yellow;
+    color: $white;
+}
+
+/*******************
+c3 chart global
+******************/
+
+.c3 text {
+    fill-opacity: 0.5;
+}
+
+.ct-area,
+.ct-line {
+    pointer-events: none;
+}
+
+.c3-chart-arcs-title {
+    fill: $muted;
+}
+
+.c3 line,
+.c3 path {
+    stroke: $gray-200;
+}
+.c3-chart-arc path{
+    stroke:transparent;  
+}
+
+.no-shrink {
+    flex-shrink: 0;
+}
+
+.up-img {
+    background-size: cover;
+    background-position: center center;
+    min-height: 340px;
+}
+
+/*******************
+list-inline
+******************/
+
+ul.list-inline {
+    li {
+        display: inline-block;
+        margin: 0 5px;
+    }
+}
+
+/*******************
+icons path
+*******************/
+
+@font-face {
+    font-family: 'icomoon';
+    src: url("fonts/icomoon.ttf?-rdmvgc") format("truetype");
+}
+
+@font-face {
+    font-family: 'simple-line-icons';
+    src: url('fonts/Simple-Line-Icons.ttf?-i3a2kk') format('truetype');
+}
+
+@font-face {
+    font-family: 'themify';
+    src: url('fonts/themify.ttf') format('truetype'),
+}
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype');
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/materialdesignicons-webfont.ttf') format('ttf'), url('fonts/materializeicons.woff2') format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: inherit;
+
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+/*******************
+Seach listing Page
+******************/
+
+.search-listing {
+    padding: 0px;
+    margin: 0px;
+    li {
+        list-style: none;
+        padding: 15px 0;
+        border-bottom: 1px solid $border;
+        h4 {
+            margin: 0px;
+            font-size: 18px;
+            a {
+                color: $info;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+        a {
+            color: $success;
+        }
+    }
+}
+
+#scroll1,
+#scroll2,
+#scroll3,
+#scroll4 {
+    position: relative;
+}
+
+/*******************
+table class
+******************/
+
+.no-border {
+    tr {
+        border: 0px;
+    }
+}
+
+.mini-table {
+    td {
+        padding: 8px 5px;
+    }
+}
+
+/*******************
+success error 
+******************/
+
+.success-alert-bar,
+.error-alert-bar {
+    border-radius: 5px;
+    display: none;
+}
+
+.stats-row {
+    margin-bottom: 20px;
+    .stat-item {
+        display: inline-block;
+        padding-right: 15px;
+    }
+}
+
+.social-profile {
+    text-align: center;
+    background: rgba(7, 10, 43, 0.8);
+}
+
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.25rem;
+    .align-self-center {
+        align-self: center;
+    }
+}
+
+// Tooltip for the chartist chart charts
+
+.chartist-tooltip {
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    border-radius: $radius;
+    padding: 10px 20px;
+    background: $info;
+    color: $white;
+    ext-align: center;
+    pointer-events: none;
+    z-index: 1;
+    -webkit-transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    -o-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+}
+
+.chartist-tooltip:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: $info;
+}
+
+.chartist-tooltip.tooltip-show {
+    opacity: 1;
+}
+
+// form wizard
+
+.vertical .clearfix {
+    clear: none;
+}
+
+/*******************
+c3 charts
+********************/
+.c3-line{
+    stroke-width:2px;
+}
+
+/*******************
+ earning chart
+*******************/
+.product-earning{
+    .c3 line,.c3 path{
+        stroke: #e9ecef;
+    }
+    .c3-shape{
+        stroke: #2962FF !important;
+        stroke-width: 0px;
+    }
+}
+
+/*******************
+ revenue chart
+*******************/
+.c3-border{
+    .c3-chart-arc path {
+        stroke: none !important;
+    }
+}
+
+.gaugejs-box {
+    position: relative;
+    margin: 0 auto;
+}
+
+.gaugejs-box canvas.gaugejs {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.flotTip {
+  background-color: $white !important;
+  border-radius: 3px !important;
+  border: 0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  padding: 7px 15px !important;
+  font-size: 13px !important;
+}
+
+.info-gradient {
+  @include horizontal-gradient(#7f9bff, #2ddeff);
+}
+.warning-gradient {
+  @include horizontal-gradient(#fe8c81 , #fbd323);
+}
+.danger-gradient {
+  @include horizontal-gradient(#a77ffc, #ff6eac);
+}
+.success-gradient {
+  @include horizontal-gradient(#11d7e4, #48eaa1);
+}
+.primary-gradient {
+  @include horizontal-gradient(#7559ce, #678fe9);
+}

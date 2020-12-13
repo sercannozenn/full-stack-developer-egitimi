@@ -1,0 +1,429 @@
+.rtl {
+
+    @import 'rtl-padding-margin';
+
+    .left {
+        float: right!important;
+    }
+
+    .right {
+        float: left!important;
+    }
+
+    .ml-auto {
+        margin-right: auto!important;
+        margin-left: 0px!important;
+    }
+
+    .mr-auto {
+        margin-left: auto!important;
+        margin-right: 0px!important;
+    }
+
+    .b-l {
+        border-right: 1px solid $border;
+        border-left: none;
+    }
+    .b-r {
+        border-left: 1px solid $border;
+        border-right: none;
+    }
+
+    .dropdown-content li > a > i {
+        float: right;
+        margin: 0 0 0 10px;
+    }
+
+    // topbar navigation
+
+    .topbar nav {
+        padding-left: 10px;
+        padding-right: 0;
+    }
+
+    .topbar nav .nav-wrapper > ul.left {
+        margin-right: $sidebar-width-full;
+        margin-left: 0;
+    }
+
+    .topbar nav .mailbox.dropdown-content .message-center a .mail-contnet {
+        margin-right: 10px;
+        margin-left: 0;
+    }
+
+    .topbar nav ul.dropdown-user li .dw-user-box .u-text {
+        padding-right: 10px;
+        padding-left: 0;
+    }
+
+    .topbar nav .nav-wrapper .search-box .app-search .srh-btn {
+        left: 20px;
+        right: auto;
+    }
+
+    // breadcrumb
+
+    .breadcrumb:before {
+        content: '\E5CB';
+    }
+
+    // left sidebar
+
+    .left-sidebar .sidenav ul > li.small-cap {
+        margin: 20px 20px 0 0;
+    }
+
+    .left-sidebar .sidenav ul > li a > i.material-icons {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+
+    .collapsible .has-arrow::after {
+        right: auto;
+        left: 1em;
+    }
+
+    // right sidebar
+
+    .right-side-toggle {
+        left: 20px;
+        right: auto;
+    }
+
+    .right-sidebar .sidenav.right-sidenav .mailbox .message-center a .mail-contnet {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .steamline {
+        border-left: none;
+        border-right: 1px solid $border;
+        margin-right: 20px;
+        margin-left: 0;
+        .sl-left {
+            float: right;
+            margin-right: -20px;
+            margin-left: 15px;
+        }
+        .sl-right {
+            padding-left: 0;
+            padding-right: 50px;
+        }
+    }
+
+    // others
+
+    .css-bar>i {
+        margin-left: 0;
+        margin-right: 5px;
+    }
+
+    .order-widget .order .order-category:first-child {
+        padding-right: 0;
+        padding-left: 25px;
+    }
+
+    .chat-list li .chat-content,
+    .comment-text {
+        padding-left: 0;
+        padding-right: 15px;
+    }
+
+    .chatbox .message-center a .mail-contnet {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+    .profiletimeline {
+        padding-right: 40px;
+        padding-left: 0;
+        margin: 40px 30px 0 10px;
+        border-right: 1px solid $border;
+        border-left: none;
+        .sl-left {
+            float: right;
+            margin-right: -60px;
+            margin-left: 15px;
+        }
+    }
+
+    .dataTables_filter {
+        float: left;
+    }
+
+    .dataTables_wrapper .dataTables_paginate {
+        text-align: left;
+    }
+
+    .chat-list {
+        .chat-item {
+            .chat-content {
+                padding-right: 15px;
+                padding-left: 0;
+            }
+            .chat-time {
+                margin: 5px 65px 15px 0;
+            }
+            &.odd .chat-content,
+            &.odd .chat-time {
+                text-align: left;
+            }
+        }
+    }
+
+    //sidebar chat
+    .chat-windows .user-chat .chat-head .status{
+        left: auto;
+        right: 10px;
+    }
+
+    .chat-windows .user-chat .chat-head img{
+        margin: -4px 0 0 8px;
+    }
+
+    .chat-windows .user-chat .chat-head i{
+        float: left;
+    }
+
+    .chat-list li.odd .chat-content{
+        text-align: left;
+    }
+
+    .chat-list li.odd .chat-time{
+        text-align: left;
+    }
+
+    .lobilists {
+        .lobilist-actions {
+            right: auto;
+            left: 8px;
+        }
+        .lobilist-item .todo-actions {
+            right: auto;
+            left: 4px;
+        }
+        .lobilist-check {
+            left: auto;
+            right: 12px;
+        }
+        .lobilist-item,
+        .lobilist-item-placeholder {
+            padding-left: 0;
+            padding-right: 35px;
+        }
+        .lobilist-item .drag-handler {
+            left: auto;
+            right: 0;
+        }
+        .lobilist-wrapper,
+        .lobilist-placeholder {
+            margin-left: 16px;
+            margin-right: 0;
+        }
+    }
+
+    .minicolors .minicolors-grid {
+        right: 22px;
+        left: auto;
+    }
+
+    .minicolors-theme-bootstrap .minicolors-swatch {
+        right: auto;
+        left: 3px;
+    }
+
+    .wizard>.steps>ul>li,
+    .wizard>.actions>ul>li {
+        float: right;
+    }
+
+    .wizard-content .wizard>.steps>ul>li:after {
+        right: auto;
+        left: 0;
+    }
+
+    .wizard-content .wizard>.steps>ul>li:before {
+        left: auto;
+        right: 0;
+    }
+
+    .wizard-content .wizard.vertical>.steps {
+        float: right;
+    }
+
+    // layout
+
+    $left-part-width:260px;
+    .left-part {
+        border-left: 1px solid $border;
+        border-right: none;
+        .show-left-part {
+            left: -46px;
+            right: auto;
+        }
+    }
+
+    .right-part {
+        margin-right: $left-part-width;
+        margin-left: 0;
+    }
+
+    .reverse-mode {
+        .left-part {
+            right: auto;
+            left: 0;
+            border-right: 1px solid $border;
+            border-left: none;
+        }
+        .show-left-part {
+            left: auto;
+            right: -41px;
+        }
+        .right-part {
+            margin-right: 0px;
+            margin-left: $left-part-width;
+        }
+    }
+
+    #main-wrapper[data-layout="vertical"] {
+        /*sidebar type*/
+        &[data-sidebartype="full"] {
+            .page-wrapper {
+                margin-right: $sidebar-width-full;
+                margin-left: 0;
+            }
+        }
+        &[data-sidebartype="iconbar"] {
+            .page-wrapper,
+            .topbar nav ul.left {
+                margin-right: $sidebar-width-iconbar;
+                margin-left: 0;
+            }
+        }
+        &[data-sidebartype="overlay"] {
+            .left-sidebar {
+                right: -$sidebar-width-full;
+                left: auto;
+            }
+            &.show-sidebar {
+                .left-sidebar {
+                    right: 0;
+                    left: auto
+                }
+            }
+        }
+    }
+    /* Vertical responsive layout */
+    @media(min-width:767px) {
+        #main-wrapper[data-layout="vertical"] {
+            /*Sidebar position*/
+            &[data-sidebar-position="fixed"][data-sidebartype="full"],
+            &[data-sidebar-position="fixed"][data-sidebartype="overlay"] {
+                .topbar nav ul.left {
+                    margin-right: $sidebar-width-full;
+                    margin-left: 0;
+                }
+            }
+            &[data-sidebar-position="fixed"][data-sidebartype="mini-sidebar"] {
+                .topbar nav ul.left {
+                    margin-right: $sidebar-width-mini;
+                    margin-left: 0;
+                }
+            }
+            &[data-sidebar-position="fixed"][data-sidebartype="iconbar"] {
+                .topbar nav ul.left {
+                    margin-right: $sidebar-width-iconbar;
+                    margin-left: 0;
+                }
+            }
+            /*Fixed sidebar with minisidebar*/
+            &[data-sidebar-position="fixed"][data-sidebartype="mini-sidebar"] {
+                .topbar nav ul.left {
+                    margin-right: $sidebar-width-mini;
+                    margin-left: 0;
+                }
+            }
+            &[data-sidebartype="mini-sidebar"] {
+                .page-wrapper {
+                    margin-right: $sidebar-width-mini;
+                    margin-left: 0;
+                }
+                .topbar nav {
+                    ul.left {
+                        margin-right: $sidebar-width-mini;
+                    }
+                }
+                .left-sidebar {
+                    .sidenav {
+                        .user-profile {
+                            .user-name {
+                                .name {
+                                    i {
+                                        margin-left: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width:1023px) {
+        #main-wrapper {
+            &[data-sidebartype="mini-sidebar"] {
+                &.show-sidebar {
+                    .topbar nav .nav-wrapper {
+                        ul.left {
+                            margin-right: $sidebar-width-mini;
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+            &[data-sidebartype="overlay"] {
+                .topbar nav .nav-wrapper {
+                    ul.left {
+                        margin-right: $sidebar-width-mini;
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    @media(max-width:766px) {
+        #main-wrapper {
+            &[data-sidebartype="mini-sidebar"] {
+                .left-sidebar {
+                    right: -$sidebar-width-full;
+                    left: auto;
+                }
+                .topbar nav {
+                    ul.left {
+                        margin-right: $sidebar-width-mini;
+                        margin-left: 0;
+                    }
+                }
+            }
+            &.show-sidebar {
+                .left-sidebar {
+                    right: 0;
+                    left: auto;
+                }
+            }
+        }
+        .left-part {
+            right: -260px;
+            left: auto;
+            &.show-panel {
+                right: 0px;
+                left: auto;
+            }
+        }
+        .right-part {
+            margin-right: 0px;
+        }
+    }
+}

@@ -1,0 +1,229 @@
+@mixin grid-classes-rtl($size, $i, $perc) {
+  &.offset-#{$size}#{$i} {
+    margin-right: $perc;
+    margin-left: inherit;
+  }
+  &.pull-#{$size}#{$i} {
+    right: $perc;
+  }
+  &.push-#{$size}#{$i} {
+    left: $perc;
+  }
+}
+
+
+.rtl{
+  direction: rtl;
+  text-align: right;
+
+  .row {
+
+    .col {
+      float: right;
+
+      $i: 1;
+      @while $i <= $num-cols {
+        $perc: unquote((100 / ($num-cols / $i)) + "%");
+        @include grid-classes-rtl("s", $i, $perc);
+        $i: $i + 1;
+      }
+
+      @media #{$medium-and-up} {
+
+        $i: 1;
+        @while $i <= $num-cols {
+          $perc: unquote((100 / ($num-cols / $i)) + "%");
+          @include grid-classes-rtl("m", $i, $perc);
+          $i: $i + 1;
+        }
+      }
+
+      @media #{$large-and-up} {
+
+        $i: 1;
+        @while $i <= $num-cols {
+          $perc: unquote((100 / ($num-cols / $i)) + "%");
+          @include grid-classes-rtl("l", $i, $perc);
+          $i: $i + 1;
+        }
+      }
+
+      @media #{$extra-large-and-up} {
+
+        $i: 1;
+        @while $i <= $num-cols {
+          $perc: unquote((100 / ($num-cols / $i)) + "%");
+          @include grid-classes-rtl("xl", $i, $perc);
+          $i: $i + 1;
+        }
+      }
+    }
+  }
+
+  ul:not(.browser-default){
+    padding-right: 0;
+  }
+
+  span.badge {
+    float: left;
+    margin-right: 14px;
+    margin-left: inherit;
+  }
+
+  .sidenav {
+    li > a {
+      & > i,
+      & > [class^="mdi-"], li > a > [class*="mdi-"],
+      & > i.material-icons {
+        float: right;
+      }
+    }
+  }
+
+  ul.sidenav.sidenav-fixed ul.collapsible-accordion .collapsible-body li a{
+    padding:  0 45px 0 37.5px;
+  }
+
+  .collapsible span.badge {
+    margin-right: auto;
+  }
+
+  .breadcrumb {
+    float: right;
+  }
+
+  .card .card-image .card-title {
+    left: inherit;
+    right: 0;
+  }
+
+  .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+    margin-right: 0px;
+    margin-left: 24px;
+  }
+
+  .btn-floating.halfway-fab {
+    right: inherit;
+    left: 24px;
+  }
+
+  .secondary-content {
+    float: left;
+  }
+
+  .collection .collection-item.avatar {
+    padding-left: inherit;
+    padding-right: 72px;
+  }
+
+  .collection .collection-item.avatar:not(.circle-clipper)>.circle, 
+  .collection .collection-item.avatar :not(.circle-clipper)>.circle {
+    left: inherit;
+    right: 15px;
+  }
+
+  .collection .collection-item.avatar .secondary-content {
+    right: inherit;
+    left: 16px;
+  }
+
+
+  nav .brand-logo.left {
+    left: 0.5rem;
+    padding: 0;
+  }
+
+  nav ul li {
+    float: right;
+  }
+
+  .preloader-wrapper {
+    direction: ltr;
+  }
+
+  .collapsible-header i {
+    margin-right: inherit;
+    margin-left: 1rem;
+  }
+
+  .dropdown-content li {
+    text-align: right;
+  }
+
+  .modal .modal-footer {
+    text-align: left;
+  }
+
+  @media only screen and (min-width: 993px)
+  {
+    #toast-container {
+      right: inherit;
+      left: 7%
+    }
+  }
+
+  .input-field .prefix ~ input, .input-field .prefix ~ textarea, .input-field .prefix ~ label, .input-field .prefix ~ .validate ~ label, .input-field .prefix ~ .autocomplete-content {
+    margin-left: inherit;
+    margin-right: 3rem;
+  }
+
+  .input-field>label:not(.label-icon).active,
+  .input-field>label:not(.label-icon){
+    -webkit-transform-origin: top right;
+    transform-origin: top right;
+  }
+
+  form p {
+    text-align: right;
+  }
+
+  [type="checkbox"]+span:not(.lever),
+  [type="radio"]:not(:checked)+span, [type="radio"]:checked+span {
+    padding-left: inherit;
+    padding-right: 35px;
+  }
+
+  [type="checkbox"]+span:not(.lever):before, 
+  [type="checkbox"]:not(.filled-in)+span:not(.lever):after,
+  [type="checkbox"].filled-in+span:not(.lever):before, 
+  [type="checkbox"].filled-in+span:not(.lever):after,
+  [type="radio"]+span:before, [type="radio"]+span:after {
+    left: inherit;
+    right: 0;
+  }
+
+  [type="checkbox"]:checked+span:not(.lever):before{
+    left: inherit;
+    right: 10px;
+  }
+
+  [type="checkbox"]:indeterminate+span:not(.lever):before{
+    left: inherit;
+    right: 20px;
+  }
+
+  .input-field.col label {
+    left: inherit;
+    right: .75rem;
+  }
+
+  .select-wrapper .caret {
+    right: inherit;
+    left: 0
+  }
+
+  .chip .close {
+    float: left;
+    padding-right: 8px;
+    padding-left: 0;
+  }
+
+  .chip>img {
+    float: right;
+    margin: 0 -12px 0 8px;
+  }
+
+  .breadcrumb:before {
+    content: '\E5CB';
+  }
+}
