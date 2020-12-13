@@ -1,0 +1,446 @@
+/*============================================================== 
+ Scafholding
+ ============================================================== */
+
+.z-depth-1,
+nav,
+.card-panel,
+.card,
+.toast,
+.btn,
+.btn-large,
+.btn-small,
+.btn-floating,
+.dropdown-content,
+.collapsible,
+.sidenav,
+.page-titles,
+.app-search {
+    box-shadow: $shadow;
+}
+
+.card {
+    .card-content {
+        .card-title {
+            line-height: 24px;
+            margin-bottom: 10px;
+            margin-top: 0px;
+        }
+        .card-subtitle {
+            margin-bottom: 15px;
+            margin-top: -5px;
+            font-size: 15px;
+            font-weight: $font-light;
+            color: $body-text;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    }
+    .card-title {
+        font-weight: $font-medium;
+        font-size: 18px;
+    }
+    .card-action {
+        background-color: $white;
+    }
+    &.x-small {
+        min-height: 200px;
+        position: relative;
+    }
+}
+.card-hover{
+    -webkit-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    transition: all .25s ease;
+    &:hover{
+        webkit-transform: translateY(-4px) scale(1.01);
+        -moz-transform: translateY(-4px) scale(1.01);
+        -ms-transform: translateY(-4px) scale(1.01);
+        -o-transform: translateY(-4px) scale(1.01);
+        transform: translateY(-4px) scale(1.01);
+        -webkit-box-shadow: 0 14px 24px rgba(62,57,107,.1);
+        box-shadow: 0 14px 24px rgba(62,57,107,.1);
+    }
+}
+code {
+    font-size: 87.5%;
+    color: $code;
+    word-break: break-word;
+}
+
+hr {
+    margin: 1rem 0;
+    border: 0;
+    border-top: 1px solid $border;
+}
+
+.radius {
+    border-radius: $radius;
+}
+
+.dl {
+    display: inline-block;
+}
+
+.db {
+    display: block;
+}
+
+.vm {
+    vertical-align: middle;
+}
+
+/*******************
+Opacity
+*******************/
+
+.op-5 {
+    opacity: 0.5;
+}
+
+.op-7 {
+    opacity: 0.7;
+}
+
+.op-3 {
+    opacity: 0.3;
+}
+
+
+
+
+
+/*******************
+Background colors
+*******************/
+
+html body {
+    .bg-info {
+        background-color: $info;
+    }
+    .bg-success {
+        background-color: $success;
+    }
+    .bg-inverse {
+        background-color: $inverse;
+    }
+    .bg-danger {
+        background-color: $danger;
+    }
+    .bg-warning {
+        background-color: $warning;
+    }
+    .bg-light {
+        background-color: $light;
+    }
+    .bg-primary {
+        background-color: $primary;
+    }
+    .bg-white {
+        background-color: $white;
+    }
+}
+
+
+
+
+
+/*******************
+font weight
+*******************/
+
+html body {
+    .font-bold {
+        font-weight: $font-bold;
+    }
+    .font-medium {
+        font-weight: $font-medium;
+    }
+    .font-light {
+        font-weight: $font-light;
+    }
+    .font-16 {
+        font-size: 16px;
+    }
+    .font-12 {
+        font-size: 12px;
+    }
+    .font-14 {
+        font-size: 14px;
+    }
+    .font-10 {
+        font-size: 10px;
+    }
+    .font-18 {
+        font-size: 18px;
+    }
+    .font-20 {
+        font-size: 20px;
+    }
+    .display-3 {
+        font-size: 4rem;
+    }
+    .display-4 {
+        font-size: 3.5rem;
+    }
+    .display-5 {
+        font-size: 3rem;
+    }
+    .display-6 {
+        font-size: 2.5rem;
+    }
+    .display-7 {
+        font-size: 2rem;
+    }
+    .display-8 {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+
+/*******************
+Padding margin property 
+*******************/
+
+$vertical-property-map: ( m-t-: margin-top, m-b-: margin-bottom, m-r-: margin-right, m-l-: margin-left, p-t-: padding-top, p-b-: padding-bottom, p-r-: padding-right, p-l-: padding-left, p-: padding, m-:margin);
+$sizes-list: 5 10 15 20 25 30 40;
+@each $size in $sizes-list {
+    $val: $size + 0px;
+    @each $keyword,
+    $property in $vertical-property-map {
+        html body .#{$keyword}#{$size} {
+            #{$property}: $val !important;
+        }
+    }
+}
+
+
+
+
+
+/** * Zero */
+
+$zero-property-map: ( m-0: margin, m-t: margin-top, m-r: margin-right, m-b: margin-bottom, m-l: margin-left, p-0: padding, p-t: padding-top, p-r: padding-right, p-b: padding-bottom, p-l: padding-left);
+@each $keyword,
+$property in $zero-property-map {
+    html body .#{$keyword}-0 {
+        #{$property}: 0 !important;
+    }
+}
+
+
+
+
+
+
+/*******************
+Flex property 
+*******************/
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-self-end {
+    align-self: flex-end;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.justify-content-start {
+    justify-content: flex-start;
+}
+
+/*******************
+Custom breadcrumb
+*******************/
+
+.page-titles {
+    padding: 30px 30px 0 30px;
+    box-shadow: none;
+    .custom-breadcrumb {
+        background: transparent;
+        box-shadow: none;
+        height: 20px;
+        line-height: 20px;
+        .breadcrumb {
+            color: $body-text;
+            font-size: 12px;
+            &:before {
+                color: $body-text;
+                font-size: 16px;
+            }
+            &:last-child {
+                @extend .blue-text.text-accent-4;
+            }
+        }
+    }
+}
+
+/*******************
+margin ml- and mr auto
+*******************/
+
+html,
+body {
+    .ml-auto {
+        margin-left: auto;
+    }
+    .mr-auto {
+        margin-right: auto;
+    }
+}
+
+
+
+
+
+/*******************
+borders
+*******************/
+
+html,
+body {
+    .b-t {
+        border-top: 1px solid $border;
+    }
+    .b-l {
+        border-left: 1px solid $border;
+    }
+    .b-r {
+        border-right: 1px solid $border;
+    }
+    .b-b {
+        border-bottom: 1px solid $border;
+    }
+    .b-0 {
+        border: 0px solid $border;
+    }
+    .b-all {
+        border: 1px solid $border;
+    }
+}
+
+
+
+
+
+/*******************
+Labels
+*******************/
+
+.label {
+    padding: 3px 10px;
+    line-height: 13px;
+    color: $white;
+    font-weight: 400;
+    border-radius: $radius;
+    font-size: 75%;
+}
+
+.label-rounded {
+    border-radius: 60px;
+}
+
+.label-custom {
+    @extend .cyan;
+}
+
+.label-success {
+    background-color: $success;
+}
+
+.label-info {
+    background-color: $info;
+}
+
+.label-warning {
+    background-color: $warning;
+}
+
+.label-danger {
+    background-color: $danger;
+}
+
+.label-megna {
+    @extend .cyan;
+}
+
+.label-primary {
+    background-color: $primary;
+}
+
+.label-purple {
+    @extend .purple;
+}
+
+.label-red {
+    @extend .red;
+}
+
+.label-inverse {
+    background-color: $gray-800;
+}
+
+.label-default {
+    background-color: $gray-100;
+}
+
+
+
+
+
+/*******************
+Buttons
+*******************/
+
+.btn-round {
+    border-radius: 60px;
+}
+
+.w25 {
+    width: 25%;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w75 {
+    width: 75%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.secondary-btn {
+    height: 30px;
+    line-height: 25px;
+    font-size: 12px;
+    background: transparent;
+    @extend .grey-text,
+    .text-accent-4;
+    border: 1px solid $border;
+    border-radius: 5px;
+    &:hover,
+    &:focus {
+        background: $gray-600;
+        @extend .white-text;
+    }
+}
