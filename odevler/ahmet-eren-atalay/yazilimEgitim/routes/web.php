@@ -25,12 +25,11 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function (){
-        Route::get('/add','Admin\PostController@showFormAdd')->name('admin.post.add');
-        Route::post('/add','Admin\PostController@add');
         Route::get('/add','Admin\PostAddController@index')->name('admin.post');
         Route::post('/add','Admin\PostAddController@postadd')->name('admin.posts.add');
         Route::get('/edit/{id}','Admin\PostAddController@index')->name('admin.post.edit');
         Route::post('/edit/{id}','Admin\PostAddController@postadd');
+        Route::post('/tags/search','Admin\TagController@search')->name('admin.search.tag');
 
         Route::get('/list','Admin\PostListController@index')->name('admin.post.list');
         Route::post('/list','Admin\PostListController@delete')->name('admin.post.delete');

@@ -106,7 +106,7 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
-    }
+}
 
 
     public function changeStatus(Request $request)
@@ -136,5 +136,17 @@ class TagController extends Controller
         TagsList::where('id',$tagID)->delete();
 
         return response()->json(['message' => 'Başarılı'], 200);
+    }
+
+
+    public function search (Request $request)
+    {
+
+
+        $result = TagsList::all();
+
+        return view('admin.layouts.layouts',compact('result'));
+
+
     }
 }
