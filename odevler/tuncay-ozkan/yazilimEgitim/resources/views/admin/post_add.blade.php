@@ -7,7 +7,7 @@
     Makale Ekleme
 @endsection
 @section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css">
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 
@@ -33,17 +33,17 @@
                                 <label for="name3">Başlık</label>
                             </div>
                         </div>
+
                         <div class="input-field col s12">
                             <div class="row">
                                 <div class="col s8 m3">
-                                    <select name="category_id" >
+                                    <select name="category_id">
                                         <option value="" disabled selected>Lütfen Kategori Seçin</option>
                                         @foreach($category as  $key=>$value)
                                             <option name="category_id" value="{{$value->id}}">{{$value->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div class="col s4">
                                     <div class="card">
                                         <div class="card-content">
@@ -56,7 +56,6 @@
                                                     <span class="lever"></span> Aktif
                                                 </label>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +81,8 @@
                                     <input type="file" multiple>
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input name="image" class="file-path validate" type="text" placeholder="Resim Seçimi Yapın">
+                                    <input name="image" class="file-path validate" type="text"
+                                           placeholder="Resim Seçimi Yapın">
                                 </div>
                             </div>
 
@@ -93,7 +93,10 @@
                                     <div class="card-content">
                                         <h5 class="card-title activator">Etiket
                                         </h5>
-                                        <select id="searc-tag" class="searc-tag"></select>
+                                        <select name="tags_id" id="searc-tag" class="form-control searc-tag" multiple="multiple">
+                                        </select>
+
+                                        <div id="result"></div>
                                     </div>
 
                                 </div>
@@ -117,87 +120,51 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
 
-      const myForm=document.getElementById("PostForm");
+        const myForm = document.getElementById("PostForm");
 
-      myForm.addEventListener("submit",(e)=>{
+        myForm.addEventListener("submit", (e) => {
 
-          e.preventDefault();
+            e.preventDefault();
 
-          const  request=new XMLHttpRequest();
-          request.open("post","/admin/post/add");
-          request.onload=function () {
-              console.log(request.responseText);
+            const request = new XMLHttpRequest();
+            request.open("post", "/admin/post/add");
+            request.onload = function () {
+                console.log(request.responseText);
 
-          };
-          request.send(new FormData(myForm));
+            };
+            request.send(new FormData(myForm));
 
-      });
+        });
 
     </script>
+    <script>
+        $('#searc-tag').select2({
+            ajax: {
+                url: '{{route('admin.post.search')}}',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                results: function (data) {
+                    return {results: data.results, more: more};
+                    console.log(data)
+                },
+            },
 
-<script>
-    {{--$(document).ready(function () {--}}
-    {{--    $("#tagPostSearch").keyup(function () {--}}
-    {{--        const post=$('#tagPostSearch').val();--}}
-    {{--        console.log(post);--}}
-    {{--        $.ajax(--}}
-    {{--            {--}}
-    {{--                url: '{{route('admin.post.search')}}',--}}
-    {{--                method: 'GET',--}}
-    {{--                data: {--}}
+            succes: function (response) {
+                console.log("response.name");
+                let result = $(document).getElementById('#result');
 
-    {{--                    data: post--}}
-    {{--                },--}}
-    {{--                async: false,--}}
-    {{--                success: function (response) {--}}
-    {{--                    console.log(response);--}}
-    {{--                    // Swal.fire({--}}
-    {{--                    //     icon: 'success',--}}
-    {{--                    //     title: 'Uyarı',--}}
-    {{--                    //     text: "Kayıt İşlemi  Başarılı",--}}
-    {{--                    //     confirmButtonText: 'Tamam'--}}
-    {{--                    //--}}
-    {{--                    // })--}}
-    {{--                },--}}
-    {{--                // error:function () {--}}
-    {{--                //     Swal.fire({--}}
-    {{--                //         icon: 'danger',--}}
-    {{--                //         title: 'Uyarı',--}}
-    {{--                //         text: "Kayıt İşlemi  Başarısız",--}}
-    {{--                //         confirmButtonText: 'Tamam'--}}
-    {{--                //--}}
-    {{--                //     })--}}
-    {{--                // }--}}
-    {{--            },--}}
-    {{--        )--}}
-    {{--    });--}}
 
-    {{--})--}}
-</script>
+            },
 
- <script>
-     $('#searc-tag').select2({
-         ajax: {
-            // url: '{{route('admin.post.search')}}',
-            url: '{{route('admin.post.search')}}',
-             dataType: 'json',
-             delay: 250,
-             data: function (params) {
-                 return {
-                     q: params.term, // search term
-                     page: params.page,
-                 };
-             },
-         },
-         async:false,
-         succes:function(response){
-             console.log(response);
-         },
-
-         placeholder: 'Etiket Yazın',
-         minimumInputLength: 1 +'Karakter Girin',
-     });
- </script>
+            placeholder: 'Etiket Yazın',
+            minimumInputLength: 1 + 'Karakter Girin',
+        });
+    </script>
 
 
     <script>

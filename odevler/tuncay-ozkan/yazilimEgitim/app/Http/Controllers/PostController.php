@@ -28,23 +28,23 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-dd($request->post());
+//dd($request->post());
         $data = new PostModel();
         $data->title = $request->title;
         $data->posts = $request->posts;
         $data->user_id = Auth::user()->id;
         $data->status = $request->status ? 1 : 0;
         $data->category_id = $request->category_id;
-        $data->tags_id = 1;
-        $data->slug=Str::slug($request->title);
+        $data->tags_id = $request->tags_id;
+        $data->slug = Str::slug($request->title);
         if ($request->hasFile('image')) {
             $iname = Str::slug($request->title) . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('/uploads'), $iname);
             $data->image = 'uploads/' . $iname;
-            dd($data);
+            //  dd($data);
             $data->save();
         }
-$data->save();
+        $data->save();
         return redirect()->back();
 
     }
@@ -67,13 +67,15 @@ $data->save();
 
     public function search(Request $request)
     {
-        $data= $request->all();
-
-       foreach ($data as $item){
-           $category = DB::table('tags')
-               ->where('name', 'like', '%'.$item.'%')
-               ->get();
-       }
-return response()->json([$category]) ;
+        $data = $request->all();
+        $category = null;
+        foreach ($data as $item) {
+            $category = DB::table('tags')
+                ->where('name', 'like', '%' . $item . '%')
+                ->get(['tags.name AS text', 'tags.*']);
+        }
+        return response()->json([
+            "results" => $category
+        ]);
     }
 }
