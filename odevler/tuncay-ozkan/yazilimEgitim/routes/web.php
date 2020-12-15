@@ -32,14 +32,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::resource('/category', 'Admin\CategoryController');
         Route::post('/category/changeStatus', 'Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');
         Route::post('/category/delete', 'Admin\CategoryController@delete')->name('admin.category.delete');
-        Route::get('/test',function (){
-           return view('admin.test');
-        });
 
     });
     Route::get('/etiket', 'TagController@index')->name('admin.tag.list');
     Route::get('/etiket/add', 'TagController@create')->name('admin.tag.add');
     Route::post('/etiket/add', 'TagController@store')->name('admin.tag.store');
+    Route::post('/etiket/delete', 'TagController@delete')->name('admin.tag.delete');
+    Route::get('/etiket/edit', 'TagController@edit')->name('admin.tag.edit');
+    Route::post('/etiket/update/', 'TagController@update')->name('admin.tag.update');
 });
 
 
