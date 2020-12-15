@@ -7,8 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/backEnd/images/favicon.png')}}">
     <title>@yield('title')</title>
-{{--    <link href="{{ asset('assets/backEnd/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">--}}
-{{--    <link href="{{ asset('assets/backEnd/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('assets/backEnd/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/backEnd/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/backEnd/dist/css/style.css') }}" rel="stylesheet">
 
     <link href="{{ asset('assets/backEnd/dist/css/pages/dashboard1.css') }}" rel="stylesheet">
@@ -230,8 +230,8 @@
 
 <script src="{{asset('assets/backEnd/dist/js/custom.min.js') }}"></script>
 
-{{--<script src="{{asset('assets/backEnd/libs/chartist/dist/chartist.min.js') }}"></script>--}}
-{{--<script src="{{asset('assets/backEnd/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>--}}
+<script src="{{asset('assets/backEnd/libs/chartist/dist/chartist.min.js') }}"></script>
+<script src="{{asset('assets/backEnd/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
 <script src="{{asset('assets/backEnd/extra-libs/sparkline/sparkline.js') }}"></script>
 <script src="{{asset('assets/backEnd/dist/js/pages/dashboards/dashboard1.js') }}"></script>
 <script src="{{ asset('assets/sweet-alert/sweetalert2.all.min.js') }}"></script>

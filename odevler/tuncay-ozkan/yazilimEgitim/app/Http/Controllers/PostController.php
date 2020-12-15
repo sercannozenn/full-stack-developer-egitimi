@@ -28,10 +28,11 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-//dd($request->post());
+
+
         $data = new PostModel();
         $data->title = $request->title;
-        $data->posts = $request->posts;
+        $data->content = $request->posts;
         $data->user_id = Auth::user()->id;
         $data->status = $request->status ? 1 : 0;
         $data->category_id = $request->category_id;
@@ -41,11 +42,12 @@ class PostController extends Controller
             $iname = Str::slug($request->title) . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('/uploads'), $iname);
             $data->image = 'uploads/' . $iname;
-            //  dd($data);
             $data->save();
         }
+
         $data->save();
-        return redirect()->back();
+      //  return redirect()->back();
+        return response()->json(['message' => 'Başarılı', 'status' => $data->status], 200);
 
     }
 

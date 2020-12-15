@@ -11,11 +11,7 @@
     <link rel="stylesheet" type="text/css">
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 
-    <style>
-        input.select-dropdown.dropdown-trigger {
-            display: none;
-        }
-    </style>
+
 
 
 @endsection
@@ -33,9 +29,9 @@
                                 <label for="name3">Başlık</label>
                             </div>
                         </div>
+                        <div class="row">
 
-                        <div class="input-field col s12">
-                            <div class="row">
+
                                 <div class="col s8 m3">
                                     <select name="category_id">
                                         <option value="" disabled selected>Lütfen Kategori Seçin</option>
@@ -43,6 +39,7 @@
                                             <option name="category_id" value="{{$value->id}}">{{$value->name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                                 <div class="col s4">
                                     <div class="card">
@@ -59,7 +56,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
                         </div>
 
 
@@ -118,25 +115,23 @@
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+{{--  form submit  işlemleri JS   --}}
     <script>
-
-        const myForm = document.getElementById("PostForm");
-
+  const myForm = document.getElementById("PostForm");
         myForm.addEventListener("submit", (e) => {
-
             e.preventDefault();
-
             const request = new XMLHttpRequest();
             request.open("post", "/admin/post/add");
             request.onload = function () {
-                console.log(request.responseText);
 
             };
+
             request.send(new FormData(myForm));
 
         });
-
     </script>
+
+{{--  Tag işlemlerinin  js    --}}
     <script>
         $('#searc-tag').select2({
             ajax: {
@@ -150,12 +145,12 @@
                 },
                 results: function (data) {
                     return {results: data.results, more: more};
-                    console.log(data)
+
                 },
             },
 
             succes: function (response) {
-                console.log("response.name");
+
                 let result = $(document).getElementById('#result');
 
 
@@ -166,7 +161,7 @@
         });
     </script>
 
-
+    {{--  CK Editor işlemlerinin  js    --}}
     <script>
         CKEDITOR.replace('posts');
     </script>
