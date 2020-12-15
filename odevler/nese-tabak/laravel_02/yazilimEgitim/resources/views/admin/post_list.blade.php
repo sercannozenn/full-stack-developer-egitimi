@@ -34,7 +34,7 @@
                                     <a href="javascript:void(0)" class="deletePost" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
-                                    <a href="#editPost" class="editPost modal-trigger"
+                                    <a href="{{ route('admin.post.add') }}" class="editPost "
                                        data-id="{{ $item->id }}">
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
@@ -124,4 +124,104 @@
 
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function (){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.deletePost').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let self = $(this);
+                Swal.fire({
+                    title: 'Uyarı',
+                    text: `${dataID} ID'li etiketi silmek istediğinize emin misiniz?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet',
+                    cancelButtonText: 'Hayır'
+                }).then((result) =>
+                {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax({
+                            url: '{{route('admin.post.delete')}}',
+                            method: 'POST',
+                            data: {
+                                id: dataID,
+                            },
+                            async: false,
+                            success: function (response)
+                            {
+                                $('#row' + dataID).remove();
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Uyarı',
+                                    text: dataID + " id'li etiket silindi",
+                                    confirmButtonText: 'Tamam'
+
+                                })
+                            },
+                            error: function ()
+                            {
+
+                            }
+                        })
+                    }
+                })
+
+            });
+            $('.changeStatus').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let self = $(this);
+                $.ajax({
+                    url: '{{route('admin.post.changeStatus')}}',
+                    method: 'POST',
+                    data: {
+                        id: dataID,
+                        {{--//'_token': '{{ csrf_token() }}'--}}
+                    },
+                    async: false,
+                    success: function (response)
+                    {
+                        if (response.status == 1)
+                        {
+                            self[0].classList.remove('red');
+                            self[0].classList.add('green');
+                            self[0].innerText = "Aktif";
+                        }
+                        else
+                        {
+                            self[0].classList.remove('green');
+                            self[0].classList.add('red');
+                            self[0].innerText = "Pasif";
+                        }
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Uyarı',
+                            text: dataID + " id'li etiketin durumu şu anda " + self[0].innerText
+                                + " olarak güncellendi.",
+                            confirmButtonText: 'Tamam'
+
+                        })
+                    },
+                    error: function ()
+                    {
+
+                    }
+                })
+
+
+            });
+
+        });
+    </script>
 @endsection

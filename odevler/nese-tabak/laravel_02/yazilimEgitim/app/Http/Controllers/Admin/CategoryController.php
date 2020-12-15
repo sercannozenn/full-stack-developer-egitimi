@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PostCategory;
+use App\Models\PostList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -74,13 +75,12 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $category = PostCategory::find($id);
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $status = $category->status;
-        $category->status = $status ? 0 : 1;
-        $category->save();
-
+        $list = PostList::find($id);
+        $list->name = $request->name;
+        $status = $list->status;
+        $list->status = $status ? 0 : 1;
+        $list->save();
+dd($request->all());
         alert()->success('Başarılı', 'Kategori güncellendi')
             ->showConfirmButton('Tamam', '#3085d6');
         return redirect()->route('category.index');

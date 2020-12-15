@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PostCategory;
+
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\PostList;
@@ -47,7 +48,7 @@ class PostController extends Controller
         $content = $request->text;
         $status = $request->status;
         $category_id =$request->category_id;
-        $tags_id = json_encode(1);
+//        $tags_id = json_encode(1);
         $user = Auth::user();
 
         $data = [
@@ -57,7 +58,7 @@ class PostController extends Controller
             'slug' => Str::slug($name),
             'status' => $status ? 1 : 0,
             'user_id' => $user->id,
-            'tags_id'=>$tags_id,
+//            'tags_id'=>$tags_id,
             'category_id'=>$category_id
 
         ];
@@ -90,18 +91,7 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $post = PostList::find($id);
-        $post->name = $request->name;
-        $post->title = $request->title;
-        $post->content = $request->text;
 
-        $status = $post->status;
-        $post->status = $status ? 0 : 1;
-        $post->save();
-
-        alert()->success('Başarılı', 'Kategori güncellendi')
-            ->showConfirmButton('Tamam', '#3085d6');
-        return redirect()->route('$post.index');
     }
 
 
@@ -116,14 +106,14 @@ class PostController extends Controller
         {
             $postID = $request->id;
 
-            $post = PostList::find($postID);
+            $list = PostList::find($postID);
 
-            $status = $post->status;
+            $status = $list->status;
 
-            $post->status = $status ? 0 : 1;
-            $post->save();
+            $list->status = $status ? 0 : 1;
+            $list->save();
 
-            return response()->json(['message' => 'Başarılı', 'status' => $post->status], 200);
+            return response()->json(['message' => 'Başarılı', 'status' => $list->status], 200);
         }
         catch (\Exception $exception)
         {
@@ -134,9 +124,11 @@ class PostController extends Controller
 
     public function delete(Request $request)
     {
-        $postID = $request->id;
 
-        PostList::where('id', $postID)->delete();
+
+        $listID = $request->id;
+        PostList::find($listID);
+        PostList::where('id', $listID)->delete();
 
         return response()->json(['message' => 'Başarılı'], 200);
 
