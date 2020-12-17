@@ -186,7 +186,7 @@
                                     <div class="input-field col s12">
 
                                         <div class="tags-input-div tags-input-field">
-                                            <input name="tagName" type="text" class="tags input"  id="tags_id" placeholder="Etiket Giriniz">
+                                            <input name="name" type="text" class="tags input"  id="tags_id" placeholder="Etiket Giriniz">
                                             <ul class="tags-list tags-list-absolute tags-margin">
                                             </ul>
                                         </div>
@@ -240,7 +240,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input name="tagName" id="nameEdit" type="text">
+                                        <input name="name" id="nameEdit" type="text">
                                         <label for="nameEdit">Etiket Adı</label>
                                     </div>
                                 </div>
@@ -390,8 +390,8 @@
             let status = $('#statusEdit');
             let self = $(this);
 
-            let route = '{{ route('admin.tag.edit', ['list' => 'tagEdit']) }}';
-            let routeUpdate = '{{ route('admin.tag.update', ['list' => 'tagEdit']) }}';
+            let route = '{{ route('tag.edit', ['tag' => 'tagEdit']) }}';
+            let routeUpdate = '{{ route('tag.update', ['tag' => 'tagEdit']) }}';
             route = route.replace('tagEdit', dataID);
             routeUpdate = routeUpdate.replace('tagEdit', dataID);
             $('#editTagForm').attr('action', routeUpdate);
@@ -406,10 +406,9 @@
                 {
 
                     $('label[for="nameEdit"]').addClass('active');
-                    let list = response.list;
-
-                    nameEdit.val(list.name);
-                    if (list.status)
+                    let tag = response.tag;
+                    nameEdit.val(tag.name);
+                    if (tag.status)
                     {
                         status.attr('checked', true);
                     }

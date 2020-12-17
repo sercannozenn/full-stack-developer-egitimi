@@ -35,7 +35,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
 //        dd($request->all());
-        $name = $request->tagName;
+        $name = $request->name;
         $status = $request->status;
         $user = Auth::user();
         $data = [
@@ -60,36 +60,35 @@ class TagController extends Controller
 
     public function edit($id)
     {
-        $list = TagList::find($id);
+//        dd('olduu');
+        $tag = TagList::find($id);
 
         return response()->json([
-            'list' => $list
+            'tag' => $tag
         ], 200);
     }
 
 
     public function update(Request $request, $id)
     {
-//        dd($request->all());
-        $list = TagList::find($id);
-        $list->tagName =$request->tagName;
-        $status = $list->status;
-        $list->status = $status ? 0 : 1;
-        dd($list);
-        $list->save();
+//        $list = TagList::find($id);
+//        $list->name =$request->name;
+//        $status = $list->status;
+//        $list->status = $status ? 0 : 1;
+//        $list->save();
+
+//
+        $name = $request->name;
+        $status = $request->status;
+        $user = Auth::user();
+        $data = [
+            'name' => $name,
+            'user_id' => $user->id,
+            'status' => $status ? 1 : 0
+        ];
 
 
-//        $name = $request->name;
-//        $status = $request->status;
-//        $user = Auth::user();
-//        $data = [
-//            'name' => $name,
-//            'user_id' => $user->id,
-//            'status' => $status ? 1 : 0
-//        ];
-//
-//
-//        TagList::where('id', $id)->update($data);
+        TagList::where('id', $id)->update($data);
 
 
         alert()->success('Başarılı', 'Etiket güncellendi')
