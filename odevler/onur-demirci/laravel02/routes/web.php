@@ -25,10 +25,13 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function (){
-        Route::resource('/posts','Admin\PostsController');
-        Route::get('/add','Admin\PostsController@addPost')->name('admin.post.add');
-        Route::post('/add/save','Admin\PostsController@store')->name('admin.post.save');
-
+        Route::get('/list','Admin\PostController@listPosts')->name('admin.post.list');
+        Route::get('/add','Admin\PostController@addPostPage')->name('admin.post.add');
+        Route::post('/add','Admin\PostController@savePost');
+        Route::get('/edit/id={id}', 'Admin\PostController@editPostPage')->name('admin.post.edit');
+        Route::post('/edit/id={id}', 'Admin\PostController@editPost');
+        Route::post('/delete','Admin\PostController@deletePost')->name('admin.post.delete');
+        Route::get('/getTags/','Admin\PostController@getTags')->name('post.getTags');
         Route::resource('/etiket', 'Admin\NewTagController');
         Route::post('/etiket/changeStatus','Admin\NewTagController@changeStatus')->name('admin.tag.changeStatus');
         Route::post('/etiket/delete','Admin\NewTagController@delete')->name('admin.tag.delete');

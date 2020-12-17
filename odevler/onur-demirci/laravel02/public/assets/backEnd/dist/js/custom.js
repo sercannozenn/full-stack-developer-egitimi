@@ -141,11 +141,11 @@ $(function() {
     });
     $('.chips-autocomplete').chips({
         autocompleteOptions: {
-            data: {
-                'Apple': null,
-                'Microsoft': null,
-                'Google': null
-            }
+            // data: {
+            //     'Apple': null,
+            //     'Microsoft': null,
+            //     'Google': null
+            // }
         }
     });
     // ============================================================== 

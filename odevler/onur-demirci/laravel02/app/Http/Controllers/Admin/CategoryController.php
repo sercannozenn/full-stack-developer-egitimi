@@ -115,9 +115,9 @@ class CategoryController extends Controller
 
     public function delete(Request $request)
     {
-        $tagID = $request->id;
+        $categoryID = $request->id;
 
-        Tags::where('id', $tagID)->delete();
+        PostCategory::where('id', $categoryID)->delete();
 
         return response()->json(['message' => 'Başarılı'], 200);
 

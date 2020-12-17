@@ -164,32 +164,11 @@
     <script>
         $(document).ready(function ()
         {
-            function inputValidation(inputArray, formID)
-            {
-                let validation = true;
-                for (let i = 0; i < inputArray.length; i++)
-                {
-                    var inputInfo = inputArray[i];
-                    var input = $('#' + inputInfo.id ).val();
-                    if (input.trim() == "")
-                    {
-                        Swal.fire({
-                            icon: 'error',
-                            title: inputInfo.alertTitle,
-                            text: inputInfo.alertTextAttr + ' boş bırakılamaz!',
-                            confirmButtonText: 'Tamam'
-                        });
-                        validation = false;
-                    }
-                }
-                validation ? $('#' + formID).submit() : '';
-            }
-
             $('#btnSave').click(function ()
             {
                 let inputArray = [
                     {
-                        id: 'name',
+                        id: '#name',
                         alertTextAttr: 'Etiket Adı',
                         alertTitle: "Uyarı",
                     }
@@ -343,7 +322,7 @@
             $('#btnEdit').click(function ()
             {
                 let inputArray = [{
-                    id: 'nameEdit',
+                    id: '#nameEdit',
                     alertTitle: 'Uyarı',
                     alertTextAttr: 'Etiket adı'
                 }];

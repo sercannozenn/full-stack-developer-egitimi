@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="icon" type="image/png" sizes="16x16" href="assets/backEnd/images/favicon.png')}}">
     <title>@yield('title')</title>
     <link href="{{ asset('assets/backEnd/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
@@ -114,7 +114,7 @@
     </div>
     <a href="#" data-target="right-slide-out"
        class="sidenav-trigger right-side-toggle btn-floating btn-large waves-effect waves-light red"><i
-            class="material-icons">settings</i></a>
+                class="material-icons">settings</i></a>
     <aside class="right-sidebar">
         <ul id="right-slide-out" class="sidenav right-sidenav p-t-10">
             <li>
@@ -122,7 +122,7 @@
                     <div class="col s12">
                         <ul class="tabs">
                             <li class="tab col s4"><a href="#settings" class="active"><span
-                                        class="material-icons">build</span></a></li>
+                                            class="material-icons">build</span></a></li>
                         </ul>
                     </div>
                     <div id="settings" class="col s12">
@@ -238,6 +238,24 @@
 <script src="{{ asset('assets/sweet-alert/sweetalert2.all.min.js') }}"></script>
 @include('sweetalert::alert')
 <script>
+    function inputValidation(inputArray, formID) {
+        let validation = true;
+        for (let i = 0; i < inputArray.length; i++) {
+            var inputInfo = inputArray[i];
+            var input = $(inputInfo.id).val();
+        if (input === undefined || input === null || input.trim() == "") {
+            Swal.fire({
+                icon: 'error',
+                title: inputInfo.alertTitle,
+                text: inputInfo.alertTextAttr + ' boş bırakılamaz!',
+                confirmButtonText: 'Tamam'
+            });
+            validation = false;
+        }
+    }
+
+    validation ? $('#' + formID).submit() : '';
+    }
     @php
         if ($errors->any())
        {

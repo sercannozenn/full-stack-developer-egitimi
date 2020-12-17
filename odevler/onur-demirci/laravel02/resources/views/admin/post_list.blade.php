@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-content">
                     <h5 class="card-title">Makale Listesi</h5>
-                    <a class="btn-floating waves-effect waves-light teal" title="Yeni Makale Ekle">
+                    <a href="{{route('admin.post.add')}}" class="btn-floating waves-effect waves-light teal" title="Yeni Makale Ekle">
                         <i class="material-icons">add</i>
                     </a>
                     <table class="responsive-table">
@@ -30,13 +30,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($post_list as $item)
+                        @foreach($posts as $item)
                             <tr id="row{{$item->id}}">
                                 <td>
-                                    <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}" data-name="{{$item->name}}">
+                                    <a href="javascript:void(0)" class="deletePost" data-id="{{ $item->id }}" data-name="{{$item->title}}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
-                                    <a href="#editTag" class="editTag modal-trigger"
+                                    <a href="{{route('admin.post.edit',$item->id)}}" class="editPost"
                                        data-id="{{ $item->id }}">
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
@@ -70,4 +70,61 @@
     </div>
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $('.deletePost').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let dataName = $(this).data('name');
+                let self = $(this);
+                Swal.fire({
+                    title: 'Uyarı',
+                    text: `${dataName} adlı makaleyi silmek istediğinize emin misiniz?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet',
+                    cancelButtonText: 'Hayır'
+                }).then((result) =>
+                {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax({
+                            url: '{{route('admin.post.delete')}}',
+                            method: 'POST',
+                            data: {
+                                id: dataID,
+                            },
+                            async: false,
+                            success: function (response)
+                            {
+                                $('#row' + dataID).remove();
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Uyarı',
+                                    text: dataName + " adlı makale silindi",
+                                    confirmButtonText: 'Tamam'
+
+                                })
+                            },
+                            error: function ()
+                            {
+
+                            }
+                        })
+                    }
+                })
+
+            });
+        })
+    </script>
 @endsection
