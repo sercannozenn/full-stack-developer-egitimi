@@ -76,7 +76,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = PostCategory::find($id);
-        dd($category);
+//        dd($category);
         $category->name = $request->name;
         $category->description = $request->description;
         $status = $category->status;
