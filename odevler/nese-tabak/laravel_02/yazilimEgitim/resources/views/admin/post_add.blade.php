@@ -189,11 +189,11 @@
                         </div>
                         {{--status--}}
                         <div class="row">
-                            <div class="input-field col s12 ">
+                            <div class="input-field col s12">
                                 <div class="switch">
-                                    <label for="status">
+                                    <label for="statusEdit">
                                         Pasif
-                                        <input name="status" id="status" type="checkbox">
+                                        <input name="status" id="statusEdit" type="checkbox">
                                         <span class="lever"></span>
                                         Aktif
                                     </label>

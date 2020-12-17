@@ -142,7 +142,7 @@
                                     <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
-                                    <a href="#editCategory" class="editCategory modal-trigger"
+                                    <a href="#editTag" class="editTag modal-trigger"
                                        data-id="{{ $item->id }}">
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
@@ -227,7 +227,7 @@
     </div>
 
 
-    <div id="editCategory" class="modal modalEdit">
+    <div id="editTag" class="modal modalEdit">
         <div class="modal-content">
             <div class="row">
                 <div class="col s12 l12">
@@ -240,7 +240,7 @@
                                 <div class="row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">account_circle</i>
-                                        <input name="name" id="nameEdit" type="text">
+                                        <input name="tagName" id="nameEdit" type="text">
                                         <label for="nameEdit">Etiket Adı</label>
                                     </div>
                                 </div>
@@ -381,6 +381,56 @@
                 }
             })
         });
+        });
+
+        $('.editTag').click(function ()
+        {
+            let dataID = $(this).data('id');
+            let nameEdit = $('#nameEdit');
+            let status = $('#statusEdit');
+            let self = $(this);
+
+            let route = '{{ route('admin.tag.edit', ['list' => 'tagEdit']) }}';
+            let routeUpdate = '{{ route('admin.tag.update', ['list' => 'tagEdit']) }}';
+            route = route.replace('tagEdit', dataID);
+            routeUpdate = routeUpdate.replace('tagEdit', dataID);
+            $('#editTagForm').attr('action', routeUpdate);
+            $.ajax({
+                url: route,
+                method: 'GET',
+                data: {
+                    id: dataID,
+                },
+                async: false,
+                success: function (response)
+                {
+
+                    $('label[for="nameEdit"]').addClass('active');
+                    let list = response.list;
+
+                    nameEdit.val(list.name);
+                    if (list.status)
+                    {
+                        status.attr('checked', true);
+                    }
+                    else
+                    {
+                        status.attr('checked', false);
+                    }
+                },
+                error: function ()
+                {
+
+                }
+            })
+
+
+        });
+
+        $('#btnEdit').click(function ()
+        {
+            $('#editTagForm').submit();
+
         });
     </script>
 @endsection

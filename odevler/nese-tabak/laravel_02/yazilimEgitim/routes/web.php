@@ -29,12 +29,15 @@ Route::prefix('admin')->middleware('auth')->group(function ()
         Route::get('/add', 'Admin\PostController@addPost')->name('admin.post.add');
         Route::get('/list', 'Admin\PostController@listPost')->name('admin.post.list');
 
+        Route::resource('/tag', 'Admin\TagController');
         Route::post('/tag/search-tags','Admin\TagController@search')->name('admin.search.tag');
         Route::post('/tag/delete', 'Admin\TagController@delete')->name('admin.tag.delete');
+        Route::get('/tag/edit', 'Admin\TagController@edit')->name('admin.tag.edit');
+        Route::get('/tag/update', 'Admin\TagController@update')->name('admin.tag.update');
         Route::post('/tag/changeStatus', 'Admin\TagController@changeStatus')->name('admin.tag.changeStatus');
 
 
-        Route::resource('/tag', 'Admin\TagController');
+
 
         Route::resource('/category', 'Admin\CategoryController');
         Route::post('/category/changeStatus', 'Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');

@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PostCategory;
-use App\Models\PostList;
 use App\Models\TagList;
-
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,17 +35,19 @@ class TagController extends Controller
     public function store(Request $request)
     {
 //        dd($request->all());
-        $name=$request->tagName;
-        $status=$request->status;
-        $user=Auth::user();
-        $data=[
-           'name' =>$name,
-           'user_id' =>$user->id,
-           'status' =>$status ? 1:0
+        $name = $request->tagName;
+        $status = $request->status;
+        $user = Auth::user();
+        $data = [
+            'name' => $name,
+            'user_id' => $user->id,
+            'status' => $status ? 1 : 0
         ];
+
+
         TagList::create($data);
-//        alert()->succes('Başarılı','Kategori Eklendi')
-//            ->showConfirmButton('Tamam','#3085d6');
+        alert()->succes('Başarılı','Etiket Eklendi')
+            ->showConfirmButton('Tamam','#3085d6');
         return redirect()->route('tag.index');
 
     }
@@ -62,14 +60,43 @@ class TagController extends Controller
 
     public function edit($id)
     {
-        //
+        $list = TagList::find($id);
+
+        return response()->json([
+            'list' => $list
+        ], 200);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+//        dd($request->all());
+        $list = TagList::find($id);
+        $list->tagName =$request->tagName;
+        $status = $list->status;
+        $list->status = $status ? 0 : 1;
+        dd($list);
+        $list->save();
+
+
+//        $name = $request->name;
+//        $status = $request->status;
+//        $user = Auth::user();
+//        $data = [
+//            'name' => $name,
+//            'user_id' => $user->id,
+//            'status' => $status ? 1 : 0
+//        ];
+//
+//
+//        TagList::where('id', $id)->update($data);
+
+
+        alert()->success('Başarılı', 'Etiket güncellendi')
+            ->showConfirmButton('Tamam', '#3085d6');
+        return redirect()->route('tag.index');
     }
+
     public function changeStatus(Request $request)
     {
 
