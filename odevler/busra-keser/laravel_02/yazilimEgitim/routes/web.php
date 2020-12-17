@@ -25,8 +25,9 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function (){
+//        Route::get('/add', 'Admin\PostsC')->name('admin.post.add');
         Route::get('/add',function (){
-           return view('admin.post_add');
+            return view('admin.posts_add');
         })->name('admin.post.add');
         Route::get('/list',function (){
             return view('admin.post_list');
