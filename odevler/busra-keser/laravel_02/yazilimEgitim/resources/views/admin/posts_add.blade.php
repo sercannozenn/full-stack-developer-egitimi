@@ -73,7 +73,7 @@
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">local_offer</i>
                                     <select id="tags" name="tags_id">
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -81,12 +81,6 @@
                     </div>
                 </div>
 
-{{--                <div class="col s12">--}}
-{{--                    <div class="form-group">--}}
-{{--                        <textarea name="content" id="ckeditor" cols="50" rows="15" class="ckeditor contentpost">--}}
-{{--                        </textarea>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
                 <div class="col s12 m-t-10">
                     <input class="btn btn-block blue" type="button" id="btnSave" name="btnSave" value="Kaydet">
                 </div>
