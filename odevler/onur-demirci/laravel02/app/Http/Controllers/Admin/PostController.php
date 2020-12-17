@@ -103,6 +103,26 @@ class PostController extends Controller
         return response()->json(['message' => 'Başarılı'], 200);
     }
 
+    public function changePostStatus(Request $request) {
+        try
+        {
+            $postID = $request->id;
+
+            $post = Posts::find($postID);
+
+            $status = $post->status;
+
+            $post->status = $status ? 0 : 1;
+            $post->save();
+
+            return response()->json(['message' => 'Başarılı', 'status' => $post->status], 200);
+        }
+        catch (\Exception $exception)
+        {
+            return response()->json(['message' => 'Başarısız', 'status' => $status], 500);
+        }
+    }
+
     public function getTags(Request $request) {
         $term = $request->term;
         $tags = DB::table('tags')

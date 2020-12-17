@@ -28,10 +28,16 @@ Route::prefix('admin')->middleware('auth')->group(function ()
         Route::get('/list','Admin\PostController@listPosts')->name('admin.post.list');
         Route::get('/add','Admin\PostController@addPostPage')->name('admin.post.add');
         Route::post('/add','Admin\PostController@savePost');
+
         Route::get('/edit/id={id}', 'Admin\PostController@editPostPage')->name('admin.post.edit');
         Route::post('/edit/id={id}', 'Admin\PostController@editPost');
         Route::post('/delete','Admin\PostController@deletePost')->name('admin.post.delete');
+
+        Route::post('/changeStatus','Admin\PostController@changePostStatus')->name('admin.post.changeStatus');
         Route::get('/getTags/','Admin\PostController@getTags')->name('post.getTags');
+
+
+
         Route::resource('/etiket', 'Admin\NewTagController');
         Route::post('/etiket/changeStatus','Admin\NewTagController@changeStatus')->name('admin.tag.changeStatus');
         Route::post('/etiket/delete','Admin\NewTagController@delete')->name('admin.tag.delete');

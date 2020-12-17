@@ -48,11 +48,11 @@
 
                                 <td>
                                     @if ($item->status)
-                                        <a class="waves-effect waves-light btn green changeTagStatus"
-                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Aktif</a>
+                                        <a class="waves-effect waves-light btn green changePostStatus"
+                                           data-id="{{ $item->id }}" data-name="{{$item->title}}">Aktif</a>
                                     @else
-                                        <a class="waves-effect waves-light btn red changeTagStatus"
-                                           data-id="{{ $item->id }}" data-name="{{$item->name}}">Pasif</a>
+                                        <a class="waves-effect waves-light btn red changePostStatus"
+                                           data-id="{{ $item->id }}" data-name="{{$item->title}}">Pasif</a>
                                     @endif
                                 </td>
                                 <td>{{ $item->slug }}</td>
@@ -77,7 +77,50 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            $('.changePostStatus').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let dataName = $(this).data('name');
+                let self = $(this);
+                $.ajax({
+                    url: '{{route('admin.post.changeStatus')}}',
+                    method: 'POST',
+                    data: {
+                        id: dataID,
+                        {{--//'_token': '{{ csrf_token() }}'--}}
+                    },
+                    async: false,
+                    success: function (response)
+                    {
+                        if (response.status == 1)
+                        {
+                            self[0].classList.remove('red');
+                            self[0].classList.add('green');
+                            self[0].innerText = "Aktif";
+                        }
+                        else
+                        {
+                            self[0].classList.remove('green');
+                            self[0].classList.add('red');
+                            self[0].innerText = "Pasif";
+                        }
 
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'İşlem Başarılı',
+                            text: dataName + " adlı makalenin durumu " + self[0].innerText
+                                + " olarak güncellendi.",
+                            confirmButtonText: 'Tamam'
+
+                        })
+                    },
+                    error: function ()
+                    {
+
+                    }
+                })
+
+            });
 
             $('.deletePost').click(function ()
             {
