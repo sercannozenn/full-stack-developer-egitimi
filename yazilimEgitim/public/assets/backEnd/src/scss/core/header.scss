@@ -1,0 +1,267 @@
+/*============================================================== 
+ Topbar
+ ============================================================== */
+
+.topbar {
+    position: relative;
+    z-index: 10;
+    nav {
+        background: $topbar;
+        padding-right: 10px;
+        height: $topbar-height;
+        line-height: $topbar-height;
+        .nav-wrapper {
+            .brand-logo {
+                left: auto;
+                transform: none;
+                @extend .blue,
+                .accent-4;
+                width: 250px;
+                display: flex;
+                z-index: 101;
+                align-items: center;
+                height: $topbar-height;
+                @extend .blue;
+                transition: width .3s;
+                .icon {
+                    flex-shrink: 0;
+                    padding:0 5px 0 15px;
+                    text-align: center;
+                    line-height: 21px;
+                }
+                .dark-logo {
+                    display: none;
+                }
+                &:after {
+                    position: absolute;
+                    content: '';
+                    height: 100%;
+                    width: 100%;
+                    
+                }
+            }
+            ul {
+                li {
+                    a {
+                        color: $white;
+                        .profile-pic {
+                            width: 27px;
+                            vertical-align: middle;
+                            margin-top: -5px;
+                        }
+                    }
+                }
+            }
+            >ul.left {
+                margin-left: $sidebar-width-full;
+                transition: all .3s;
+            }
+            .search-box {
+                position:relative;
+                .app-search {
+                    z-index: 110;
+                    width: 260px;
+                    position: absolute;
+                    top: 0px;
+                    display: none;
+                    left: 0px;
+
+                    .form-control {
+                        padding: 10px 40px 10px 15px;
+                        
+                        height: auto;
+                        background: $white;
+                        border: 1px solid $gray-300;
+                        box-sizing:border-box;
+                        border-radius:60px;
+                        box-shadow: none;
+                    }
+                    .srh-btn {
+                        position: absolute;
+                        top: 0;
+                        color: $inverse;
+                        cursor: pointer;
+                        left: 222px;
+                        &:hover{
+                            background:none;
+                        }
+                        i {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+            .sidenav-trigger {
+                margin: 0;
+            }
+        }
+        .dropdown-content {
+            li {
+                &:hover,
+                &.active {
+                    background-color: transparent;
+                }
+            }
+        }
+        .mailbox {
+            &.dropdown-content {
+                min-width: 300px;
+                li {
+                    .drop-title {
+                        font-weight: $font-medium;
+                        padding: 11px 20px 15px;
+                        border-bottom: 1px solid $border;
+                    }
+                    a {
+                        color: $body-text;
+                    }
+                }
+                .message-center {
+                    height: 200px;
+                    overflow: auto;
+                    position: relative;
+                    a {
+                        border-bottom: 1px solid $border;
+                        display: flex;
+                        text-decoration: none;
+                        padding: 9px 15px;
+                        transition:0.1s ease-in;
+                        &:hover {
+                            background: $light;
+                        }
+                        .user-img {
+                            width: 50px;
+                            position: relative;
+                            display: inline-block;
+                            margin: 0 0px 15px 0;
+                            img {
+                                width: 100%;
+                                vertical-align: middle;
+                            }
+                            .profile-status {
+                                border: 2px solid $white;
+                                border-radius: 50%;
+                                display: inline-block;
+                                height: 10px;
+                                left: 30px;
+                                position: absolute;
+                                top: 1px;
+                                width: 10px;
+                            }
+                            .online {
+                                @extend .green;
+                            }
+                            .busy {
+                                @extend .red;
+                            }
+                            .away {
+                                @extend .amber;
+                            }
+                            .offline {
+                                @extend .yellow;
+                            }
+                        }
+                        .mail-contnet {
+                            width: 100%;
+                            vertical-align: middle;
+                            margin-left: 10px;
+                            h5 {
+                                margin: 5px 0px 0;
+                                font-size: 16px;
+                                color: $heading-text;
+                            }
+                            .mail-desc,
+                            .time {
+                                font-size: 12px;
+                                display: block;
+                                margin: 1px 0;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                color: $body-text;
+                                white-space: nowrap;
+                                width: 80%;
+                            }
+                        }
+                        .btn-floating {
+                            flex-shrink: 0;
+                        }
+                    }
+                }
+            }
+        }
+        ul.dropdown-user {
+            min-width: 300px;
+            li {
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                .dw-user-box {
+                    padding: 20px 15px;
+                    .u-img {
+                        width: 80px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        img {
+                            width: 100%;
+                            border-radius: 5px;
+                        }
+                    }
+                    .u-text {
+                        display: inline-block;
+                        padding-left: 10px;
+                        vertical-align: middle;
+                        h4 {
+                            margin: 0px;
+                            font-size: 18px;
+                        }
+                        p {
+                            margin: 2px 0 0 0;
+                            font-size: 12px;
+                            color: $body-text;
+                        }
+                        .btn {
+                            margin: 5px 0 0 0;
+                        }
+                    }
+                }
+                a {
+                    color: $body-text;
+                    &:hover {
+                        background: $light;
+                    }
+                }
+            }
+        }
+        .lang-dropdown {
+            a {
+                i {
+                    font-size: 16px;
+                }
+            }
+            ul.dropdown-content {
+                min-width: 150px;
+            }
+        }
+    }
+    .nav-toggle,
+    .sidebar-toggle {
+        padding: 23px 20px;
+        &:hover {
+            .bars {
+                width: 20px;
+            }
+        }
+    }
+    .bars {
+        height: 2px;
+        background: $white;
+        margin-bottom: 4px;
+        border-radius: $radius;
+        display: block;
+        width: 10px;
+        transition: 0.2s ease-in;
+        &.bar2 {
+            width: 20px;
+        }
+    }
+}

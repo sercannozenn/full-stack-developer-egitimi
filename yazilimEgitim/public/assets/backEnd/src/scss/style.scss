@@ -1,0 +1,48 @@
+/*
+	Template Name: 
+	Author: 
+	File: scss
+*/
+
+//This is the core files
+@import 'variable';
+@import "components/color-classes";
+
+@import 'materialize';
+
+//This is for the icons
+
+@import 'icons/font-awesome/css/fontawesome-all.css';
+@import 'icons/simple-line-icons/css/simple-line-icons.css';
+@import 'icons/weather-icons/css/weather-icons.min.css';
+@import 'icons/themify-icons/themify-icons.css';
+@import 'icons/flag-icon-css/flag-icon.min.css';
+@import 'core/animation';
+@import 'core/app';
+@import 'core/header';
+@import 'core/sidebar';
+@import 'core/right-sidebar';
+@import 'core/chat';
+@import 'core/layout';
+@import "core/spinner";
+
+//Theme colors
+
+@import 'theme-colors/theme-colors';
+@import 'theme-colors/dark-theme';
+
+// All the widgets scss
+
+@import 'widgets/widgets';
+
+//This is for the horizontal version (if you are not using horizontal version you can remove this)
+
+@import 'horizontal/horizontal';
+
+@import 'core/perfect-scrollbar';
+@import 'core/scafholding';
+@import 'core/component';
+@import 'core/other-common';
+@import 'responsive';
+
+@import 'rtl/rtl';

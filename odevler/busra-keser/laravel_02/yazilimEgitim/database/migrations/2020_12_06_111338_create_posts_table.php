@@ -21,8 +21,8 @@ class CreatePostsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->tinyInteger('status')->default(0);
             $table->string('image')->nullable();
-            $table->string('slug');
-            $table->json('tags_id');
+            $table->string('slug')->default('a');
+            $table->json('tags_id')->unsigned()->nullable();
             $table->bigInteger('category_id')->unsigned();
             $table->dateTime('publish_date')->nullable();
 

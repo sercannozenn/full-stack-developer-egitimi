@@ -24,11 +24,20 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
+
+//    Route::resource('/posts', 'Admin\PostsController');
+
     Route::prefix('post')->group(function (){
-//        Route::get('/add', 'Admin\PostsC')->name('admin.post.add');
-        Route::get('/add',function (){
-            return view('admin.posts_add');
-        })->name('admin.post.add');
+
+
+//        Route::resource('/post', 'Admin\PostController');
+
+//        Route::post('/add', 'Admin\PostController')->name('admin.post.add');
+//        Route::get('/add', 'Admin\PostsController@create')->name('admin.post.create');
+        Route::get('/', 'Admin\PostController@index')->name('admin.post.index');
+        Route::post('/add', 'Admin\PostController@add');
+        Route::get('/add', 'Admin\PostController@add')->name('admin.post.add');
+
         Route::get('/list',function (){
             return view('admin.post_list');
         })->name('admin.post.list');

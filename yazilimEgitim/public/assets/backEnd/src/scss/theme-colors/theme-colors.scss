@@ -1,0 +1,158 @@
+// Theme colors
+#main-wrapper {
+    &[data-layout="vertical"], &[data-layout="horizontal"] {
+        /*This is for the logo bg*/
+        .topbar nav .nav-wrapper .brand-logo {
+            &[data-logobg="skin1"] {
+                background: $skin1 !important;
+            }
+            &[data-logobg="skin2"] {
+                background: $skin2 !important;
+            }
+            &[data-logobg="skin3"] {
+                background: $skin3 !important;
+            }
+            &[data-logobg="skin4"] {
+                background: $skin4 !important;
+            }
+            &[data-logobg="skin5"] {
+                background: $skin5 !important;
+            }
+            &[data-logobg="skin6"] {
+                background: $skin6 !important;
+                .dark-logo {
+                    display: block;
+                }
+                .light-logo {
+                    display: none;
+                }
+            }
+        }
+        .topbar nav {
+            &[data-navbarbg="skin1"] {
+                background: $skin1;
+            }
+            &[data-navbarbg="skin2"] {
+                background: $skin2;
+            }
+            &[data-navbarbg="skin3"] {
+                background: $skin3;
+            }
+            &[data-navbarbg="skin4"] {
+                background: $skin4;
+            }
+            &[data-navbarbg="skin5"] {
+                background: $skin5;
+            }
+            &[data-navbarbg="skin6"] {
+                background: $skin6;
+                .nav-wrapper ul li a {
+                    color: $gray-600;
+                }
+                .bars {
+                    background: $gray-500;
+                }
+                .header-search {
+                    .header-search-input {
+                        color: $body-text;
+                        &:focus {
+                            border: 1px solid $gray-500;
+                        }
+                    }
+                    i {
+                        color: $body-text;
+                    }
+                }
+            }
+        }
+        /*This is for the sidebar bg*/
+        .left-sidebar {
+            .sidenav {
+                &[data-sidebarbg="skin1"] {
+                    background-color: $skin1 !important;
+                    .collapsible-body {
+                        background-color: $skin1 !important;
+                    }
+                }
+                &[data-sidebarbg="skin2"] {
+                    background-color: $skin2 !important;
+                    .collapsible-body {
+                        background-color: $skin2 !important;
+                    }
+                }
+                &[data-sidebarbg="skin3"] {
+                    background-color: $skin3 !important;
+                    .collapsible-body {
+                        background-color: $skin3 !important;
+                    }
+                }
+                &[data-sidebarbg="skin4"] {
+                    background-color: $skin4 !important;
+                    .collapsible-body {
+                        background-color: $skin4 !important;
+                    }
+                }
+                &[data-sidebarbg="skin5"] {
+                    background-color: $skin5 !important;
+                    .collapsible-body {
+                        background-color: $skin5 !important;
+                    }
+                }
+                &[data-sidebarbg="skin6"] {
+                    background-color: $skin6 !important;
+                    ul li {
+                        &.small-cap {
+                            color: $body-text;
+                        }
+                        a {
+                            color: $gray-700;
+                            i {
+                                color: $gray-500;
+                            }
+                        }
+                        &:hover {
+                            > .collapsible-header {
+                                color: $gray-700;
+                                i,
+                                .hide-menu {
+                                    color: $gray-700;
+                                }
+                            }
+                        }
+                        &.active {
+                            > .collapsible-header {
+                                color: $white;
+                                i,
+                                .hide-menu {
+                                    color: $white;
+                                }
+                            }
+                        } 
+
+                    }
+                    .collapsible-body {
+                        >ul:not(.collapsible) {
+                            >li {
+                                a {
+                                    color: $gray-700 !important;
+                                    i {   
+                                        color: $gray-500 !important;
+                                    }
+                                }
+                                &.active,
+                                &:hover {
+                                    a {
+                                        color: $gray-900 !important;
+                                        i {
+                                            color: $gray-900 !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        }
+    }
+}
