@@ -118,7 +118,7 @@
         <div class="col s12">
             <div class="card">
                 <div class="card-content">
-                    <h5 class="card-title">Kategori Listesi</h5>
+                    <h5 class="card-title">Etiket Listesi</h5>
                     <a class="btn-floating waves-effect waves-light teal  modal-trigger" title="Yeni Makale Ekle"
                        href="#newTag">
                         <i class="material-icons">add</i>

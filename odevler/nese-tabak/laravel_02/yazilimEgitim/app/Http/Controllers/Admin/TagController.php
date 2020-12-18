@@ -46,7 +46,7 @@ class TagController extends Controller
 
 
         TagList::create($data);
-        alert()->succes('Başarılı','Etiket Eklendi')
+        alert()->success('Başarılı','Etiket Eklendi')
             ->showConfirmButton('Tamam','#3085d6');
         return redirect()->route('tag.index');
 
