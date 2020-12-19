@@ -17,13 +17,14 @@
                     <table class="responsive-table">
                         <thead>
                         <tr>
-                            <th>Resim</th>
                             <th>ID</th>
+                            <th>İşlem</th>
                             <th>Başlık</th>
                             <th>Kullanıcı Adı</th>
                             <th>Aktif/Pasif</th>
                             <th>Slug</th>
                             <th>Kategori</th>
+                            <th>Resim</th>
                             <th>Paylaşım Tarihi</th>
                             <th>Güncelleme Tarihi</th>
                         </tr>
@@ -31,8 +32,16 @@
                         <tbody>
                         @foreach($list as $item)
                             <tr id="post{{ $item->id }}">
-                                <td>Boş</td>
+
                                 <td>{{ $item->id }}</td>
+                                <td>
+                                    <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}">
+                                        <i class="fas fa-trash  red-text"></i>
+                                    </a>
+                                    <a href="{{ route('post.edit', $item->id) }}">
+                                        <i class="fas fa-edit  yellow-text"></i>
+                                    </a>
+                                </td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ $item->getUser->name }}</td>
                                 <td>
@@ -49,6 +58,9 @@
                                 </td>
                                 <td>
                                     {{$item->getCategory->name}}
+                                </td>
+                                <td>
+                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:S')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:S')}}</td>

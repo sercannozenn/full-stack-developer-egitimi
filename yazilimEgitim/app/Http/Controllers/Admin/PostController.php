@@ -5,17 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PostCategory;
 use App\Models\Posts;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $list = Posts::all();
@@ -23,34 +20,37 @@ class PostController extends Controller
         return view('admin.post_list', compact('list'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $category = PostCategory::where('status', 1)->get();
-        return view('admin.post_add', compact('category'));
 
+        return view('admin.post_add', compact('category'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $image = $request->file('image');
+
+        if ($image)
+        {
+            $name = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $explode = explode('.', $name);
+            $name = $explode[0] . '_' . now()->format('d-m-Y_H-i-s') . '.' . $extension;
+            $publicPath = 'public/';
+            $path = 'postImage/';
+            Storage::putFileAs($publicPath . $path, $image, $name);
+        }
+
         Posts::create([
             "title" => $request->title,
             "slug" => Str::slug($request->title, '-'),
             "user_id" => Auth::id(),
             "category_id" => $request->category_id,
-            "tags_id" => json_encode($request->tagName),
+            "tags_id" => json_encode(substr($request->tag_ids, 0, -1)),
             "content" => $request->text,
             "status" => isset($request->status) ? 1 : 0,
+            "image" => $image ? $path . $name : null,
             "publish_date" => isset($request->publishNow) ? now() : $request->publish_date,
         ]);
         alert()->success('Başarılı', 'Post eklendi')
@@ -60,46 +60,34 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        $post = Posts::find($id);
+        $category = PostCategory::where('status', 1)->get();
+
+        $tagsID = json_decode($post->tags_id);
+        $tagsID = explode(',', $tagsID);
+        $tagsIDArr = [];
+        foreach ($tagsID as $item)
+        {
+            $tagsIDArr[] = Tag::find($item);
+        }
+        $tagsID = $tagsIDArr;
+        return view('admin.post_add', compact('category', 'post', 'tagsID'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

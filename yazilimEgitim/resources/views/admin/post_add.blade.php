@@ -1,7 +1,26 @@
 @extends('layouts.admin')
 
 @section('title')
-    Makale Ekleme
+    <?php
+    if (isset($post))
+    {
+        $title = "Makale Düzenleme";
+        $route = route('post.update', $post->id);
+        $postIsset = true;
+
+    }
+    else
+    {
+        $title = "Makale Ekleme";
+        $route = route('post.store');
+        $postIsset = false;
+        $nowPublishStatus = false;
+    }
+
+
+    ?>
+
+    {{ $title }}
 @endsection
 @section('css')
     <link rel="stylesheet" type="text/css"
@@ -123,20 +142,12 @@
         <div class="col s12 ">
             <div class="card">
                 <div class="card-content">
-                    <h5 class="card-title activator">Makale Ekle<i class="material-icons right tooltipped"
-                                                                   data-position="left" data-delay="50"
-                                                                   data-tooltip="Get Code">more_vert</i></h5>
-                    <form id="frm-post" action="{{route('post.store')}}" method="post">
+                    <h5 class="card-title activator">{{ $title }}
+                        <i class="material-icons right tooltipped" data-position="left" data-delay="50"
+                           data-tooltip="Get Code">more_vert</i></h5>
+                    <form id="frm-post" action="{{ $route }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        {{--name--}}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="name" name="name" type="text">
-                                <label for="name">Name</label>
-                            </div>
-                        </div>
-                        {{--kategori adı--}}
+                        {{ isset($post) ? method_field('PUT') : '' }}
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">clear_all</i>
@@ -154,7 +165,8 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">assignment</i>
-                                <input id="post-name" name="title" type="text">
+                                <input id="post-name" name="title" type="text"
+                                       value="{{ $postIsset ? $post->title : '' }}">
                                 <label for="post-name">Makale Adı</label>
                             </div>
                         </div>
@@ -162,11 +174,35 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <div class="tags-input-div tags-input-field">
+                                    @if ($postIsset)
+                                        @foreach($tagsID as $item)
+                                            <div class="tags-select-item">
+                                                {{ $item->name }}
+                                                <i class="material-icons tags-select-close" data-id="{{ $item->id }}">close</i>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                     <input type="text" name="tagName" class="tags input" id="tags_id"
                                            placeholder="Etiket Giriniz">
+                                    <input type="hidden" name="tag_ids"
+                                           value="{{ $postIsset ? json_decode($post->tags_id).',' : '' }}" id="tagID">
                                     <ul class="tags-list tags-list-absolute tags-margin">
                                     </ul>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 20px">
+                            <div class="input-field col s6">
+                                <input type="file" name="image">
+                            </div>
+                            <div class="input-field col s6">
+                                @if ($postIsset  && $post->image && file_exists('storage/' .  $post->image))
+                                    <img src="{{ asset('storage/'.  $post->image) }}" width="100">
+                                    <small>Seçilen Resim</small>
+                                @else
+                                    <img src="{{ asset('assets/images/default.jpg') }}" width="100">
+                                @endif
                             </div>
                         </div>
                         {{--ckeditör--}}
@@ -178,8 +214,7 @@
                                             <h4 class="card-title">Ekle</h4>
                                             <div id="editor">
                                                  <textarea name="text" cols="50" rows="15" class="ckeditor"
-                                                           id="post-content">
-                                                 </textarea>
+                                                           id="post-content">{!! $postIsset ? $post->content : '' !!}</textarea>
 
                                             </div>
                                         </div>
@@ -193,24 +228,37 @@
                                 <div class="switch">
                                     <label for="statusEdit">
                                         Pasif
-                                        <input name="status" id="statusEdit" type="checkbox">
+                                        <input name="status" id="statusEdit" type="checkbox"
+                                            {{ $postIsset ? ($post->status ? 'checked' :  '') : ''}}>
                                         <span class="lever"></span>
                                         Aktif
                                     </label>
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        if ($postIsset)
+                        {
+                            $publishDate = \Carbon\Carbon::parse($post->publish_date);
+                            $nowPublishStatus = now() > $publishDate;
+                        }
+
+                        ?>
                         <div class="row">
                             <div class="input-field col s6">
+
                                 <h5>Yayınlanma Tarihi Seç</h5>
                                 <input id="publish_date" type="datetime-local" placeholder="Yayınlanma tarihi seç"
-                                       class="post-date" name="publish_date">
+                                       class="post-date" name="publish_date"
+                                       {{ $postIsset ? ($nowPublishStatus ? 'disabled' : '') :''}}
+                                       value="{{ $postIsset ?  $publishDate->format('Y-m-d\TH:i:s') : '' }}" step="1">
                             </div>
                             <div class="input-field col s6">
                                 <div class="switch">
                                     <label for="publishNow">
                                         Şimdi Yayınla
-                                        <input name="publishNow" id="publishNow" type="checkbox">
+                                        <input name="publishNow" id="publishNow"
+                                               type="checkbox" {{ $nowPublishStatus ? 'checked' : '' }}>
                                         <span class="lever"></span>
                                     </label>
                                 </div>
@@ -218,7 +266,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <button id="btnSave" class="btn green waves-effect btn-block" type="button">
+                                <button id="btnSave" class="btn green waves-effect btn-block" type="submit">
                                     Kaydet
                                 </button>
                             </div>
@@ -248,8 +296,16 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        @if($postIsset)
+        var tagIDList = '{{ json_decode($post->tags_id) }}' + ',';
+        @else
+        var tagIDList = '';
+        @endif
         $(document).on('click', 'body .tags-list-item', function ()
         {
+            var dataID = $(this).data('id');
+            tagIDList += dataID + ',';
+            $('#tagID').val(tagIDList);
             var child = $(this).children();
             var span = child[0].innerText;
 
@@ -260,7 +316,7 @@
 
             div.innerText = span;
             i.innerText = 'close';
-
+            i.setAttribute('data-id', dataID);
             div.appendChild(i);
             var tagsInput = document.querySelector('.tags-input-div');
             tagsInput.insertBefore(div, tagsInput.childNodes[0]);
@@ -272,6 +328,13 @@
         {
             var a = $(this).parent();
             a[0].remove();
+            let dataID = $(this).data('id') + ',';
+            console.log(dataID);
+            console.log(tagIDList);
+            tagIDList = tagIDList.replace(dataID, '');
+            console.log(tagIDList);
+            $('#tagID').val(tagIDList);
+
         });
         $(".tags").on("keyup", function ()
         {
@@ -280,13 +343,13 @@
             if (tagText.length > 0)
             {
                 $.ajax({
-                    method:'POST',
-                    url:'{{ route('admin.search.tag') }}',
-                    data:{
+                    method: 'POST',
+                    url: '{{ route('admin.search.tag') }}',
+                    data: {
                         text: tagText
                     },
-                    async:false,
-                    success:function (response)
+                    async: false,
+                    success: function (response)
                     {
                         $('.tags-list').html("");
                         $('.tags-list').append(response);
