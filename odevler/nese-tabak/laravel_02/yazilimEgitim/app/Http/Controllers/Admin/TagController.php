@@ -20,7 +20,7 @@ class TagController extends Controller
     {
         $search = $request->search;
         $result = TagList::where('name', 'LIKE', '%' . $search . '%')
-            ->select('id', 'name')
+            ->statusActive()
             ->get();
 //        dd($result);
         return view('admin.layouts.tag_search_result', compact('result'));
@@ -60,7 +60,7 @@ class TagController extends Controller
 
     public function edit($id)
     {
-//        dd('olduu');
+
         $tag = TagList::find($id);
 
         return response()->json([

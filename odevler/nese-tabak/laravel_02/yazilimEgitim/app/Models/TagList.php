@@ -18,4 +18,9 @@ class TagList extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id')->select('name');
     }
+
+    public function scopeStatusActive($query)
+    {
+        return $query->where('status', 1);
+    }
 }

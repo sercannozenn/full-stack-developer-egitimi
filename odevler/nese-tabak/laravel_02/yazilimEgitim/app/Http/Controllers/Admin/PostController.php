@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\PostCategory;
 
+use App\Models\TagList;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\PostList;
@@ -15,50 +17,54 @@ class PostController extends Controller
 
     public function index()
     {
-        return view('admin.post_list',);
-
-    }
-
-    public function addPost()
-    {
-
-
-        $category = PostCategory::all();
-        return view('admin.post_add', compact('category'));
-
-    }
-
-    public function listPost()
-    {
         $list = PostList::all();
+
         return view('admin.post_list',compact('list'));
+
     }
+
 
 
     public function create()
     {
+        $category = PostCategory::where('status', 1)->get();
 
+        return view('admin.post_add', compact('category'));
     }
 
 
     public function store(Request $request)
     {
-        $name = $request->name;
+        $image = $request->file('image');
+
+        if ($image)
+        {
+            $name = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $explode = explode('.', $name);
+            $name = $explode[0] . '_' . now()->format('d-m-Y_H-i-s') . '.' . $extension;
+            $publicPath = 'public/';
+            $path = 'postImage/';
+            Storage::putFileAs($publicPath . $path, $image, $name);
+        }
+
         $title = $request->title;
         $content = $request->text;
-        $status = $request->status;
+        $status = isset($request->status);
         $category_id =$request->category_id;
-//        $tags_id = json_encode(1);
+        $tags_id = $request->tag_ids;
+        $publish_date = isset($request->publishNow);
         $user = Auth::user();
 
         $data = [
-            'name' => $name,
             'title' => $title,
             'content' => $content,
-            'slug' => Str::slug($name),
-            'status' => $status ? 1 : 0,
+            'slug' => Str::slug($title,'-'),
+            "status" => $status ? 1 : 0,
+            "image" => $image ? $path . $name : null,
+            "publish_date" => $publish_date ? now() : $request->publish_date,
+            "tags_id" => json_encode(substr($tags_id, 0, -1)),
             'user_id' => $user->id,
-//            'tags_id'=>$tags_id,
             'category_id'=>$category_id
 
         ];
@@ -69,7 +75,7 @@ class PostController extends Controller
         alert()->success('Başarılı', 'Kategori eklendi')
             ->showConfirmButton('Tamam', '#3085d6');
 
-        return redirect()->back();
+        return redirect()->route('post.index');
     }
 
 
@@ -82,16 +88,23 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = PostList::find($id);
+        $category = PostCategory::where('status', 1)->get();
 
-        return response()->json([
-            'post' => $post
-        ], 200);
+        $tagsID = json_decode($post->tags_id);
+        $tagsID = explode(',', $tagsID);
+        $tagsIDArr = [];
+        foreach ($tagsID as $item)
+        {
+            $tagsIDArr[] = TagList::find($item);
+        }
+        $tagsID = $tagsIDArr;
+        return view('admin.post_add', compact('category', 'post', 'tagsID'));
     }
 
 
     public function update(Request $request, $id)
     {
-
+        dd($request->all());
     }
 
 

@@ -23,19 +23,17 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::prefix('post')->group(function ()
     {
-        Route::resource('/post', 'Admin\PostController');
+        Route::resource('post', 'Admin\PostController');
         Route::post('/post/changeStatus', 'Admin\PostController@changeStatus')->name('admin.post.changeStatus');
         Route::post('/post/delete', 'Admin\PostController@delete')->name('admin.post.delete');
-        Route::get('/add', 'Admin\PostController@addPost')->name('admin.post.add');
-        Route::get('/list', 'Admin\PostController@listPost')->name('admin.post.list');
 
-        Route::resource('/tag', 'Admin\TagController');
+        Route::resource('tag', 'Admin\TagController');
         Route::post('/tag/search-tags','Admin\TagController@search')->name('admin.search.tag');
         Route::post('/tag/delete', 'Admin\TagController@delete')->name('admin.tag.delete');
         Route::post('/tag/changeStatus', 'Admin\TagController@changeStatus')->name('admin.tag.changeStatus');
 
 
-        Route::resource('/category', 'Admin\CategoryController');
+        Route::resource('category', 'Admin\CategoryController');
         Route::post('/category/changeStatus', 'Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');
         Route::post('/category/delete', 'Admin\CategoryController@delete')->name('admin.category.delete');
     });

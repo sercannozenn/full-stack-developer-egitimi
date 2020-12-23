@@ -3,115 +3,6 @@
     Etiket Listesi
 @endsection
 @section('css')
-    <style>
-        .tags:focus {
-            border: none !important;
-            box-shadow: unset !important;
-        }
-
-        .tags-input-div {
-            border: none;
-            border-bottom: 1px solid #9e9e9e;
-            box-shadow: none;
-            margin: 0 0 8px 0;
-            min-height: 45px;
-            outline: none;
-            transition: all .3s;
-        }
-
-        .tags-input-field {
-            position: relative !important;
-            margin-top: 1rem !important;
-            margin-bottom: 1rem !important;
-        }
-
-        .tags-input-div .tags {
-            background: none;
-            border: 0 !important;
-            color: rgba(0, 0, 0, 0.6);
-            display: inline-block;
-            font-size: 16px;
-            height: 3rem;
-            line-height: 32px;
-            outline: 0;
-            margin: 0;
-            padding: 0 !important;
-            width: 120px !important;
-        }
-
-        .tags-list {
-            cursor: pointer;
-            display: block;
-            opacity: 1;
-            transform: scaleX(1) scaleY(1);
-            width: 100%;
-            left: 0;
-            top: 0;
-            height: 50px;
-            transform-origin: 0 0;
-        }
-
-        .tags-list-absolute {
-            background-color: #fff;
-            margin: 0;
-            min-width: 100px;
-            overflow-y: auto;
-            opacity: 1;
-            position: absolute;
-            left: 0;
-            top: 55px !important;
-            z-index: 9999;
-            transform-origin: 0 0;
-        }
-
-        .tags-list-item {
-            clear: both;
-            color: rgba(0, 0, 0, 0.87);
-            cursor: pointer;
-            min-height: 50px;
-            line-height: 1.5rem;
-            width: max-content;
-            text-align: left;
-            display: inline-block;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 3px 1px -2px rgba(0, 0, 0, 0.02), 0 1px 5px 0 rgba(0, 0, 0, 0.02);
-        }
-
-        .tags-list-item:hover {
-            background-color: #eeeeee;
-        }
-
-        .tags-list-item span {
-            font-size: 16px;
-            color: #5e35b1;
-            display: inline-block;
-            line-height: 22px;
-            padding: 14px 16px;
-        }
-
-        .tags-margin {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .tags-select-item {
-            display: inline-block;
-            height: 32px;
-            font-size: 13px;
-            font-weight: 500;
-            color: rgba(0, 0, 0, 0.6);
-            line-height: 32px;
-            padding: 0 12px;
-            border-radius: 16px;
-            background-color: #e4e4e4;
-            margin-bottom: 5px;
-            margin-right: 5px;
-        }
-
-        div.tags-input-div:focus-within {
-            border-bottom: 10px solid #5e35b1 !important;
-        }
-    </style>
-
 @endsection
 @section('content')
     <div class="row">
@@ -137,7 +28,7 @@
                         </thead>
                         <tbody>
                         @foreach($list as $item)
-                            <tr id="row{{$item->id}}">
+                            <tr id="tag{{$item->id}}">
                                 <td>
                                     <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
@@ -150,7 +41,6 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->getUser->name }}</td>
-                                {{--                                <td>{{ $item->userName }}</td>--}}
                                 <td>
                                     @if ($item->status)
                                         <a class="waves-effect waves-light btn green changeStatus"
@@ -184,12 +74,9 @@
                                 {{--chips--}}
                                 <div class="row">
                                     <div class="input-field col s12">
-
-                                        <div class="tags-input-div tags-input-field">
-                                            <input name="name" type="text" class="tags input"  id="tags_id" placeholder="Etiket Giriniz">
-                                            <ul class="tags-list tags-list-absolute tags-margin">
-                                            </ul>
-                                        </div>
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input name="name" id="name" type="text">
+                                        <label for="name">Etiket Adı</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -282,12 +169,38 @@
 @section('js')
     <script>
         $(document).ready(function(){
-           $('#btnSave').click(function(){
+            function inputValidation(inputArray, formID)
+            {
+                let validation = true;
+                for (let i = 0; i < inputArray.length; i++)
+                {
+                    var inputInfo = inputArray[i];
+                    var input = $('#' + inputInfo.id ).val();
+                    if (input.trim() == "")
+                    {
+                        Swal.fire({
+                            icon: 'error',
+                            title: inputInfo.alertTitle,
+                            text: inputInfo.alertTextAttr + ' boş bırakılamaz!',
+                            confirmButtonText: 'Tamam'
+                        });
+                        validation = false;
+                    }
+                }
+                validation ? $('#' + formID).submit() : '';
+            }
+            $('#btnSave').click(function (){
+                let inputArray = [
+                    {
+                        id: 'name',
+                        alertTextAttr: 'Etiket Adı',
+                        alertTitle: "Uyarı",
+                    }
+                ];
+                inputValidation(inputArray, 'frmTag');
+            })
 
-             $('#frmTag').submit();
-           });
-
-        $.ajaxSetup({
+            $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }

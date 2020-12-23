@@ -8,13 +8,13 @@
         <div class="collapsible-body">
             <ul>
                 <li>
-                    <a href="{{ route('admin.post.add') }}">
+                    <a href="{{ route('post.create') }}">
                         <i class="material-icons dp48">queue</i>
                         <span class="hide-menu"> Makale Ekle </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.post.list') }}" ><i class="material-icons dp48">view_list</i>
+                    <a href="{{ route('post.index') }}" ><i class="material-icons dp48">view_list</i>
                         <span class="hide-menu"> Makale Listesi </span>
                     </a>
                 </li>

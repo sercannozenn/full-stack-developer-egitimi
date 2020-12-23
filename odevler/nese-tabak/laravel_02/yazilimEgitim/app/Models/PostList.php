@@ -17,4 +17,8 @@ class PostList extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id')->select('name');
     }
+    public function getCategory()
+    {
+        return $this->hasOne('App\Models\PostCategory', 'id', 'category_id')->select('name');
+    }
 }

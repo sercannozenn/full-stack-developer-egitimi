@@ -11,7 +11,7 @@
                 <div class="card-content">
                     <h5 class="card-title">Makale Listesi</h5>
                     <a class="btn-floating waves-effect waves-light teal  modal-trigger" title="Yeni Makale Ekle"
-                       href="{{ route('admin.post.add') }}">
+                       href="{{ route('post.create') }}">
                         <i class="material-icons">add</i>
                     </a>
                     <table class="responsive-table">
@@ -19,31 +19,31 @@
                         <tr>
                             <th>İşlem</th>
                             <th>ID</th>
-                            <th>Makale Adı</th>
-                            <th>Açıklama</th>
+                            <th>Başlık</th>
                             <th>Kullanıcı Adı</th>
                             <th>Aktif/Pasif</th>
+                            <th>Slug</th>
+                            <th>Kategori</th>
+                            <th>Resim</th>
                             <th>Oluşturma Tarihi</th>
                             <th>Güncelleme Tarihi</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($list as $item)
-                            <tr id="row{{$item->id}}">
+                            <tr id="post{{$item->id}}">
                                 <td>
                                     <a href="javascript:void(0)" class="deletePost" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
-                                    <a href="{{ route('admin.post.add') }}" class="editPost "
+                                    <a href="{{ route('post.edit', $item->id) }}" class="editPost "
                                        data-id="{{ $item->id }}">
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
                                 </td>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{ $item->content}}</td>
                                 <td>{{ $item->getUser->name }}</td>
-
                                 <td>
                                     @if ($item->status)
                                         <a class="waves-effect waves-light btn green changeStatus"
@@ -53,68 +53,21 @@
                                            data-id="{{ $item->id }}">Pasif</a>
                                     @endif
                                 </td>
+                                <td>
+                                    {{ $item->slug }}
+                                </td>
+                                <td>
+                                    {{$item->getCategory->name}}
+                                </td>
+                                <td>
+                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">
+                                </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s') }}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="editPost" class="modal modalEdit">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12 l12">
-                    <div class="card">
-                        <div class="card-content">
-                            <h5 class="card-title activator">Kategori Düzenleme</h5>
-                            <form id="editPostForm" action="" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">account_circle</i>
-                                        <input name="name" id="nameEdit" type="text">
-                                        <label for="nameEdit">Makale Adı</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">email</i>
-                                        <input name="description" id="descriptionEdit" type="text">
-                                        <label for="descriptionEdit">Açıklama</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <div class="switch">
-                                            <label for="statusEdit">
-                                                Pasif
-                                                <input name="status" id="statusEdit" type="checkbox">
-                                                <span class="lever"></span>
-                                                Aktif
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <button id="btnEdit" class="btn green waves-effect btn-block" type="button">
-                                            Değişiklikleri Kaydet
-                                        </button>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <button class="btn red waves-effect btn-block modal-close" type="button">
-                                            Vazgeç
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -158,7 +111,7 @@
                             async: false,
                             success: function (response)
                             {
-                                $('#row' + dataID).remove();
+                                $('#post' + dataID).remove();
 
                                 Swal.fire({
                                     icon: 'success',
@@ -186,7 +139,7 @@
                     method: 'POST',
                     data: {
                         id: dataID,
-                        {{--//'_token': '{{ csrf_token() }}'--}}
+                        //'_token': '{{ csrf_token() }}'
                     },
                     async: false,
                     success: function (response)
@@ -218,10 +171,7 @@
 
                     }
                 })
-
-
             });
-
         });
     </script>
 @endsection
