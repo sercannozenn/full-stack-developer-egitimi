@@ -19,10 +19,9 @@ class PostController extends Controller
     {
         $list = PostList::all();
 
-        return view('admin.post_list',compact('list'));
+        return view('admin.post_list', compact('list'));
 
     }
-
 
 
     public function create()
@@ -51,7 +50,7 @@ class PostController extends Controller
         $title = $request->title;
         $content = $request->text;
         $status = isset($request->status);
-        $category_id =$request->category_id;
+        $category_id = $request->category_id;
         $tags_id = $request->tag_ids;
         $publish_date = isset($request->publishNow);
         $user = Auth::user();
@@ -59,13 +58,13 @@ class PostController extends Controller
         $data = [
             'title' => $title,
             'content' => $content,
-            'slug' => Str::slug($title,'-'),
+            'slug' => Str::slug($title, '-'),
             "status" => $status ? 1 : 0,
             "image" => $image ? $path . $name : null,
             "publish_date" => $publish_date ? now() : $request->publish_date,
             "tags_id" => json_encode(substr($tags_id, 0, -1)),
             'user_id' => $user->id,
-            'category_id'=>$category_id
+            'category_id' => $category_id
 
         ];
 //        dd($data);
@@ -104,7 +103,51 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+//        dd($request->all());
+//        dd($id);
+        $post = PostList::find($id);
+
+        $image = $request->file('image');
+
+        if ($image)
+        {
+            $name = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $explode = explode('.', $name);
+            $name = $explode[0] . '_' . now()->format('d-m-Y_H-i-s') . '.' . $extension;
+            $publicPath = 'public/';
+            $path = 'postImage/';
+            Storage::putFileAs($publicPath . $path, $image, $name);
+            $post ->image= $path . $name;
+        }
+
+        $title = $request->title;
+        $content = $request->text;
+        $status = isset($request->status);
+        $category_id = $request->category_id;
+        $tags_id = $request->tag_ids;
+        $publish_date = isset($request->publishNow);
+        $user = Auth::user();
+
+        $data = [
+            'title' => $title,
+            'content' => $content,
+            'slug' => Str::slug($title, '-'),
+            "status" => $status ? 1 : 0,
+            "image" => $image ? $path . $name : null,
+            "publish_date" => $publish_date ? now() : $request->publish_date,
+            "tags_id" => json_encode(substr($tags_id, 0, -1)),
+            'user_id' => $user->id,
+            'category_id' => $category_id
+
+        ];
+        PostList::where('id', $id)->update($data);
+
+
+        alert()->success('Başarılı', 'Liste güncellendi')
+            ->showConfirmButton('Tamam', '#3085d6');
+
+        return redirect()->route('post.index');
     }
 
 
