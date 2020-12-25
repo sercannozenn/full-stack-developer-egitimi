@@ -154,7 +154,8 @@
                                 <select name="category_id">
                                     <option value="" disabled selected>Lütfen Seçim Yapın</option>
                                     @foreach($category as $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        <option value="{{ $value->id }}"
+                                            {{ $postIsset ? ($post->category_id == $value->id ? 'selected' :'' ) : ''}}>{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                                 <label>Kategori Adı</label>

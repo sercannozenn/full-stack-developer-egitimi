@@ -156,9 +156,9 @@ website:    http://www.themepunch.com
 .navbar-nav > li:last-child > a {
   margin-right: 0;
 }
-.navbar-nav > li:last-child > a:after {
-  display: none;
-}
+/*.navbar-nav > li:last-child > a:after {*/
+/*  display: none;*/
+/*}*/
 .navbar-nav li.drop {
   position: relative;
 }

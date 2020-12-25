@@ -48,4 +48,12 @@
             </ul>
         </div>
     </li>
+
+    <li>
+        <a href="{{route('menu.index')}}" class="collapsible-header">
+            <i class="material-icons">supervisor_account</i>
+            <span class="hide-menu">Menü Düzenleme</span>
+        </a>
+    </li>
+
 </ul>

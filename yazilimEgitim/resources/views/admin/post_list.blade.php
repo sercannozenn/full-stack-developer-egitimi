@@ -35,7 +35,7 @@
 
                                 <td>{{ $item->id }}</td>
                                 <td>
-                                    <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}">
+                                    <a href="javascript:void(0)" class="deletePost" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
                                     <a href="{{ route('post.edit', $item->id) }}">
@@ -62,8 +62,8 @@
                                 <td>
                                     <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">
                                 </td>
-                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:S')}}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:S')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -74,4 +74,100 @@
     </div>
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function ()
+        {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.deletePost').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let route = '{{route('post.destroy', 'postID')}}';
+                route = route.replace('postID', dataID);
+                Swal.fire({
+                    title: 'Uyarı',
+                    text: `${dataID} ID'li postu silmek istediğinize emin misiniz?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet',
+                    cancelButtonText: 'Hayır'
+                }).then((result) =>
+                {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax({
+                            url: route,
+                            method: 'POST',
+                            data: {
+                                '_method': 'DELETE'
+                            },
+                            async: false,
+                            success: function (response)
+                            {
+                                document.getElementById("post" + dataID).remove();
+
+                                Swal.fire({
+                                    title: 'Başarılı',
+                                    text: `${dataID} ID'li postu silinmiştir. `,
+                                    icon: 'success',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Tamam',
+                                });
+                            },
+                            error: function ()
+                            {
+
+                            }
+                        })
+
+                    }
+                })
+
+
+            });
+
+
+            $('.changeStatus').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let self = $(this);
+                let route = '{{route('admin.post.changeStatus')}}';
+                $.ajax({
+                    url: route,
+                    method: 'POST',
+                    data: {
+                        id: dataID
+                    },
+                    async: false,
+                    success: function (response)
+                    {
+                        let changeStatusVal = response.status;
+                        Swal.fire({
+                            title: 'Başarılı',
+                            text: dataID + "'li postun durumu " + (changeStatusVal ? 'pasiften aktif ' : 'aktiften pasif') + ' olarak güncellenmiştir.',
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Tamam',
+                        });
+
+                        self[0].textContent = changeStatusVal ? "Aktif" : "Pasif";
+                        let finalStatus = [changeStatusVal ? 'red' : 'green', changeStatusVal ? 'green' : 'red'];
+                        self[0].className = self[0].className.replace(finalStatus[0], finalStatus[1]);
+                    },
+                    error: function ()
+                    {
+
+                    }
+                })
+
+
+            });
+        });
+    </script>
 @endsection
