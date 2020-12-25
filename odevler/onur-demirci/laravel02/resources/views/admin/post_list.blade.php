@@ -24,9 +24,9 @@
                             <th>Aktif/Pasif</th>
                             <th>Slug</th>
                             <th>Kategori</th>
-                            <th>Paylaşım Tarihi</th>
-                            <th>Güncelleme Tarihi</th>
                             <th>Yayınlanma Tarihi</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Güncelleme Tarihi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,12 @@
                                         <i class="fas fa-edit  yellow-text"></i>
                                     </a>
                                 </td>
-                                <td></td>
+                                <td>@if($item->image && file_exists('storage/'.$item->image))
+                                            <img src="{{ asset('storage/'. $item->image) }}" alt="Post Image" style="width: 50px;">
+                                    @else
+                                        <small>Resim Seçilmedi</small>
+                                    @endif
+                                </td>
                                 <td>{{ $item->id }}</td>
                                 <td>{{$item->title}}</td>
                                 <td>{{ $item->getUser->name }}</td>
@@ -57,9 +62,9 @@
                                 </td>
                                 <td>{{ $item->slug }}</td>
                                 <td>{{ $item->getCategory->name }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->publish_date)->format('d-m-Y H:i:s') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($item->publish_time)->format('d-m-Y H:i:s') }}</td>
                             </tr>
                         @endforeach
                         </tbody>

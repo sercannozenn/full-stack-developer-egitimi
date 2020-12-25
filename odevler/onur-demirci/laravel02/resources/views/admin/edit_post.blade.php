@@ -15,7 +15,7 @@
 
 @section('content')
     <div class="row">
-        <form id="postForm" method="POST" action="{{route('admin.post.edit',$post->id)}}" class="col s12">
+        <form id="postForm" method="POST" action="{{route('admin.post.edit',$post->id)}}" class="col s12" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -27,10 +27,27 @@
                 <div class="input-field col s6">
                     <select id="category" name="category">
                         @foreach($categories as $item)
-                            <option value="{{ $item->id }}" @if($item->id==$post->category_id) {{ 'selected="selected"' }} @endif>{{ $item->name }}</option>
+                            <option value="{{ $item->id }}" {{$item->id==$post->category_id ? 'selected':'' }} >{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </div>
+            </div>
+            <div class="row">
+                <div class="file-field input-field col s6">
+                    <div class="btn">
+                        <span>Makale Resmi Seç</span>
+                        <input type="file" accept="image/*" name="postImage" id="post-image">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" value="{{ $post->image }}">
+                    </div>
+                </div>
+                @if($post->image && file_exists('storage/'.$post->image))
+                    <div class="input-field col s6">
+                        <img src="{{ asset('storage/'. $post->image) }}" alt="Post Image" style="width: 100px;">
+                        <small>Seçilen Resim</small>
+                    </div>
+                @endif
             </div>
             <div class="row">
                 <div class="input-field col s6">
@@ -43,8 +60,10 @@
                 <div class="input-field col s6">
                     <h5>Yayınlanma Tarihi Seç</h5>
                     <input id="publish_date" type="datetime-local"
-                           class="post-date" min="{{str_replace(" ","T",$post->publish_date)}}"
-                           value="{{str_replace(" ","T",$post->publish_date)}}"
+                           class="post-date"
+{{--                           min="{{\Carbon\Carbon::parse($post->publish_date)->format('Y-m-d\TH:i:s')}}"--}}
+                           {{--                           value="{{str_replace(" ","T",$post->publish_date)}}"--}}
+                           value="{{\Carbon\Carbon::parse($post->publish_date)->format('Y-m-d\TH:i:s')}}"
                            name="publish_date">
                 </div>
                 <div class="input-field col s6">
@@ -86,6 +105,9 @@
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="{{asset('assets/backEnd/libs/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        var route='{{ route('post.getTags') }}';
+    </script>
     <script src="{{asset('assets/js/posts.js')}}"></script>
     <script>
         $(document).ready(function () {
@@ -97,7 +119,7 @@
                 $("label[for='publishNow']").html(' Zaten Yayında\n' +
                     '                            <input name="publishNow" id="publishNow" type="checkbox" checked disabled>\n' +
                     '                            <span class="lever"></span>');
-                $('#publish_date').prop('disabled','true');
+                $('#publish_date').prop('disabled', 'true');
 
             } else {
                 //
@@ -108,8 +130,8 @@
             var tag_names = [
                 @foreach($tags as $tag)
                         @if(in_array($tag->id,explode(",",json_decode($post->tags_id))))
-                    '{{$tag->name}}',
-                @endif
+                                '{{$tag->name}}',
+                        @endif
                 @endforeach
             ];
 

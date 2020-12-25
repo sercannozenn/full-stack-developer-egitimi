@@ -52,8 +52,8 @@
                             <div class="input-field col s12">
                                 <input id="password" type="password" name="password">
                                 <label for="password">Password</label>
+                                <a href="{{route('reset.password')}}"><small>Forgot Password?</small></a>
                             </div>
-
                         </div>
                         <!-- pwd -->
                         <div class="row m-t-5">

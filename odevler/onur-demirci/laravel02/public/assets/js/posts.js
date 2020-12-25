@@ -33,7 +33,7 @@ $(document).ready(function () {
     $('#tags').select2({
         ajax: {
             delay: 250,
-            url: 'http://localhost:8000/admin/post/getTags',
+            url: route,
             method: 'GET',
             dataType: 'json',
             data: function (params) {
@@ -71,4 +71,13 @@ $(document).ready(function () {
         return tag.name || tag.text;
     }
     CKEDITOR.replace('editor1');
+
+    var d = new Date();
+    const ye = new Intl.DateTimeFormat('tr', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('tr', { month: 'numeric' }).format(d);
+    const da = new Intl.DateTimeFormat('tr', { day: '2-digit' }).format(d);
+    var today = `${ye}-${mo}-${da}`;
+    today+= "T"+d.toString().substring(16,21);
+    document.getElementById("publish_date").min = today;
+    console.log(today);
 });

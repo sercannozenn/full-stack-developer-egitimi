@@ -17,6 +17,7 @@ class Posts extends Model
     public function getUser()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id')->select('name');
+//        return $this->hasOne(User::class)->select('name');
     }
 
     public function getCategory()

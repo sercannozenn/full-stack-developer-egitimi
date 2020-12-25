@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="row">
-        <form id="postForm" method="POST" action="" class="col s12">
+        <form id="postForm" method="POST" action="" enctype="multipart/form-data" class="col s12">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -26,6 +26,17 @@
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="file-field input-field col s6">
+                    <div class="btn">
+                        <span>Makale Resmi Seç</span>
+                        <input type="file" accept="image/*" name="postImage" id="post-image">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -82,12 +93,14 @@
     <script src="{{asset('assets/js/posts.js')}}"></script>
     <script>
 
-        var d = new Date();
-        const ye = new Intl.DateTimeFormat('tr', { year: 'numeric' }).format(d);
-        const mo = new Intl.DateTimeFormat('tr', { month: 'numeric' }).format(d);
-        const da = new Intl.DateTimeFormat('tr', { day: '2-digit' }).format(d);
-        var today = `${ye}-${mo}-${da}`;
-        today+= "T"+d.toString().substring(16,21);
-        document.getElementById("publish_date").min = today;
+        var route = '{{route('post.getTags')}}';
+        // var d = new Date();
+        // const ye = new Intl.DateTimeFormat('tr', { year: 'numeric' }).format(d);
+        // const mo = new Intl.DateTimeFormat('tr', { month: 'numeric' }).format(d);
+        // const da = new Intl.DateTimeFormat('tr', { day: '2-digit' }).format(d);
+        // var today = `${ye}-${mo}-${da}`;
+        // today+= "T"+d.toString().substring(16,21);
+        // document.getElementById("publish_date").min = today;
+        // console.log(today);
     </script>
 @endsection
