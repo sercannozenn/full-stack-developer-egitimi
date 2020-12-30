@@ -5,22 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Posts extends Model
+class Tag extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
     protected $primaryKey = 'id';
-    protected $table = 'posts';
+    protected $table = 'tags';
 
     public function getUser()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id')->select('name');
     }
 
-    public function getCategory()
+    public function scopeStatusActive($query)
     {
-        return $this->hasOne('App\Models\PostCategory', 'id', 'category_id')->select('name');
+        return $query->where('status', 1);
     }
-
 }

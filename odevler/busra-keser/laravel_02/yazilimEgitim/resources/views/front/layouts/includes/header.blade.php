@@ -19,14 +19,14 @@
                     <li class="drop"><a class="active" href="/">Anasayfa</a></li>
                     <li><a href="{{route('about')}}">Hakkımızda</a></li>
 
-{{--                    <li class="drop"><a href="portfolio.html">Portfolio</a>--}}
-{{--                        <ul class="dropdown">--}}
-{{--                            <li><a href="portfolio.html">Portfolio 3 Col</a></li>--}}
-{{--                            <li><a href="portfolio-col4.html">Portfolio 4 Col</a></li>--}}
-{{--                            <li><a href="portfolio-col2.html">Portfolio 2 Col</a></li>--}}
-{{--                            <li><a href="single-project.html">Single Project</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="drop"><a href="portfolio.html">Portfolio</a>--}}
+                    {{--                        <ul class="dropdown">--}}
+                    {{--                            <li><a href="portfolio.html">Portfolio 3 Col</a></li>--}}
+                    {{--                            <li><a href="portfolio-col4.html">Portfolio 4 Col</a></li>--}}
+                    {{--                            <li><a href="portfolio-col2.html">Portfolio 2 Col</a></li>--}}
+                    {{--                            <li><a href="single-project.html">Single Project</a></li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    </li>--}}
 
                     <li><a href="{{route('blog')}}">Blog</a></li>
                     <li><a href="{{route('contact')}}">İletişim</a></li>

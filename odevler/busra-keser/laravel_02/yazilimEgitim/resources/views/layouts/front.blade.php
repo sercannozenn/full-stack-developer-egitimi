@@ -14,12 +14,13 @@
 @yield('sections')
 
 @include('front.layouts.includes.footer')
-    <!-- End footer -->
+<!-- End footer -->
 
 </div>
 <!-- End Container -->
 
 @include('front.layouts.includes.scripts')
+
 
 </body>
 </html>

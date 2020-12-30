@@ -1,5 +1,5 @@
 <head>
-    <title>@yield('title','Welcome  Home Page')</title>
+    <title>@yield('title','Welcome Home Page')</title>
 
     <meta charset="utf-8">
 

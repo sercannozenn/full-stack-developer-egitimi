@@ -24,34 +24,14 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
+    Route::resource('post', 'Admin\PostController');
+    Route::resource('tag', 'Admin\TagController');
+    Route::post('/tag/search-tags', 'Admin\TagController@search')->name('admin.search.tag');
 
-//    Route::resource('/posts', 'Admin\PostsController');
+    Route::resource('category', 'Admin\CategoryController');
+    Route::post('/category/changeStatus', 'Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');
+    Route::post('/category/delete', 'Admin\CategoryController@delete')->name('admin.category.delete');
 
-    Route::prefix('post')->group(function (){
-
-
-//        Route::resource('/post', 'Admin\PostController');
-
-//        Route::post('/add', 'Admin\PostController')->name('admin.post.add');
-//        Route::get('/add', 'Admin\PostsController@create')->name('admin.post.create');
-        Route::get('/', 'Admin\PostController@index')->name('admin.post.index');
-        Route::post('/add', 'Admin\PostController@add');
-        Route::get('/add', 'Admin\PostController@add')->name('admin.post.add');
-
-        Route::get('/list',function (){
-            return view('admin.post_list');
-        })->name('admin.post.list');
-
-        Route::get('/etiket', function ()
-        {
-            return view('admin.tag_list');
-        })->name('admin.tag.list');
-
-        Route::resource('/category','Admin\CategoryController');
-        Route::post('/category/changeStatus','Admin\CategoryController@changeStatus')->name('admin.category.changeStatus');
-        Route::post('/category/delete','Admin\CategoryController@delete')->name('admin.category.delete');
-
-    });
 });
 
 

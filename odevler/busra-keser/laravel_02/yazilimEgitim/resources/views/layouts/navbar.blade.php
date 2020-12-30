@@ -26,13 +26,13 @@
                 <a class="nav-link text-white" href="#">İletişim</a>
             </li>
         </ul>
-{{--        <form class="form-inline my-2 my-lg-0 search-form">--}}
-{{--            <div class="search-bar">--}}
-{{--                <input class="searchInput form-control mr-sm-2" type="search" placeholder="Ara..." aria-label="Search">--}}
-{{--                <i class="fas fa-search"></i>--}}
-{{--            </div>--}}
-{{--            --}}{{--            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>--}}
-{{--        </form>--}}
+        {{--        <form class="form-inline my-2 my-lg-0 search-form">--}}
+        {{--            <div class="search-bar">--}}
+        {{--                <input class="searchInput form-control mr-sm-2" type="search" placeholder="Ara..." aria-label="Search">--}}
+        {{--                <i class="fas fa-search"></i>--}}
+        {{--            </div>--}}
+        {{--            --}}{{--            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>--}}
+        {{--        </form>--}}
         <div class="input-group mb-3 my-2 my-lg-0 search-bar">
             <input type="text" class="form-control searchInput" placeholder="Ara..." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
