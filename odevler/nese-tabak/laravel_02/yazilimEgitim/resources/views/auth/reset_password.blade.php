@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/backEnd/images/favicon.png">
-    <title>Login</title>
+    <title>Şifremi Unuttum</title>
 
     <link href="{{ asset('assets/backEnd/dist/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/backEnd/dist/css/pages/authentication.css') }}" rel="stylesheet">
@@ -24,7 +24,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Yazılım Eğitim</p>
+            <p class="loader__label">Material Admin</p>
         </div>
     </div>
     <div class="auth-wrapper d-flex no-block justify-content-center align-items-center"
@@ -32,40 +32,34 @@
         <div class="auth-box">
             <div id="loginform">
                 <div class="logo">
-                    <span class="db"><img src="assets/backEnd/images/logo-icon.png" alt="logo"/></span>
-                    <h5 class="font-medium m-b-20">Giriş Yap</h5>
+                    <span class="db"><img src="{{asset('assets/backEnd/images/logo-icon.png')}}" alt="logo"/></span>
+                    <h5 class="font-medium m-b-20">Şifremi Unuttum</h5>
                 </div>
                 <!-- Form -->
                 <div class="row">
-                    <form class="col s12" action="{{ route('login') }}" method="POST">
-                        @csrf
-
+                    <form class="col s12" action="" method="POST" id="reset-password-form">
+                    @csrf
+                    <!-- email-->
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="email" type="email" name="email">
                                 <label for="email">Email</label>
                             </div>
-
                         </div>
+                    @if(isset($token))
                         <!-- pwd -->
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="password" type="password" name="password">
-                                <label for="password">Password</label>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" type="password" name="password">
+                                    <label for="password">Password</label>
+                                </div>
                             </div>
-
-                        </div>
-                        <!-- pwd -->
-                        <div class="row m-t-5">
-                            <div class="col s7">
-                                <a href="{{ route('reset.password') }}">Şifremi Unuttum</a>
-                            </div>
-
-                        </div>
-                        <!-- pwd -->
+                        @endif
                         <div class="row m-t-40">
                             <div class="col s12">
-                                <button class="btn-large w100 blue accent-4" type="submit">Login</button>
+                                <button id="reset-password" class="btn-large w100 blue accent-4" type="submit">Şifremi
+                                    Sıfırla
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -94,26 +88,52 @@
         $(".preloader").fadeOut();
     });
 
-    @php
-        if ($errors->any())
-       {
-           $swalText = '';
-           foreach ($errors->all() as $error)
-           {
-               $swalText .= $error . '<br>';
-           }
-       }
-    @endphp
 
-    @if($errors->any())
-    Swal.fire({
-        icon: 'error',
-        title: 'Hata',
-        html: '{!!  $swalText !!}',
-    });
-    @endif
-
-
+    // $('#reset-password').click(function ()
+    // {
+    //
+    //     var email = $('#email').val();
+    //     var password = $('#password').val();
+    //
+    //     if (email.trim() == "")
+    //     {
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Uyarı',
+    //             text: 'Email boş bırakılamaz!',
+    //             confirmButtonText: 'Tamam'
+    //         })
+    //     }
+    //     else if  (password.trim() == "")
+    //     {
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Uyarı',
+    //             text: 'Parola boş bırakılamaz!',
+    //             confirmButtonText: 'Tamam'
+    //         })
+    //     }
+    //     else if (!validateEmail(email))
+    //     {
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Uyarı',
+    //             text: 'Geçerli bir email adresi giriniz!',
+    //             confirmButtonText: 'Tamam'
+    //
+    //         })
+    //     }
+    //     else
+    //     {
+    //         $('#reset-password-form').submit();
+    //     }
+    // })
+    //
+    // function validateEmail(email)
+    // {
+    //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(email);
+    // }
 </script>
 </body>
 
