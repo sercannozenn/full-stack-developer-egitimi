@@ -122,4 +122,17 @@ class PostController extends Controller
         Posts::where('id', $id)->delete();
         return response()->json(['status' => 1], 200);
     }
+
+    public function changeStatus(Request $request)
+    {
+        $id=$request->id;
+        $post= Posts::find($id);
+
+        $post->status= $post->status ? 1 : 0;
+        $post->save();
+
+        return response()->json(['status' => 1], 200);
+
+    }
+
 }

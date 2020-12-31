@@ -81,7 +81,7 @@
                                     @else
                                         <img src="{{ asset('assets/images/default.jpg') }}" width="100">
                                     @endif
-{{--                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">--}}
+                                    {{--                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">--}}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>
@@ -97,7 +97,8 @@
 @section('js')
     <script>
 
-        $(document).ready(function (){
+        $(document).ready(function ()
+        {
 
             $.ajaxSetup({
                 headers: {
@@ -105,10 +106,11 @@
                 }
             });
 
-            $('.deletePost').click(function(){
+            $('.deletePost').click(function ()
+            {
                 let dataID = $(this).data('id');
                 let route = '{{route('post.destroy', 'postID')}}';
-                route = route.replace('postID',dataID);
+                route = route.replace('postID', dataID);
                 Swal.fire({
                     title: 'Uyarı',
                     text: `${dataID} ID'li postu silmek istediğinize emin misiniz?`,
@@ -123,14 +125,15 @@
                     if (result.isConfirmed)
                     {
                         $.ajax({
-                            url:route,
-                            method:'POST',
-                            data:{
-                                '_method' : 'DELETE'
+                            url: route,
+                            method: 'POST',
+                            data: {
+                                '_method': 'DELETE'
                             },
-                            async:false,
-                            success:function(response){
-                                document.getElementById("post"+dataID).remove();
+                            async: false,
+                            success: function (response)
+                            {
+                                document.getElementById("post" + dataID).remove();
 
                                 Swal.fire({
                                     title: 'Başarılı',
@@ -140,7 +143,8 @@
                                     confirmButtonText: 'Tamam',
                                 })
                             },
-                            error:function(){
+                            error: function ()
+                            {
 
                             }
                         })
@@ -150,6 +154,116 @@
 
 
             });
+
+            $('.changeStatus').click(function ()
+            {
+                let dataID = $(this).data('id');
+                let self = $(this);
+                $.ajax({
+                    url: '{{route('admin.post.changeStatus')}}',
+                    method: 'POST',
+                    data: {
+                        id: dataID,
+                        {{--//'_token': '{{ csrf_token() }}'--}}
+                    },
+                    async: false,
+                    success: function (response)
+                    {
+                        if (response.status == 1)
+                        {
+                            self[0].classList.remove('red');
+                            self[0].classList.add('green');
+                            self[0].innerText = "Aktif";
+                        }
+                        else
+                        {
+                            self[0].classList.remove('green');
+                            self[0].classList.add('red');
+                            self[0].innerText = "Pasif";
+                        }
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Uyarı',
+                            text: dataID + " id'li kategorinin durumu şu anda " + self[0].innerText
+                                + " olarak güncellendi.",
+                            confirmButtonText: 'Tamam'
+
+                        })
+                    },
+                    error: function ()
+                    {
+
+                    }
+                })
+
+            });
+
+            {{--$('.changeStatus').click(function ()--}}
+            {{--{--}}
+            {{--    let dataID = $(this).data('id');--}}
+            {{--    let self = $(this);--}}
+            {{--    let route = '{{route('admin.post.changeStatus')}}';--}}
+
+            {{--    $.ajax({--}}
+            {{--        url: route,--}}
+            {{--        method: 'POST',--}}
+            {{--        data: {--}}
+            {{--            id: dataID--}}
+            {{--        },--}}
+            {{--        async: false,--}}
+            {{--        success: function (response)--}}
+            {{--        {--}}
+
+            {{--            let changeStatusVal = response.status;--}}
+
+
+
+            {{--            if (changeStatusVal == 1)--}}
+            {{--            {--}}
+            {{--                self[0].classList.remove('red');--}}
+            {{--                self[0].classList.add('green');--}}
+            {{--                self[0].innerText = "Aktif";--}}
+            {{--            }--}}
+            {{--            else--}}
+            {{--            {--}}
+            {{--                self[0].classList.remove('green');--}}
+            {{--                self[0].classList.add('red');--}}
+            {{--                self[0].innerText = "Pasif";--}}
+            {{--            }--}}
+
+            {{--            Swal.fire({--}}
+            {{--                title: 'Başarılı',--}}
+            {{--                text: dataID + "'li postun durumu " + (changeStatusVal ? 'pasiften aktif ' : 'aktiften pasif ') + ' olarak güncellenmiştir.',--}}
+            {{--                icon: 'success',--}}
+            {{--                confirmButtonColor: '#3085d6',--}}
+            {{--                confirmButtonText: 'Tamam',--}}
+            {{--            });--}}
+
+            {{--            // self[0].textContent = changeStatusVal ? "Aktif" : "Pasif";--}}
+            {{--            // let finalStatus = [changeStatusVal ? 'red' : 'green', changeStatusVal ? 'green' : 'red'];--}}
+            {{--            // self[0].className= self[0].className.replace(finalStatus[0], finalStatus[1]);--}}
+
+            {{--            // if ($degisim == 1)--}}
+            {{--            // {--}}
+            {{--            //     self[0].className = self[0].className.replace('red', 'green');--}}
+            {{--            // }--}}
+            {{--            // else if ($degisim == 0)--}}
+            {{--            // {--}}
+            {{--            //     self[0].className = self[0].className.replace('green', 'red');--}}
+            {{--            //--}}
+            {{--            // }--}}
+
+
+            {{--                },--}}
+            {{--        error: function ()--}}
+            {{--        {--}}
+
+            {{--        }--}}
+            {{--    })--}}
+
+
+            {{--});--}}
 
 
         });

@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware('auth')->group(function ()
     Route::get('/view-profile', 'AdminController@viewProfile')->name('admin.viewProfile');
     Route::put('/view-profile', 'AdminController@viewProfileUpdate');
     Route::resource('post', 'Admin\PostController');
+    Route::post('/post/changeStatus', 'Admin\PostController@changeStatus')->name('admin.post.changeStatus');
     Route::resource('tag', 'Admin\TagController');
     Route::post('/tag/search-tags', 'Admin\TagController@search')->name('admin.search.tag');
 
