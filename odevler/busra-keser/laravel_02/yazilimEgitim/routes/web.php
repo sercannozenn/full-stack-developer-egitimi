@@ -19,6 +19,7 @@ Route::get('/blog', 'FrontController@blog')->name('blog');
 Route::get('/contact', 'FrontController@contact')->name('contact');
 
 
+
 Route::prefix('admin')->middleware('auth')->group(function ()
 {
     Route::get('/', 'AdminController@index')->name('admin.index');
@@ -39,3 +40,7 @@ Route::prefix('admin')->middleware('auth')->group(function ()
 Route::get('login', 'Auth\LoginController@showLogin')->name('login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('login', 'Auth\LoginController@login');
+Route::get('/password/reset', 'Auth\ResetPasswordController@showForm')->name('reset.password');
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@resetPasswordShowForm')->name('reset.password.showForm');
+Route::post('/password/reset/{token}', 'Auth\ResetPasswordController@resetPassword');
+Route::post('/password/reset', 'Auth\ResetPasswordController@reset');
