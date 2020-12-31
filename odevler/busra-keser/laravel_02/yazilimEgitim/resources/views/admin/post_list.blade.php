@@ -51,7 +51,7 @@
 
                                 <td>{{ $item->id }}</td>
                                 <td>
-                                    <a href="javascript:void(0)" class="deleteTag" data-id="{{ $item->id }}">
+                                    <a href="javascript:void(0)" class="deletePost" data-id="{{ $item->id }}">
                                         <i class="fas fa-trash  red-text"></i>
                                     </a>
                                     <a href="{{ route('post.edit', $item->id) }}">
@@ -95,4 +95,65 @@
     </div>
 @endsection
 @section('js')
+    <script>
+
+        $(document).ready(function (){
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.deletePost').click(function(){
+                let dataID = $(this).data('id');
+                let route = '{{route('post.destroy', 'postID')}}';
+                route = route.replace('postID',dataID);
+                Swal.fire({
+                    title: 'Uyarı',
+                    text: `${dataID} ID'li postu silmek istediğinize emin misiniz?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Evet',
+                    cancelButtonText: 'Hayır'
+                }).then((result) =>
+                {
+                    if (result.isConfirmed)
+                    {
+                        $.ajax({
+                            url:route,
+                            method:'POST',
+                            data:{
+                                '_method' : 'DELETE'
+                            },
+                            async:false,
+                            success:function(response){
+                                document.getElementById("post"+dataID).remove();
+
+                                Swal.fire({
+                                    title: 'Başarılı',
+                                    text: `${dataID} ID'li post silinmiştir.`,
+                                    icon: 'success',
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Tamam',
+                                })
+                            },
+                            error:function(){
+
+                            }
+                        })
+
+                    }
+                })
+
+
+            });
+
+
+        });
+
+
+    </script>
 @endsection
