@@ -85,8 +85,36 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-//        dd($request->all());
-//        return view('admin.post_list');
+        $post=Posts::find($id);
+
+        $image = $request->file('image');
+
+        if ($image)
+        {
+            $name = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $explode = explode('.', $name);
+            $name = $explode[0] . '_' . now()->format('d-m-Y_H-i-s') . '.' . $extension;
+            $publicPath = 'public/';
+            $path = 'postImage/';
+            Storage::putFileAs($publicPath . $path, $image, $name);
+            $post->image=$path . name;
+        }
+
+        $post->title=$request->title;
+        $post->slug=Str::slug($request->title, '-');
+        $post->category_id= $request->category_id;
+        $post->tags_id=json_encode(substr($request->tag_ids, 0, -1));
+        $post->content=$request->text;
+        $post->status=isset($request->status) ? 1 : 0;
+        $post->publish_date=isset($request->publishNow) ? now() : $request->publish_date;
+
+        $post->save();
+
+        alert()->success('Başarılı', 'Post güncellendi')
+            ->showConfirmButton('Tamam', '#3085d6');
+
+        return redirect()->route('post.index');
     }
 
     public function destroy($id)

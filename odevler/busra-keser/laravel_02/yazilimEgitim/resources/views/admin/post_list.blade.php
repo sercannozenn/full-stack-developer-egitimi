@@ -1,6 +1,22 @@
 @extends('layouts.admin')
 @section('title')
     Makale Listesi
+    <?php
+    if (isset($post))
+    {
+
+        $postIsset = true;
+
+    }
+    else
+    {
+
+        $postIsset = false;
+
+    }
+
+
+    ?>
 @endsection
 @section('css')
 @endsection
@@ -60,7 +76,12 @@
                                     {{$item->getCategory->name}}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">
+                                    @if ($item->image && file_exists('storage/' .  $item->image))
+                                        <img src="{{ asset('storage/'.  $item->image) }}" width="100">
+                                    @else
+                                        <img src="{{ asset('assets/images/default.jpg') }}" width="100">
+                                    @endif
+{{--                                    <img src="{{ asset('storage/'.$item->image) }}" width="100" alt="">--}}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s')}}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d-m-Y H:i:s')}}</td>

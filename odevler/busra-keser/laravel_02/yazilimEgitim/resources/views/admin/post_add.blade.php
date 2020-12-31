@@ -145,7 +145,7 @@
                     <h5 class="card-title activator">{{ $title }}
                         <i class="material-icons right tooltipped" data-position="left" data-delay="50"
                            data-tooltip="Get Code">more_vert</i></h5>
-                    <form id="frm-post" action="{{ $route }}" method="post" enctype="multipart/form-data">
+                    <form id="frm-post" action="{{ $route }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ isset($post) ? method_field('PUT') : '' }}
                         <div class="row">
@@ -154,7 +154,9 @@
                                 <select name="category_id">
                                     <option value="" disabled selected>Lütfen Seçim Yapın</option>
                                     @foreach($category as $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        <option value="{{ $value->id }}"
+                                            {{ $postIsset ? ($post->category_id == $value->id ? 'selected' : '') : '' }}>{{ $value->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <label>Kategori Adı</label>
