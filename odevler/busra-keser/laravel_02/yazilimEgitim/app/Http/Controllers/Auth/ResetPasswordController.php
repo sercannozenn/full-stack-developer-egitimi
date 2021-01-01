@@ -46,12 +46,24 @@ class ResetPasswordController extends Controller
 
     public function resetPasswordShowForm(Request $request)
     {
-        if (isset($request->token))
+        $token = $request->token;
+
+        if ($token)
         {
-            $token = $request->token;
-            return view('auth.reset_password', compact('token'));
+            $user = User::where('reset_password_token', $token)->first();
+
+            if ($user)
+            {
+                return view('auth.reset_password', compact('token'));
+            }
+
+
         }
-        return view('front.index');
+
+        alert()->success('Başarılı', 'Belirtilen token a ait kullanıcı bulunamadı')
+            ->showConfirmButton('Tamam', '#3085d6');
+
+        return redirect()->route('reset.password');
     }
 
     public function resetPassword(Request $request)
@@ -61,14 +73,16 @@ class ResetPasswordController extends Controller
         $token = $request->token;
         $password = $request->password;
 
-        $user=User::where('email', $email)
+        $user = User::where('email', $email)
             ->where('reset_password_token', $token)
             ->where('reset_password_expired', '>', now())
             ->first();
 
         if ($user)
         {
-            $user->password=bcrypt($password);
+            $user->password = bcrypt($password);
+            $user->reset_password_token=null;
+            $user->reset_password_expired=null;
             $user->save();
 
             Auth::login($user);

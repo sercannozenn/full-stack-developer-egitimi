@@ -109,6 +109,7 @@ class PostController extends Controller
         $post->status=isset($request->status) ? 1 : 0;
         $post->publish_date=isset($request->publishNow) ? now() : $request->publish_date;
 
+
         $post->save();
 
         alert()->success('Başarılı', 'Post güncellendi')
