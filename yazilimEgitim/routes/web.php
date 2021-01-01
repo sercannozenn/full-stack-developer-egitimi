@@ -13,15 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-    Route::middleware('front.data.share')->group(function ()
+Route::middleware('front.data.share')->group(function ()
 {
     Route::get('/', 'FrontController@index')->name('index');
     Route::get('/about', 'FrontController@about')->name('about');
-    Route::get('/blog', 'FrontController@blog')->name('blog');
     Route::get('/contact', 'FrontController@contact')->name('contact');
 
-});
 
+    Route::get('/blog', 'BlogController@index')->name('blog');
+    Route::get('/blog/{category}', 'BlogController@getCategory')->name('blog.category');
+    Route::get('/{category}/{post}', 'BlogController@post')->name('blog.post');
+
+
+
+});
 
 
 Route::prefix('admin')->middleware('auth')->group(function ()

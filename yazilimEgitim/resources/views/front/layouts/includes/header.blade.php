@@ -21,15 +21,17 @@
                         if ($item->route_type == 1)
                         {
                             $route = route($item->route);
-                            $active= Route::is($item->route) ? 'active' : '';
+                            $active = Route::is($item->route) ? 'active' : '';
                         }
                         else if ($item->route_type == 2)
                         {
                             $route = url($item->route);
-                            $active= request()->is($item->route) ? 'active' : '';
+                            $active = request()->is($item->route) ? 'active' : '';
                         }
                         ?>
-                        <li class="drop"><a class="{{ $active }}" href="{{ $route }}">{{ $item->name }}</a></li>
+                        <li class="drop">
+                            <a class="{{ $active }}" href="{{ $route }}">{{ $item->name }}</a>
+                        </li>
                     @endforeach
                 </ul>
             </div><!-- /.navbar-collapse -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
+use App\Service\RouteCheckService;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -16,22 +17,32 @@ class MenuController extends Controller
 
     public function add(Request $request)
     {
-        
-        Menu::create([
-            'name' => $request->name,
-            'order' => $request->order,
-            'status' => isset($request->status) ? 1 : 0,
-            'route_type' => $request->route_type,
-            'route' => $request->route,
-            'user_id' => auth()->id()
+        $route_type = intval($request->route_type);
+        $route = $request->route;
 
-        ]);
+        $routeCheck = RouteCheckService::checkRoute($route, $route_type);
 
-        alert()->success('Başarılı', 'Menü eklendi.')
+        if ($routeCheck)
+        {
+            Menu::create([
+                'name' => $request->name,
+                'order' => $request->order,
+                'status' => isset($request->status) ? 1 : 0,
+                'route_type' => $route_type,
+                'route' => $route,
+                'user_id' => auth()->id()
+
+            ]);
+
+            alert()->success('Başarılı', 'Menü eklendi.')
+                ->showConfirmButton('Tamam', '#3085d6');
+
+            return redirect()->route('menu.index');
+        }
+
+        alert()->error('Uyarı', 'Girilen route değeri bulunamadı')
             ->showConfirmButton('Tamam', '#3085d6');
-
-        return redirect()->route('menu.index');
-
+        return redirect()->back();
 
     }
 
@@ -45,18 +56,34 @@ class MenuController extends Controller
 
     public function edit(Request $request)
     {
-        $id = $request->id;
-        Menu::where('id', $id)->update([
-            'name' => $request->name,
-            'order' => $request->order,
-            'status' => isset($request->status) ? 1 : 0,
-            'route_type' => $request->route_type,
-            'route' => $request->route,
-        ]);
 
-        alert()->success('Başarılı', 'Menü güncellendi.')
-            ->showConfirmButton('Tamam', '#3085d6');
+        $routeCheck = RouteCheckService::checkRoute($request->route, intval($request->route_type));
 
-        return redirect()->route('menu.index');
+        if ($routeCheck)
+        {
+            $id = $request->id;
+
+            Menu::where('id', $id)->update([
+                'name' => $request->name,
+                'order' => $request->order,
+                'status' => isset($request->status) ? 1 : 0,
+                'route_type' => $request->route_type,
+                'route' => $request->route,
+            ]);
+
+            alert()->success('Başarılı', 'Menü güncellendi.')
+                ->showConfirmButton('Tamam', '#3085d6');
+
+            return redirect()->route('menu.index');
+        }
+        else
+        {
+            alert()->error('Uyarı', 'Girilen route değeri bulunamadı')
+                ->showConfirmButton('Tamam', '#3085d6');
+            return redirect()->back();
+        }
+
     }
+
+
 }
