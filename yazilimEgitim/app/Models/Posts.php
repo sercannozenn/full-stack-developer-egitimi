@@ -15,7 +15,7 @@ class Posts extends Model
 
     public function getUser()
     {
-        return $this->hasOne('App\Models\User', 'id', 'user_id')->select('name');
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
     public function getCategory()
@@ -25,9 +25,9 @@ class Posts extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comments', 'post_id', 'id')->where('parent', '=', 0);
+        return $this->hasMany('App\Models\Comments', 'post_id', 'id')
+            ->where('parent', '=', 0);
     }
-
 
     public function scopeStatusActive($query)
     {

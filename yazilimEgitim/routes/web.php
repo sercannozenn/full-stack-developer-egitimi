@@ -24,6 +24,7 @@ Route::middleware('front.data.share')->group(function ()
     Route::get('/blog/{category}', 'BlogController@getCategory')->name('blog.category');
     Route::get('/{category}/{post}', 'BlogController@post')->name('blog.post');
 
+    Route::post('/post/comments/add', 'BlogController@addComment')->name('blog.addComment');
 
 
 });

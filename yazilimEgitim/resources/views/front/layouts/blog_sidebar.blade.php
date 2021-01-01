@@ -1,6 +1,7 @@
 <div class="search-widget widget">
-    <form>
-        <input type="search" placeholder="search blog" value="{{ request()->text }}"/>
+    <form action="{{ route('blog') }}" method="GET">
+        <input type="hidden" name="q"  value="arama"/>
+        <input type="search" name="text" placeholder="search blog" value="{{ request()->text }}"/>
         <button type="submit">
             <i class="fa fa-search"></i>
         </button>

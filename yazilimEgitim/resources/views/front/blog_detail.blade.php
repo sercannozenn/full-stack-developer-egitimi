@@ -40,7 +40,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                               {!! $post->content !!}
+                                {!! $post->content !!}
                             </div>
                         </div>
 
@@ -69,50 +69,48 @@
                         <div class="comment-area-box">
                             <h1>Yorumlar</h1>
                             <ul class="comment-tree">
-                                <li>
-                                    <div class="comment-box">
-                                        <div class="comment-content">
-                                            <h4>Kate Howston</h4>
-                                            <span>May 12, 2015</span>
-                                            <a href="javascript:void(0)">Reply</a>
-                                            <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu
-                                                pulvinar nunc sapien ornare nisl. </p>
-                                        </div>
-                                    </div>
-                                    <ul class="depth">
-                                        <li>
-                                            <div class="comment-box">
-                                                <div class="comment-content">
-                                                    <h4>Jess Pinkman</h4>
-                                                    <span>May 12, 2015</span>
-                                                    <a href="#">Reply</a>
-                                                    <p>Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing
-                                                        in, lacinia vel, tellus. Suspendisse ac urna. </p>
-                                                </div>
+                                @foreach($comments as $comment)
+                                    <li>
+                                        <div class="comment-box">
+                                            <div class="comment-content">
+                                                <h4>{{ $comment->name }}</h4>
+                                                <span>{{ \Carbon\Carbon::parse($comment->created_at)->translatedFormat('j F Y') }}</span>
+                                                <a href="javascript:void(0)" data-id="{{ $comment->id }}"
+                                                   class="replyComment">Cevapla</a>
+                                                <p>{{ $comment->message }}</p>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        </div>
+                                        @if (count($comment->children) > 0)
+                                            <ul class="depth">
+                                                @foreach($comment->children as $child)
+                                                    @include('front.layouts.comments_children', ['child' => $child])
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
 
                         <div class="contact-form-box">
-                            <h1>Leave a Comment</h1>
-                            <span>Required fields are marked *</span>
-                            <form id="comment-form">
+                            <h1>Yorum Yap</h1>
+                            <form id="comment-form" action="{{ route('blog.addComment') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                <input type="hidden" name="parent" id="parent" value="0">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input name="name" id="name" type="text" placeholder="Name*">
                                     </div>
                                     <div class="col-md-4">
-                                        <input name="mail" id="mail" type="text" placeholder="Email*">
+                                        <input name="email" id="email" type="text" placeholder="Email*">
                                     </div>
                                     <div class="col-md-4">
                                         <input name="website" id="website" type="text" placeholder="Website">
                                     </div>
                                 </div>
-                                <textarea name="comment" id="comment" placeholder="Message*"></textarea>
-                                <input type="submit" id="submit-contact" value="Submit Comment">
+                                <textarea name="message" id="message" placeholder="Message*"></textarea>
+                                <input type="submit" id="submit-contact" value="Gönder">
                             </form>
                         </div>
 
@@ -129,4 +127,14 @@
 
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function ()
+        {
+            $('.replyComment').click(function ()
+            {
+                let dataID = $(this).data('id');
+                $('#parent').val(dataID);
+            });
+        });
+    </script>
 @endsection

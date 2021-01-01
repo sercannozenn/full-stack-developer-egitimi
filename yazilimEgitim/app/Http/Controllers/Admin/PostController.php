@@ -31,7 +31,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $image = $request->file('image');
-
         if ($image)
         {
             $name = $image->getClientOriginalName();

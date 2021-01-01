@@ -6,7 +6,9 @@ use App\Models\Comments;
 use App\Models\PostCategory;
 use App\Models\Posts;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class BlogController extends Controller
@@ -97,10 +99,12 @@ class BlogController extends Controller
     {
         $postSlug = $request->post;
 
-        $post = Posts::with('comments', 'comments.subComments')
+
+        $post = Posts::with('comments')
             ->where('slug', $postSlug)
             ->first();
         $comments = self::prepareComments($post->comments);
+
         if ($post)
         {
             $tagsID = json_decode($post->tags_id);
@@ -112,8 +116,6 @@ class BlogController extends Controller
             ->showConfirmButton('Tamam', '#3085d6');
 
         return redirect()->back();
-
-
     }
 
     public function prepareComments($comments)
@@ -144,6 +146,8 @@ class BlogController extends Controller
 
     public function addComment(Request $request)
     {
-        dd($request->all());
+        Comments::create($request->all());
+
+        dd('eklendi');
     }
 }
