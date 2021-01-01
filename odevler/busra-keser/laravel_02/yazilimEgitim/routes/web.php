@@ -17,6 +17,7 @@ Route::get('/', 'FrontController@index')->name('index');
 Route::get('/about', 'FrontController@about')->name('about');
 Route::get('/blog', 'FrontController@blog')->name('blog');
 Route::get('/contact', 'FrontController@contact')->name('contact');
+Route::post('/contact', 'FrontController@message');
 
 
 
