@@ -1,0 +1,49 @@
+/*-- ============================================================== 
+ Small Desktop & above all (1024px) 
+ ============================================================== */
+
+@media(min-width:1024px) {}
+
+@media (max-width: 1023px) {
+
+}
+
+/*-- ============================================================== 
+ Ipad & above all(768px) 
+ ============================================================== */
+
+@media(min-width:768px) {
+
+}
+
+/*-- ============================================================== 
+ Phone and below ipad(767px) 
+ ============================================================== */
+
+@media(max-width:767px) {
+    [data-sidebartype="mini-sidebar"] {
+        .topbar {
+            nav {
+                .nav-wrapper {
+                    .flag-icon {
+                        line-height: inherit;
+                    }
+                }
+                ul a {
+                    padding-right: 8px;
+                    padding-left: 8px;
+                }
+            }
+        }
+        .sidenav {
+            top: 0px;
+            z-index: 1000;
+        }
+    }
+    .d-flex {
+        display: block;
+    }
+    .d-flex.no-block {
+        display: flex;
+    }
+}
